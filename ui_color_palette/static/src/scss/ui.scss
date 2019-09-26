@@ -1,0 +1,10 @@
+.o_home_menu_background {
+    //background: #F9F9F9
+
+    &:before {
+        content: '';
+        background-image: url(/ui_color_palette/static/src/img/background_mono.png);
+        background-size: cover;
+        @include o-position-absolute(0,0,0,0);
+    }
+}
