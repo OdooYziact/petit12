@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--vue form demande de prix-->
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase_order_form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">draft,sent,retained,purchase</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                <field name="sale_order_id" invisible="True"/>
+                <button name="action_view_sale_order" type="object" string="Devis" class="oe_stat_button"
+                        icon="fa-list-alt" attrs="{'invisible': [('sale_order_id', '=', False)]}" groups="sales_team.group_sale_salesman">
+                </button>
+
+                <button name="action_view_purchase_requisition" type="object" string="Appel d'offres" class="oe_stat_button"
+                        icon="fa-list-alt" attrs="{'invisible': [('requisition_id', '=', False)]}">
+                </button>
+            </xpath>
+
+            <!--bouton confirmer la commande-->
+            <xpath expr="//button[@id='draft_confirm']" position="attributes">
+                <attribute name="states">draft,retained</attribute>
+            </xpath>
+
+            <!--bouton facture fournisseur-->
+            <xpath expr="//button[@name='action_view_invoice']" position="attributes">
+                <attribute name="attrs">{'invisible':[('state', 'in', ('draft','sent','to approve', 'retained')),('invoice_ids','=',[])]}</attribute>
+            </xpath>
+
+            <!--bouton retenir-->
+            <xpath expr="//button[@name='button_confirm']" position="before">
+
+                <button name="action_hold" type="object" help="Retenir cette demande de prix"
+                        string="retenir" class="oe_stat_button"
+                        states="draft,sent">
+                </button>
+
+            </xpath>
+
+            <!--bouton BL-->
+            <xpath expr="//button[@name='action_view_picking']" position="attributes">
+                <attribute name="attrs">{'invisible':['|', ('state', 'in', ('draft','sent','to approve','retained')),('picking_ids','=',[])]}</attribute>
+            </xpath>
+
+            <xpath expr="//div[@class='oe_title']" position="replace">
+                <div class="oe_title">
+                    <label string="Request for Quotation " attrs="{'invisible': [('state','not in',('draft','sent','bid'))]}"/>
+                    <label string="Purchase Order " attrs="{'invisible': [('state','in',('draft','sent','bid', 'retained'))]}"/>
+                    <label string="Demande de prix (retenue) " attrs="{'invisible': [('state','not in',('retained'))]}"/>
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--modification de la vue liste devis, ajout des demandes retenues-->
+    <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+        <field name="name">Requests for Quotation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order</field>
+        <field name="context">{'search_default_todo':1, 'show_purchase': False}</field>
+        <field name="domain">[('state','in',('draft','sent','cancel', 'confirmed', 'retained'))]</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+        <!--<field name="search_view_id" ref="purchase.view_purchase_order_filter"/>-->
+    </record>
+
+    <!--modification de la vue liste des bon de commandes, retrait des demandes retenues-->
+    <record id="purchase.purchase_form_action" model="ir.actions.act_window">
+        <field name="name">Purchase Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+        <field name="context">{'search_default_todo':1, 'show_purchase': True}</field>
+        <field name="domain">[('state','not in',('draft','sent', 'confirmed', 'retained'))]</field>
+    </record>
+
+
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">view_purchase_order_filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <!--<field name="priority">20</field>-->
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='to_approve']" position="after">
+                <filter name="retained" string="Demande retenue" domain="[('state', '=', 'retained')]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">Demande de prix</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_requisition.purchase_order_form_inherit"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='requisition_id']" position="attributes">
+                <attribute name="string">Appel d'offres</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

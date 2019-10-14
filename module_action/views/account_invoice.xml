@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Changement des filtres pour y integrer le fait de ne prendre que les activites non archivees -->
+    <record id="search_view_for_activities" model="ir.ui.view">
+        <field name="name">Filtres</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/filter[@name='activities_overdue']" position="replace">
+                <filter string="Activités en retard" name="activities_overdue" domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('activity_ids.archived', '!=', True)]" help="Show all records which has next action date is before today"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_today']" position="replace">
+                <filter string="Activités du jour" name="activities_today" domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d')), ('activity_ids.archived', '!=', True)]"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_upcoming_all']" position="replace">
+                <filter string="Activités futures" name="activities_upcoming_all" domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d')), ('activity_ids.archived', '!=', True)]"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_my']" position="replace">
+                <filter string="Mes activités" name="activities_my" domain="[('activity_ids.user_id', '=', uid), ('activity_ids.archived', '!=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

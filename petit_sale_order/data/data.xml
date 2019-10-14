@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- Catchall Email Alias -->
+    <record id="sale_order_fixed_cost" model="ir.config_parameter">
+        <field name="key">sale_order_fixed_cost</field>
+        <field name="value"></field>
+    </record>
+
+    <record id="sale_order_fixed_cost_qty" model="ir.config_parameter">
+        <field name="key">sale_order_fixed_cost_qty</field>
+        <field name="value">0.25</field>
+    </record>
+
+</odoo>

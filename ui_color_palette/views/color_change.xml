@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="_assets_primary_variables" name="web_enterprise assets primary variables" inherit_id="web_enterprise._assets_primary_variables" priority='15'>
-        <xpath expr="//link[@href='/web_enterprise/static/src/scss/primary_variables.scss']" position="replace">
-            <link rel="stylesheet" type="text/scss" href="/ui_color_palette/static/src/scss/primary_variables.scss"/>
+    <template id="less_helpers" name="web_enterprise less helpers" inherit_id="web_enterprise.less_helpers" priority='15'>
+        <xpath expr="//link[@href='/web_enterprise/static/src/less/variables.less']" position="replace">
+            <link rel="stylesheet" type="text/less" href="/ui_color_palette/static/src/less/variables.less"/>
         </xpath>
     </template>
 
-    <template id="_assets_secondary_variables" name="web_enterprise assets secondary variables" inherit_id="web_enterprise._assets_secondary_variables" priority='15'>
-        <xpath expr="//link[@href='/web_enterprise/static/src/scss/secondary_variables.scss']" position="replace">
-            <link rel="stylesheet" type="text/scss" href="/ui_color_palette/static/src/scss/secondary_variables.scss"/>
+    <template id="assets_frontend_color_change" inherit_id="web_enterprise.assets_backend"> 
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/ui_color_palette/static/src/css/color_change.css"/>
+            <link rel="stylesheet" href="/ui_color_palette/static/src/css/fix_chatter_bottom.css"/>
         </xpath>
     </template>
 
-    <template id="assets_common" name="web_enterprise assets backend helpers" inherit_id="web_enterprise.assets_common" priority='15'>
-        <xpath expr="//link[@href='/web_enterprise/static/src/scss/ui.scss']" position="replace">
-            <link rel="stylesheet" type="text/scss" href="/ui_color_palette/static/src/scss/ui.scss"/>
-        </xpath>
-    </template>
 
 </odoo>
+

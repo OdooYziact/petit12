@@ -1,0 +1,29 @@
+<odoo>
+  <data>
+      <!-- Inherit Form View to Modify it -->
+      <record id="sequence_view" model="ir.ui.view">
+          <field name="name">inherited sequence_view</field>
+          <field name="model">ir.sequence</field>
+          <field name="inherit_id" ref="base.sequence_view"/>
+          <field name="arch" type="xml">
+
+              <xpath expr="//field[@name='date_range_ids']" position="before">
+
+                  <group attrs="{'invisible': [('use_date_range', '=', False)]}">
+                      <group>
+                          <field name="is_auto_date_range" widget="boolean" />
+                          <button name="action_view_date_range" string="Intervalles de date" type="object" class="oe_link" icon="fa-arrow-right"/>
+                      </group>
+                      <group attrs="{'invisible': [('is_auto_date_range', '=', False)]}">
+                          <field name="date_range_type_id" attrs="{'required': [('is_auto_date_range', '!=', False)]}"/>
+                          <button name="action_auto_date_range" string="Créer" type="object" class="oe_highlight oe_right" attrs="{'readonly': [('date_range_type_id', '=', False)]}"/>
+                      </group>
+                  </group>
+
+
+              </xpath>
+
+          </field>
+      </record>
+  </data>
+</odoo>

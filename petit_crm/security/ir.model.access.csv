@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+petit_crm.geographical_area,petit_crm.geographical_area,model_petit_crm_geographical_area,base.group_user,1,1,1,1
+
+

@@ -1,0 +1,712 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* material_request
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"#-#-#-#-#  fr_FR.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-02 12:51+0000\n"
+"PO-Revision-Date: 2019-04-02 14:52+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+"#-#-#-#-#  fr.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-30 08:06+0000\n"
+"PO-Revision-Date: 2019-03-26 11:49+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: fr\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-18 07:42+0000\n"
+"PO-Revision-Date: 2019-03-18 08:43+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: fr\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-26 10:43+0000\n"
+"PO-Revision-Date: 2019-03-26 11:45+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: fr\n"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_purchase_order_count
+msgid "# Purchase Order"
+msgstr "Demande de prix"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_purchase_order_count
+msgid "# Purchase order"
+msgstr "Demande de prix"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_purchase_requisition_count
+msgid "# Purchase requisition"
+msgstr "Appel d'offres"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "<span class=\"o_stat_text\">Purchase order</span>"
+msgstr "<span class=\"o_stat_text\">Demande de prix</span>"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "<span class=\"o_stat_text\">Purchase requisition</span>"
+msgstr "<span class=\"o_stat_text\">Appel d'offre</span>"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_action
+msgid "Action"
+msgstr ""
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_active
+msgid "Active"
+msgstr ""
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_requisition
+msgid "Appel d'offres"
+msgstr ""
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_is_approved
+msgid "Approved"
+msgstr "Approuvé"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+#: selection:material.request.line,state:0
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_create_purchase_requisition_wizard
+#: model:ir.ui.view,arch_db:material_request.view_purchase_order_create
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: material_request
+#: selection:material.request.line,state:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: material_request
+#: model:ir.actions.act_window,help:material_request.action_material_request_tree
+msgid "Click to create a material request."
+msgstr "Cliquer pour créer la demande de prix."
+
+#. module: material_request
+#: code:addons/material_request/wizard/purchase_order_create.py:97
+#: model:ir.actions.act_window,name:material_request.action_purchase_order_create
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+#: model:ir.ui.view,arch_db:material_request.view_purchase_order_create
+#, python-format
+msgid "Create purchase order"
+msgstr "Créer une demande de prix"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_order_create
+msgid "Create purchase order from material request"
+msgstr "Créer une demande de prix depuis une demande de fourniture"
+
+#. module: material_request
+#: code:addons/material_request/wizard/wizard.py:80
+#: model:ir.actions.act_window,name:material_request.action_create_purchase_requisition_wizard
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+#, python-format
+msgid "Create purchase requisition"
+msgstr "Créer un appel d'offre"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_requisition_wizard
+#: model:ir.model,name:material_request.model_wizard_pr
+msgid "Create purchase requisition from material request"
+msgstr "Créer un appel d'offre depuis une demande de fourniture"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_create_uid
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_create_uid
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_create_uid
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_create_uid
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_create_uid
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_create_date
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_create_date
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_create_date
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_create_date
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_create_date
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_currency_id
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_request_deadline
+msgid "Deadline"
+msgstr "Echéance"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_description
+msgid "Description"
+msgstr "Description"
+
+#. module: material_request
+#: model:ir.model.fields,help:material_request.field_material_request_line_procure_method
+msgid ""
+"Determines the procurement method of the stock move that will be generated: "
+"whether it will need to 'take from the available stock' in its source "
+"location or needs to ignore its stock and create a procurement over there."
+msgstr ""
+"Détermine la méthode d'approvisionnement du mouvement de stock qui sera généré : "
+"qu'il ai y ait besoin de 'prendre dans le stock disponible' dans son emplacement "
+"source ou qu'il y ait besoin d'ignorer son stock et créer un approvisionnement."
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_display_name
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_display_name
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_display_name
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_display_name
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_display_name
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_is_done
+#: selection:material.request,state:0 selection:material.request.line,state:0
+msgid "Done"
+msgstr "Fait"
+
+#. module: material_request
+#: selection:material.request,state:0 selection:material.request.line,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_employee
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "Employee"
+msgstr "Employé"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_search
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "Group By"
+msgstr "Grouper par"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_id
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_id
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_id
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_id
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_id
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_id
+msgid "ID"
+msgstr "ID"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_is_progress
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "In Progress"
+msgstr "En cours"
+
+#. module: material_request
+#: selection:material.request,state:0
+msgid "In progress"
+msgstr "En cours"
+
+#. module: material_request
+#: code:addons/material_request/models/material_request_line.py:33
+#: selection:material.request.line,request:0
+#, python-format
+msgid "Internal picking"
+msgstr "Article existant"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_is_done
+msgid "Is Done"
+msgstr "Fait"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request___last_update
+#: model:ir.model.fields,field_description:material_request.field_material_request_line___last_update
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create___last_update
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create___last_update
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr___last_update
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_write_uid
+#: model:ir.model.fields,field_description:material_request.field_material_request_write_uid
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_write_uid
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_write_uid
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_write_uid
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_write_date
+#: model:ir.model.fields,field_description:material_request.field_material_request_write_date
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_write_date
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_write_date
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_write_date
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_material_request_line
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_material_request_line
+msgid "Material Request Line"
+msgstr "Ligne de demande de fourniture"
+
+#. module: material_request
+#: model:ir.actions.act_window,name:material_request.action_material_request_tree
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_request_id
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_request_id
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_request_id
+#: model:ir.ui.menu,name:material_request.material_request_model_act
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_search
+#: model:ir.ui.view,arch_db:material_request.view_material_request_simple_form
+#: model:ir.ui.view,arch_db:material_request.view_material_request_tree
+msgid "Material request"
+msgstr "Demande de fourniture"
+
+#. module: material_request
+#: model:ir.actions.act_window,name:material_request.action_material_request_line_tree
+#: model:ir.ui.menu,name:material_request.material_request_line_model_act
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_form
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_tree
+#: model:ir.ui.view,arch_db:material_request.view_material_request_simple_form
+msgid "Material request line"
+msgstr "Ligne de demande de fourniture"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_move_id
+msgid "Move"
+msgstr "Mouvement"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_procure_method
+msgid "Move Supply Method"
+msgstr "Méthode d'approvisionnement"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_name
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: material_request
+#: selection:material.request,state:0
+msgid "New"
+msgstr "Nouveau"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_note
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+#: model:ir.ui.view,arch_db:material_request.view_material_request_simple_form
+msgid "Note"
+msgstr ""
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "Origin"
+msgstr "Origine"
+
+#. module: material_request
+#: model:ir.filters,name:material_request.ir_filters_material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_model_name
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "Origin document"
+msgstr "Document d'origine"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "Origin reference"
+msgstr "Référence d'origine"
+
+#. module: material_request
+#: code:addons/material_request/models/material_request.py:122
+#: code:addons/material_request/models/material_request.py:128
+#: code:addons/material_request/models/material_request.py:130
+#, python-format
+msgid "Please remove or replace temporary lines"
+msgstr "Veuillez remplacez ou supprimer les lignes temporaires"
+
+#. module: material_request
+#: code:addons/material_request/models/purchase_order.py:24
+#, python-format
+msgid "Please replace product to define."
+msgstr "Veuillez remplacer les articles génériques."
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_price_total
+msgid "Price Total"
+msgstr "Prix total"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "Process"
+msgstr "Traiter"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_product_id
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_product_id
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_product_id
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_search
+msgid "Product"
+msgstr "Article"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_product_qty
+msgid "Product quantity"
+msgstr "Quantité"
+
+#. module: material_request
+#: model:product.template,name:material_request.product_to_define
+msgid "Product to define"
+msgstr "Article à définir"
+
+#. module: material_request
+#: selection:material.request.line,state:0
+msgid "Progress"
+msgstr "En cours"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_purchase_line_id
+msgid "Purchase Line"
+msgstr "Ligne d'achat"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_order
+msgid "Purchase Order"
+msgstr "Demande de prix"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne de demande de prix"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_requisition_line
+msgid "Purchase Requisition Line"
+msgstr "Ligne d'appel d'offres"
+
+#. module: material_request
+#: code:addons/material_request/models/purchase_order.py:27
+#: model:ir.actions.act_window,name:material_request.action_view_purchase_order
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_purchase_order_ids
+#: model:ir.model.fields,field_description:material_request.field_material_request_purchase_order_ids
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_form
+#: selection:material.request.line,state:0
+#, python-format
+msgid "Purchase order"
+msgstr "Demande de prix"
+
+#. module: material_request
+#: model:ir.actions.act_window,name:material_request.action_view_purchase_requisition
+#: model:ir.model.fields,field_description:material_request.field_material_request_purchase_requisition_ids
+msgid "Purchase requisition"
+msgstr "Appel d'offres"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_product_qty
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_product_qty
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "Reference"
+msgstr "Référence"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_document_name
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_document_name
+msgid "Reference origin"
+msgstr "Référence d'origine"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_request_id
+#: model:ir.model.fields,field_description:material_request.field_purchase_requisition_request_id
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_search
+msgid "Request"
+msgstr "Demande"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_request_line_id
+#: model:ir.model.fields,field_description:material_request.field_purchase_requisition_line_request_line_id
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_request_line
+msgid "Request Line"
+msgstr "Ligne de demande"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_request_date
+msgid "Request date"
+msgstr "Date de la demande"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_description
+msgid "Request description"
+msgstr "Description de la demande"
+
+#. module: material_request
+#: code:addons/material_request/models/material_request_line.py:34
+#: selection:material.request.line,request:0
+#, python-format
+msgid "Request for creation"
+msgstr "Article à créer"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_request_line
+msgid "Request lines"
+msgstr "Lignes de demande"
+
+#. module: material_request
+#: code:addons/material_request/models/material_request.py:118
+#, python-format
+msgid "Request must be in draft to be approved."
+msgstr "La demande doit être en brouillon pour être approuvée."
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_res_id
+msgid "Res"
+msgstr "Ressource"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_res_model
+msgid "Res Model"
+msgstr "Modèle"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_responsible
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_rule_id
+msgid "Rule"
+msgstr "Règle"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "Run"
+msgstr "Lancer"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_state
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_search
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "State"
+msgstr "Status"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_supplier_id
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_partner_id
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_supplier_id
+#: model:ir.model.fields,help:material_request.field_material_request_line_supplier_id
+#: model:ir.ui.view,arch_db:material_request.view_purchase_order_create
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "Total"
+msgstr ""
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_search
+msgid "Unassigned"
+msgstr "Non assigné"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_line_search
+msgid "Undefined"
+msgstr "Non défini"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_price_unit
+msgid "Unit Price"
+msgstr "Prix unitaire"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_product_uom
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_product_uom
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_product_uom
+msgid "Unit of measure"
+msgstr "Unité de mesure"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_create_purchase_requisition_wizard
+#: model:ir.ui.view,arch_db:material_request.view_purchase_order_create
+msgid "Validate"
+msgstr "Valider"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_wizard_id
+#: model:ir.model.fields,field_description:material_request.field_wizard_pr_line_wizard_id
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_create_wizard_line
+msgid "Wizard Line"
+msgstr "Assistant"
+
+#. module: material_request
+#: code:addons/material_request/models/material_request_line.py:95
+#, python-format
+msgid "You can not cancel closed request lines."
+msgstr "Vous ne pouvez pas annuler des demandes terminées."
+
+#. module: material_request
+#: code:addons/material_request/models/material_request.py:137
+#, python-format
+msgid "You can not cancel finished requests."
+msgstr "Vous ne pouvez pas annuler des demandes terminées."
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_material_request
+msgid "material.request"
+msgstr ""
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_material_request_line
+msgid "material.request.line"
+msgstr ""
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_name
+msgid "name"
+msgstr "nom"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_order_line_create
+msgid "purchase.order.line.create"
+msgstr ""
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_purchase_order_line_create_description
+msgid "request description"
+msgstr "description de la demande"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_name
+msgid "request reference"
+msgstr "référence de la demande"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_wizard_pr_line
+msgid "wizard.pr.line"
+msgstr ""
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "Approve"
+msgstr "Approuver"
+
+#. module: material_request
+#: model:product.template,name:material_request.product_to_define
+msgid "Article à définir"
+msgstr ""
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "Assign to me"
+msgstr "Me l'assigner"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.view_material_request_form
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_requisition
+msgid "Purchase Requisition"
+msgstr "Appel d'offres"
+
+#. module: material_request
+#: selection:material.request.line,state:0
+#, fuzzy
+msgid "Request for quotation"
+msgstr "Demande de prix"
+
+#. module: material_request
+#: model:ir.model.fields,field_description:material_request.field_material_request_line_state
+msgid "Status"
+msgstr "État"
+
+#. module: material_request
+#: selection:material.request.line,state:0
+msgid "Waiting"
+msgstr "En attente"
+
+#. module: material_request
+#: selection:material.request,state:0
+msgid "cancelled"
+msgstr "annulé"
+
+#. module: material_request
+#: model:ir.model,name:material_request.model_purchase_requisition_line_wizard
+msgid "purchase.requisition.line.wizard"
+msgstr ""
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.purchase_order_form
+msgid "Hold"
+msgstr "Retenir"
+
+#. module: material_request
+#: model:ir.ui.view,arch_db:material_request.purchase_order_form
+msgid "Hold this purchase order"
+msgstr "Retenir cette demande de prix"

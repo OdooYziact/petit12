@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="helpdesk_ticket_view_form" model="ir.ui.view">
+        <field name="name">Helpdesk</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+
+        <field name="arch" type="xml">
+            <!--edit partner_id-->
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="domain">[('customer','=',True), ('is_company', '=', True)]</attribute>
+            </xpath>
+
+            <!--add contact_id-->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="partner_contact_id" domain="[('parent_id', '=', partner_id), ('type', '=', 'contact')]"
+                       options='{"always_reload": True}' attrs="{'readonly': [('partner_id', '=', False)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--add sale order action-->
+    <record id="helpdesk_ticket_view_form_sale" model="ir.ui.view">
+        <field name="name">Helpdesk</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="groups_id" eval="[(4, ref('mrp.group_mrp_user'))]"/>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+
+            <!--action create_sale_order-->
+            <xpath expr="//button[@name='assign_ticket_to_self']" position="after">
+                <button name="button_create_sale_order" string="Créer un devis" type="object" class="oe_highlight"
+                        attrs="{'invisible': [('partner_id', '=', False)]}"/>
+                <!--<button name="button_create_repair_order" string="Créer une réparation" type="object" class="oe_highlight" groups="helpdesk.group_helpdesk_user" attrs="{'invisible': [('partner_id', '=', False)]}"/>-->
+            </xpath>
+
+            <xpath expr="//button[@name='toggle_active']" position="before">
+
+                <!--action view sale order-->
+                <button name="action_view_sale_order" type="object" class="oe_stat_button" icon="fa-list-alt">
+                    <field name="sale_order_count" string="Devis" widget="statinfo"/>
+                </button>
+
+            </xpath>
+        </field>
+    </record>
+
+    <!--add purchase actions-->
+    <record id="helpdesk_ticket_view_form_purchase" model="ir.ui.view">
+        <field name="name">Helpdesk</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='toggle_active']" position="before">
+
+                <!--action view purchase requisition-->
+                <button name="action_view_purchase_requisition" type="object" class="oe_stat_button" icon="fa-list-alt">
+                    <field name="purchase_requisition_count" string="Appel d'offres" widget="statinfo"/>
+                </button>
+
+                <!--action view purchase order-->
+                <button name="action_view_purchase_order" type="object" class="oe_stat_button" icon="fa-list-alt">
+                    <field name="purchase_order_count" string="Demandes de prix" widget="statinfo"/>
+                </button>
+
+            </xpath>
+        </field>
+    </record>
+
+    <!--add repair action-->
+    <record id="helpdesk_ticket_view_form_repair" model="ir.ui.view">
+        <field name="name">Helpdesk</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="groups_id" eval="[(4, ref('mrp.group_mrp_user'))]"/>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='toggle_active']" position="before">
+
+                <button name="action_view_repair_order" type="object" class="oe_stat_button" icon="fa-wrench">
+                    <field name="repair_order_count" string="Réparation(s)" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

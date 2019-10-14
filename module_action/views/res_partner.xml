@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <!-- Ajout d'un bouton dans les fiches client pour acceder aux activites le concernant -->
+    <record id="button_partners_activities" model="ir.ui.view">
+        <field name="name">Contacts</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']/button[1]" position="before">
+                <button class="oe_stat_button o_res_partner_tipp_opp" type="object" icon="fa-clock-o" name="mail_activity_tree_view_action">
+                    <label for="activities_count_current" string="Activités"/>
+                    <span class="oe_stat_value">
+                        <field name="activities_count_current" widget="integer"/>
+                        (<field name="activities_count" widget="integer"/>)
+                    </span>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Changement des filtres pour y integrer le fait de ne prendre que les activites non archivees -->
+    <record id="search_view_for_activities5" model="ir.ui.view">
+        <field name="name">Filtres</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail.res_partner_view_search_inherit_mail"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/filter[@name='activities_overdue']" position="replace">
+                <filter string="Activités en retard" name="activities_overdue" domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('activity_ids.archived', '!=', True)]" help="Show all records which has next action date is before today"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_today']" position="replace">
+                <filter string="Activités du jour" name="activities_today" domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d')), ('activity_ids.archived', '!=', True)]"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_upcoming_all']" position="replace">
+                <filter string="Activités futures" name="activities_upcoming_all" domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d')), ('activity_ids.archived', '!=', True)]"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_my']" position="replace">
+                <filter string="Mes activités" name="activities_my" domain="[('activity_ids.user_id', '=', uid), ('activity_ids.archived', '!=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="partner_form_invisible_meeting_button" model="ir.ui.view">
+        <field name="name">Clients boutons</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="crm.view_partners_form_crm1"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='schedule_meeting']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

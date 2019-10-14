@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="popup_result_product_checker" model="ir.ui.view">
+        <field name="name">popup_result_product_checker</field>
+        <field name="model">product.wizard.popup</field>
+        <field name="arch" type="xml">
+            <form string="Popup Product validation" delete="0" editable="0" nocreate="1">
+                <sheet>
+                    <group>
+                        <field name="message"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Fermer" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

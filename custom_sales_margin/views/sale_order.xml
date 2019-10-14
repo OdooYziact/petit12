@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Extended Sale Order Form View to add Sales Margin Percentage functionality -->
+    <record model="ir.ui.view" id="sale_order_sale_margin_rate">
+        <field name="name">sale.order.sale.margin.percentage.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='margin']" position="after">
+                <label for="margin_rate">Taux de marge</label>
+                <div name="margin_rate" >
+                    <field name="margin_rate" class="oe_inline" string="Taux de marge"/> %%
+                </div>
+                <!--<field name="margin_rate" widget="progressbar" groups="base.group_user" string="Taux de marge"/>-->
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extended Quotation Tree View to add Sales Margin Percentage functionality -->
+    <record model="ir.ui.view" id="view_quotation_tree_sale_margin_rate">
+        <field name="name">sale.quotation.tree.sale.margin.rate</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="margin_rate" groups="base.group_user" string="Taux de marge %"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extended Sale Order Tree View to add Sales Margin Percentage functionality -->
+    <record model="ir.ui.view" id="view_order_tree_sale_margin_rate">
+        <field name="name">sale.order.tree.sale.margin.rate</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_status']" position="after">
+                <field name="margin_rate" groups="base.group_user" string="Taux de marge %"/>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

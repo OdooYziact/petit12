@@ -1,0 +1,186 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* delivery_manager
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"#-#-#-#-#  fr_FR.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-02 13:06+0000\n"
+"PO-Revision-Date: 2019-04-02 15:06+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+"#-#-#-#-#  fr.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-08 14:04+0000\n"
+"PO-Revision-Date: 2019-02-08 15:05+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: fr\n"
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.view_stock_picking_kanban
+msgid "<i class=\"fa fa-fw fa-usd\"/>Priority"
+msgstr ""
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.view_picking_form
+msgid "Assign to Me"
+msgstr "Me l'assigner"
+
+#. module: delivery_manager
+#: model:ir.actions.server,name:delivery_manager.action_server_assign_to_me
+msgid "Assign to me"
+msgstr ""
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.view_stock_picking_calendar
+msgid "Calendar View"
+msgstr "Calendrier"
+
+#. module: delivery_manager
+#: model:ir.ui.menu,name:delivery_manager.configuration_menu
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.search_stock_picking
+msgid "Current week"
+msgstr "Semaine"
+
+#. module: delivery_manager
+#: model:ir.ui.menu,name:delivery_manager.menu_delivery_manager_root
+msgid "Delivery Manager"
+msgstr "Tournée"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_delivery_ref
+#: model:ir.ui.view,arch_db:delivery_manager.view_picking_internal_search
+msgid "Delivery Reference"
+msgstr "N° de BL"
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.search_stock_picking
+msgid "Delivery day"
+msgstr "Jour de livraison"
+
+#. module: delivery_manager
+#: model:ir.actions.act_window,name:delivery_manager.action_view_delivery_order
+#: model:ir.ui.menu,name:delivery_manager.menu_delivery_order
+msgid "Delivery order"
+msgstr "Bon de livraison"
+
+#. module: delivery_manager
+#: model:ir.actions.server,name:delivery_manager.cron_dropshipping_auto_validate_ir_actions_server
+#: model:ir.cron,cron_name:delivery_manager.cron_dropshipping_auto_validate
+#: model:ir.cron,name:delivery_manager.cron_dropshipping_auto_validate
+msgid "Dropshipping Auto Validate"
+msgstr "Auto-validation de la livraison directe"
+
+#. module: delivery_manager
+#: code:addons/delivery_manager/models/stock_picking.py:105
+#, python-format
+msgid "Dropshipping picking type id missing"
+msgstr ""
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.search_stock_picking
+msgid "Group by"
+msgstr "Grouper par"
+
+#. module: delivery_manager
+#: model:ir.ui.menu,name:delivery_manager.management_menu
+msgid "Management"
+msgstr "Gestion"
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.search_stock_picking
+msgid "Origin"
+msgstr "Document d'origine"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_delivery_day
+msgid "Partner delivery day"
+msgstr "Journée de livraison du partenaire"
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.search_stock_picking
+msgid "Picking List"
+msgstr "Mouvement de stock"
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.view_stock_picking_tree
+msgid "Picking list"
+msgstr "Mouvements de stock"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_is_priority
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_reception_person
+msgid "Received by"
+msgstr "Réceptionné par"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_responsible
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: delivery_manager
+#: model:ir.actions.act_window,name:delivery_manager.action_view_roadmap
+#: model:ir.ui.menu,name:delivery_manager.menu_roadmap
+msgid "Roadmap"
+msgstr "Feuille de route"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_scheduled_day
+#: model:ir.ui.view,arch_db:delivery_manager.search_stock_picking
+msgid "Scheduled day"
+msgstr "Jour plannifié"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_sign
+#: model:ir.ui.view,arch_db:delivery_manager.view_picking_form
+msgid "Sign"
+msgstr "Signature"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_is_signed
+msgid "Signed"
+msgstr "Document signé"
+
+#. module: delivery_manager
+#: model:ir.model,name:delivery_manager.model_stock_picking_type
+msgid "The operation type determines the picking view"
+msgstr "Le type d'opération détermine la vue des mouvements de stock."
+
+#. module: delivery_manager
+#: model:ir.ui.view,arch_db:delivery_manager.search_stock_picking
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: delivery_manager
+#: model:ir.model,name:delivery_manager.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: delivery_manager
+#: model:ir.model.fields,field_description:delivery_manager.field_stock_picking_type_delivery_manager
+msgid "Use in delivery manager module"
+msgstr "Utiliser dans le module de gestion des livraisons"

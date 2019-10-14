@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="mrp_workcenter_view" model="ir.ui.view">
+        <field name="name">petit_mrp_workcenter</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page/group" position="after">
+                <label for="approval"/>
+                <div class="o_row">
+                    <field name="approval" string="Approval needed" />
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--ajout des fields product et expertise dans la vue form-->
+    <record id="mrp_routing_workcenter_form_view" model="ir.ui.view">
+        <field name="name">mrp_routing_workcenter_form_view</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='sequence']" position="after">
+                <field name="product_tmpl_id" string="Product"/>
+                <field name="expertise" string="Expertise"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--filtres des opérations-->
+    <record id="view_mrp_routing_workcenter_filter" model="ir.ui.view">
+          <field name="name">view_mrp_routing_workcenter_filter</field>
+          <field name="model">mrp.routing.workcenter</field>
+          <field name="arch" type="xml">
+              <search string="Operations">
+                  <field name="name"/>
+                  <field name="routing_id"/>
+                  <field name="workcenter_id"/>
+                  <group expand="0" string="Group By">
+                      <filter string="Routing" domain="[]" context="{'group_by':'routing_id'}"/>
+                      <filter string="Product" domain="[]" context="{'group_by':'product_tmpl_id'}"/>
+                      <filter string="Workcenter" domain="[]" context="{'group_by':'workcenter_id'}"/>
+                  </group>
+              </search>
+          </field>
+    </record>
+
+    <!--vue liste des opérations-->
+    <record id="view_mrp_routing_workcenter_tree" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.tree</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="search_view_id" ref="view_mrp_routing_workcenter_filter"/>
+        <field name="arch" type="xml">
+            <tree string="Operations" editable="bottom">
+                <field name="sequence" readonly="1"/>
+                <field name="name" readonly="1"/>
+                <field name="workcenter_id" readonly="1"/>
+                <field name="routing_id" readonly="1"/>
+                <field name="product_tmpl_id" string="Product" readonly="1"/>
+                <field name="expertise" readonly="1"/>
+                <field name="time_cycle_manual" default_focus="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="mrp_routing_workcenter_action" model="ir.actions.act_window">
+        <field name="name">Operations</field>
+        <field name="res_model">mrp.routing.workcenter</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_mrp_routing_workcenter_tree"/>
+    </record>
+
+    <!--item menu opérations-->
+    <menuitem
+        id="mrp_repair_model_act"
+        name="Operations"
+        sequence="50"
+        action="mrp_routing_workcenter_action"
+        parent="mrp.menu_mrp_bom"/>
+
+</odoo>

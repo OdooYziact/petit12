@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_repair_data_manager,mrp.repair.data,model_mrp_repair_data,mrp.group_mrp_manager,1,1,1,1
+access_mrp_repair_specification_manager,mrp.repair.specification,model_mrp_repair_specification,mrp.group_mrp_manager,1,1,1,1
+access_mrp_repair_model_manager,mrp.repair.model,model_mrp_repair_model,mrp.group_mrp_manager,1,1,1,1
+access_mrp_repair_data,mrp.repair.data,model_mrp_repair_data,mrp.group_mrp_user,1,1,1,0
+access_mrp_repair_specification,mrp.repair.specification,model_mrp_repair_specification,mrp.group_mrp_user,1,1,1,0
+access_mrp_repair_model,mrp.repair.model,model_mrp_repair_model,mrp.group_mrp_user,1,1,1,0

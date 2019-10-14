@@ -1,0 +1,29 @@
+<odoo>
+    <record id="quality_point_view_form_inherit_mrp" model="ir.ui.view">
+        <field name="name">quality_point_view_form_inherit_mrp</field>
+        <field name="model">quality.point</field>
+        <field name="inherit_id" ref="quality_mrp.quality_point_view_form_inherit_mrp"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <field name="operation_id" position="before">
+                <field name="routing_id" attrs="{'invisible': [('code', '!=', 'mrp_operation')]}" groups="mrp.group_mrp_routings" options="{'no_create': True, 'always_reload': True}"/>
+            </field>
+            <field name="operation_id" position="attributes">
+                <!--<attribute name="domain">[('routing_id', '=', routing_id)]</attribute>-->
+                <attribute name="options">{'no_create': True, 'always_reload': True}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="quality_point_view_tree" model="ir.ui.view">
+        <field name="name">quality_point_view_tree</field>
+        <field name="model">quality.point</field>
+        <field name="inherit_id" ref="quality.quality_point_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_type_id']" position="replace">
+                <field name="operation_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

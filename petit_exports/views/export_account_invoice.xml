@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Form view -->
+    <record model="ir.ui.view" id="export_account_invoice">
+        <field name="name">Export des factures</field>
+        <field name="model">export.account.invoice</field>
+        <field name="arch" type="xml">
+            <form>
+              <group name="choices">
+                <field name="period" string="Période"/>
+                <field name="start_date" string="Du"/>
+                <field name="end_date" string="Au"/>
+<!--                <field name="start_date" string="Du" attrs="{'readonly': [('period', 'not in', ('custom'))]}"/>-->
+<!--                <field name="end_date" string="Au" attrs="{'readonly': [('period', 'not in', ('custom'))]}"/>-->
+                <field name="journal" string="Type d'export"/>
+                <field name="is_dummy" string="Test"/>
+                <field name="is_forced" string="Forcer l'export des factures"/>
+              </group>
+                <footer>
+                    <button name="action_export" string="Export" type="object" class="btn btn-success" icon="fa-download"/>
+                </footer>
+            </form>
+
+      </field>
+    </record>
+
+    <!-- Action -->
+   <record model="ir.actions.act_window" id="action_wizard_export_account_invoice">
+        <field name="name">Export des factures</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">export.account.invoice</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="export_account_invoice"/>
+        <field name="target">new</field>
+   </record>
+
+    <!-- Ajout d'un menu deroulant pour les exports comptables dans le menu de facturation, et de son sous-menu pour l'export des factures -->
+    <menuitem name="Exports comptables"
+              id="menu_exports"
+              parent="account.menu_finance"
+              groups="account.group_account_user"/>
+
+    <menuitem name="Export des factures"
+              id="menu_exports_sub"
+              parent="menu_exports"
+              action="action_wizard_export_account_invoice"
+              groups="account.group_account_user"/>
+
+</odoo>

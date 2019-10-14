@@ -1,0 +1,37 @@
+/* Parent */
+body .o_form_view.o_form_readonly,
+body .o_form_view.o_form_editable {
+	display: block;
+}
+body .o_form_view > .o_form_sheet_bg {
+    width: 100%;
+}
+
+
+/* Enfant - Form */
+body .o_form_sheet_bg {
+	display: block;
+}
+
+/* Enfant - Chat */
+body .o_chatter.oe_chatter {
+	/*display: inline-block;*/
+	margin: 0 auto;
+	display: flex;
+	flex-flow: column;
+
+}
+
+body .o_chatter.oe_chatter .o_chatter_topbar {
+	display: inline-block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+body .o_mail_thread,
+.o_chat_composer{
+	margin: 0 auto;
+	max-width: 65%;
+	min-width: 65%;
+}
+

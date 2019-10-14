@@ -1,0 +1,178 @@
+<odoo>
+    <data>
+        <!-- Top menu item -->
+        <menuitem id="menu_delivery_manager_root" name="Delivery Manager"
+            sequence="25"
+            web_icon="delivery_manager,static/description/icon.png"/>
+
+        <menuitem name="Management" id="management_menu" parent="menu_delivery_manager_root"/>
+
+        <menuitem name="Configuration" id="configuration_menu" parent="menu_delivery_manager_root"/>
+
+        <record model="ir.ui.view" id="view_stock_picking_calendar">
+            <field name="name">stock.picking.calendar</field>
+            <field name="model">stock.picking</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <calendar string="Calendar View" date_start="scheduled_date" color="picking_type_id" mode="week" quick_add="False">
+                    <!--<field name="origin"/>-->
+                    <field name="picking_type_id" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="delivery_day"/>
+                    <field name="is_priority" widget="checkbox"/>
+                </calendar>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="view_stock_picking_kanban">
+            <field name="name">stock.picking.kanban</field>
+            <field name="model">stock.picking</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column" default_group_by="scheduled_day" group_create="false">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="location_dest_id"/>
+                    <field name="state"/>
+                    <field name="date"/>
+                    <field name="delivery_day"/>
+                    <field name="scheduled_day" invisible="1"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_record_top mb8">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                    <strong>
+                                            <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'cancel': 'default', 'none': 'danger', 'waiting': 'warning', 'confirmed': 'warning', 'partially_available': 'warning', 'done': 'success'}}"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <t t-esc="record.partner_id.value"/>
+
+                                        <span t-if="record.is_priority" class="badge"><i class="fa fa-fw fa-usd"/>Priority</span>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="scheduled_date" widget="date"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_stock_picking_tree" model="ir.ui.view">
+            <field name="name">stock.picking</field>
+            <field name="model">stock.picking</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done') and scheduled_date &lt; current_date" string="Picking list">
+                    <field name="name"/>
+                    <field name="location_dest_id" groups="stock.group_stock_multi_locations"/>
+                    <field name="partner_id"/>
+                    <field name="date" invisible="1"/>
+                    <field name="scheduled_date"/>
+                    <field name="delivery_day"/>
+                    <field name="scheduled_day"/>
+                    <field name="origin"/>
+                    <field name="group_id" invisible="1"/>
+                    <field name="backorder_id"/>
+                    <field name="state"/>
+                    <field name="priority" invisible="0"/>
+                    <field name="picking_type_id" invisible="1"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search -->
+        <record id="search_stock_picking" model="ir.ui.view">
+            <field name="name">search stock picking</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Picking List" filter_domain="['|',('name','ilike', self),('origin','ilike',self)]"/>
+                    <field name="partner_id" filter_domain="[('partner_id','child_of',self)]"/>
+                    <field name="product_id"/>
+                    <separator/>
+                    <filter name="available" string="Prêt" domain="[('state','in',('assigned', 'partially_available'))]" help="Assigned Moves"/>
+                    <filter name="next" string="A venir" domain="[('state','not in',('done', 'cancel'))]" help="A venir"/>
+                    <separator/>
+                    <filter string="Today" name="today" domain="[('scheduled_date','&lt;=',context_today().strftime('%Y-%m-%d')),('scheduled_date','&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Current week" name="current_week" domain="
+                            [('scheduled_date','&lt;=', (context_today()+relativedelta(days=6-context_today().weekday())).strftime('%Y-%m-%d')),
+                             ('scheduled_date','&gt;=', (context_today()+relativedelta(days=-(context_today().weekday()))).strftime('%Y-%m-%d'))]"/>
+                    <group expand="0" string="Group by">
+                        <filter string="Origin" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter name="group_delivery_day" string="Delivery day"  domain="[]" context="{'group_by': 'delivery_day'}"/>
+                        <filter name="group_scheduled_day" string="Scheduled day"  domain="[]" context="{'group_by': 'scheduled_day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_view_delivery_order" model="ir.actions.act_window">
+            <field name="name">Planning</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="domain" eval="[('carrier_type', '=', 'internal'), ('picking_type_id.delivery_manager', '=', True)]"/>
+            <field name="search_view_id" ref="search_stock_picking"/>
+            <field name="context">{
+                'search_default_current_week': 1,
+                'search_default_available': 1,
+                'create': False,
+            }</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_stock_picking_kanban')}),
+                                          (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_stock_picking_calendar')}),
+                                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_stock_picking_tree')})]"/>
+        </record>
+
+        <record id="action_view_next_delivery_order" model="ir.actions.act_window">
+            <field name="name">A venir</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="domain" eval="['&amp;', ('carrier_type', '=', 'internal'), ('picking_type_id.delivery_manager', '=', True)]"/>
+            <field name="search_view_id" ref="search_stock_picking"/>
+            <field name="context">{
+                'search_default_next': 1,
+                'create': False,
+            }</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_stock_picking_tree')}),
+                                          (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_stock_picking_calendar')})]"/>
+        </record>
+
+        <record id="action_view_roadmap" model="ir.actions.act_window">
+            <field name="name">Roadmap</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain" eval="[('carrier_type', '=', 'internal'), ('picking_type_id.delivery_manager', '=', True), ('state', '=', 'assigned')]"/>
+            <field name="views">[(ref('delivery_manager.view_stock_picking_tree'),tree), (False,form)]</field>
+            <field name="search_view_id" ref="search_stock_picking"/>
+            <field name="context">{
+                'search_default_today': 1,
+                'create': False,
+            }</field>
+        </record>
+
+        <menuitem name="Planning" id="menu_delivery_order" parent="management_menu"
+                  action="action_view_delivery_order"/>
+
+        <menuitem name="Roadmap" id="menu_roadmap" parent="management_menu"
+                  action="action_view_roadmap"/>
+
+        <menuitem name="A venir" id="menu_next_delivery_order" parent="management_menu"
+                  action="action_view_next_delivery_order"/>
+
+    </data>
+</odoo>

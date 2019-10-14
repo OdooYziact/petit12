@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="view_attachment_create_form" model="ir.ui.view">
+        <field name="name">view_attachment_create_form</field>
+        <field name="model">ir.attachment</field>
+            <field name="arch" type="xml">
+                <form string="Attachments">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="type" groups="base.group_no_one"/>
+                                <field name="datas" filename="datas_fname" attrs="{'invisible':[('type','=','url')]}"/>
+                                <field name="datas_fname" groups="base.group_no_one" attrs="{'invisible':[('type','=','url')]}" class="oe_inline oe_right"/>
+                                <field name="url" widget="url" attrs="{'invisible':[('type','=','binary')]}"/>
+                                <field name="mimetype" groups="base.group_no_one"/>
+                                <field name="type_id"/>
+                                <field name="tag_ids" widget="many2many_tags"/>
+                            </group>
+                            <group string="Attached To" groups="base.group_no_one">
+                                <field name="res_model"/>
+                                <field name="res_field"/>
+                                <field name="res_id"/>
+                                <field name="res_name"/>
+                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                <field name="public"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <!-- Form (display) - attachment-->
+    <record id="view_attachment_form" model="ir.ui.view">
+        <field name="name">view_attachment_form_display</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mimetype']" position="after">
+                <field name="type_id"/> 
+                <field name="tag_ids" widget="many2many_tags"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Tree -->
+    <record id="view_attachment_tree" model="ir.ui.view">
+        <field name="name">view_attachment_tree</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='res_model']" position="replace">
+                <field name="res_model_name"/>
+            </xpath>
+
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="mimetype"/>
+                <field name="file_size"/>
+                <field name="type_id"/>
+                <field name="tag_ids" widget="many2many_tags"/>
+            </xpath>
+
+            <xpath expr="//field[@name='res_field']" position="replace">
+            </xpath>
+
+            <xpath expr="//field[@name='res_id']" position="replace">
+            </xpath>
+
+            <xpath expr="//field[@name='create_uid']" position="replace">
+            </xpath>
+
+            <xpath expr="//field[@name='create_date']" position="replace">
+            </xpath>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_attachment_kanban">
+        <field name="name">ir.attachment kanban</field>
+        <field name="model">ir.attachment</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="mimetype"/>
+                <field name="type"/>
+                <field name="datas_fname"/>
+                <field name="name"/>
+                <templates>
+                    <!--<t t-name="kanban-box">-->
+                        <!--<div class="oe_kanban_global_click">-->
+                            <!--<div class="oe_kanban_vignette">-->
+                                <!--<div class="oe_attachment">-->
+                                    <!--<div class="oe_name">-->
+                                        <!--<field name="reference"/> - <field name="name"/>-->
+                                    <!--</div>-->
+                                    <!--<div t-if="record.type.raw_value == 'binary'">-->
+                                        <!--<a t-attf-href="/web/content/#{record.id.raw_value}?download=1">-->
+                                            <!--<t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)"/>-->
+                                            <!--<div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value"/>-->
+                                            <!--<div t-if="webimage" class="o_attachment_image">-->
+                                                <!--<img t-attf-src="/web/image/#{record.id.raw_value}?download=1"/>-->
+                                            <!--</div>-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</t>-->
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click" style="padding:0px;max-height:100px;">
+                            <div class="row mb4" style="height:100%;">
+                                <div class="col-xs-4" style="height:100%;padding-right:0px;">
+
+                                    <div t-if="record.type.raw_value == 'binary'">
+                                        <a t-attf-href="/web/content/#{record.id.raw_value}?download=1">
+                                            <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)"/>
+                                            <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value"/>
+                                            <div t-if="webimage" class="o_attachment_image">
+                                                <img t-attf-src="/web/image/#{record.id.raw_value}?download=1"/>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-4 text-left" style="margin-top:4px;padding-left:5px;text-overflow:ellipsis; overflow:hidden;">
+                                    <field name="reference" t-if="record.reference.raw_value"/>
+                                    <div class="oe_name">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <field name="file_size"/> octets
+                                </div>
+
+                                <div class="col-xs-3 text-right" style="margin-top:4px;padding-right:4px;word-wrap:break-word;">
+                                    <field name="type" invisible="1"/>
+                                    <field name="type_id"/><br/>
+                                    <field name="mimetype" invisible="1"/>
+                                    <field name="tag_ids" widget="many2many_tags"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Kanban -->
+    <!--<record id="view_attachment_kanban_old" model="ir.ui.view">-->
+        <!--<field name="name">Documents</field>-->
+        <!--<field name="model">ir.attachment</field>-->
+        <!--<field name="priority" eval="1"/>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<kanban class="o_kanban_mobile oe_background_grey o_kanban_dashboard">-->
+                <!--<field name='id'/>-->
+                <!--<templates>-->
+                    <!--<t t-name="kanban-box">-->
+                        <!--<div t-attf-class="oe_kanban_card oe_kanban_global_click" style="padding:0px;max-height:100px;">-->
+                            <!--<div class="row mb4" style="height:100%;">-->
+                                <!--<div class="col-xs-4" style="height:100%;padding-right:0px;">-->
+
+                                    <!--<div class="o_kanban_image" t-if="record.mimetype.value == 'image/jpeg' or record.mimetype.value == 'image/jpg' or record.mimetype.value == 'image/png' or record.mimetype.value == 'image/svg'" style="height:100%;width:100%;">-->
+                                        <!--<img t-att-src="kanban_image('ir.attachment', 'datas', record.id.raw_value)" style="height:100%; object-fit:cover;"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="o_kanban_image" t-elif="record.mimetype.value == 'application/pdf'" style="height:100%;width:100%;">-->
+                                        <!--<img t-att-src="_s + &quot;/document_attachment/static/src/img/file-pdf-solid.svg&quot;" style="height:100%; object-fit:cover;"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="o_kanban_image" t-elif="record.mimetype.value == 'application/zip'" style="height:100%;width:100%;">-->
+                                        <!--<img t-att-src="_s + &quot;/document_attachment/static/src/img/file-archive-solid.svg&quot;" style="height:100%; object-fit:cover;"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="o_kanban_image" t-elif="record.mimetype.value == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' or record.mimetype.value == 'application/vnd.oasis.opendocument.text'" style="height:100%;width:100%;">-->
+                                        <!--<img t-att-src="_s + &quot;/document_attachment/static/src/img/file-word-solid.svg&quot;" style="height:100%; object-fit:cover;"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="o_kanban_image" t-elif="record.mimetype.value == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' or record.mimetype.value == 'application/vnd.oasis.opendocument.spreadsheet'" style="height:100%;width:100%;">-->
+                                        <!--<img t-att-src="_s + &quot;/document_attachment/static/src/img/file-excel-solid.svg&quot;" style="height:100%; object-fit:cover;"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="o_kanban_image" t-else="" style="height:100%;width:100%;">-->
+                                        <!--<img t-att-src="_s + &quot;/document_attachment/static/src/img/file-solid.svg&quot;" style="height:100%; object-fit:cover;"/>-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+
+                                <!--<div class="col-xs-4 text-left" style="margin-top:4px;padding-left:5px;text-overflow:ellipsis; overflow:hidden;">-->
+                                    <!--<strong><field name="name"/></strong><br/>-->
+                                    <!--<field name="res_model_name"/><br/>-->
+                                    <!--<field name="file_size"/> octets-->
+                                <!--</div>-->
+
+                                <!--<div class="col-xs-3 text-right" style="margin-top:4px;padding-right:4px;word-wrap:break-word;">-->
+                                    <!--<field name="type"/><br/>-->
+                                    <!--<field name="mimetype" invisible="1"/>-->
+                                    <!--<field name="type_id"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</t>-->
+                <!--</templates>-->
+            <!--</kanban>-->
+        <!--</field>-->
+    <!--</record>-->
+
+    <!-- Search -->
+    <record id="search_attachment_kanban" model="ir.ui.view">
+        <field name="name">Documents</field>
+        <field name="model">ir.attachment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Attachment" filter_domain="['|',('name','ilike',self),('reference','ilike',self)]"/>
+                <group expand="0" string="Group by">
+                    <filter name="group_by_type_id" string="Step" context="{'group_by': 'type_id'}"/>
+                    <!--<filter name="group_by_tag_ids" string="Tag" context="{'group_by': 'tag_ids'}"/>-->
+                    <filter name="group_by_res_name" string="Ressource" context="{'group_by': 'res_name'}"/>
+                    <filter name="group_by_document" string="Document" context="{'group_by': 'res_model_name'}"/>
+                    <filter name="group_by_mimetype" string="Mimetype" context="{'group_by': 'mimetype'}"/>
+                    <!--<filter name="group_by_repair_id" string="Réparation" context="{'group_by': 'repair_id'}"/>-->
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_add_attachment" model="ir.actions.act_window">
+        <field name="name">action_add_attachment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ir.attachment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_attachment_create_form"/>
+        <field name="target">new</field>
+        <field name="context">{'default_res_id': active_id, 'default_res_model': active_model'}</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Add an attachment to current document.
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+
+</odoo>

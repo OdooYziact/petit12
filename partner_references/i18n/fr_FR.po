@@ -1,0 +1,334 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_references
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-15 17:44+0000\n"
+"PO-Revision-Date: 2018-11-15 19:06+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_mrp_repair_order__rel_id
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin__rel_id
+#: model:ir.model.fields,field_description:partner_references.field_sale_order__rel_id
+msgid " Rel"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_mrp_repair_order__rel_model
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin__rel_model
+#: model:ir.model.fields,field_description:partner_references.field_sale_order__rel_model
+msgid " Rel Model"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_active
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_active
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_active
+msgid "Active"
+msgstr "Actif"
+
+#. module: partner_references
+#: model:ir.model,name:partner_references.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: partner_references
+#: model:ir.ui.view,arch_db:partner_references.res_config_settings_view_form
+msgid "Contacts"
+msgstr "Contacts"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_create_uid
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_create_uid
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_create_date
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_create_date
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: partner_references
+#: code:addons/partner_references/models/partner_references_data.py:54
+#, python-format
+msgid "Current partner has changed, update references."
+msgstr "Le partenaire a été modifié, les références doivent être mises à jour."
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_display_name
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_display_name
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_display_name
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin_display_name
+msgid "Display Name"
+msgstr "Nom"
+
+#. module: partner_references
+#: model:ir.model.fields,help:partner_references.field_partner_references_data_res_name
+msgid "Display name of the related document."
+msgstr "Référence du document d'origine"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_res_name
+msgid "Document Name"
+msgstr "Nom du document"
+
+#. module: partner_references
+#: code:addons/partner_references/models/partner_references_data.py:184
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_name
+msgid "Field"
+msgstr "Champ"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_res_config_settings_partner_practices_fields
+msgid "Habitudes"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_id
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_id
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_id
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin_id
+msgid "ID"
+msgstr "Identifiant"
+
+#. module: partner_references
+#: model:ir.ui.view,arch_db:partner_references.partner_references_form
+msgid "Label"
+msgstr "Étiquette"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices___last_update
+#: model:ir.model.fields,field_description:partner_references.field_partner_references___last_update
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data___last_update
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_write_uid
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_write_uid
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_write_date
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_write_date
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: partner_references
+#: model:ir.ui.view,arch_db:partner_references.partner_practices_form
+msgid "Libellé"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.ui.view,arch_db:partner_references.res_config_settings_view_form
+msgid "Manage partner practices."
+msgstr "Gestion des habitudes commerciales."
+
+#. module: partner_references
+#: model:ir.ui.view,arch_db:partner_references.res_config_settings_view_form
+msgid "Manage partner references."
+msgstr "Gestion des références commerciales."
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_practices_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: partner_references
+#: sql_constraint:partner.practices:0 sql_constraint:partner.references:0
+msgid "Name must be unique."
+msgstr "Le nom doit être unique."
+
+#. module: partner_references
+#: code:addons/partner_references/models/partner_references_data.py:72
+#, python-format
+msgid "No partner found."
+msgstr "Aucun contact trouvé."
+
+#. module: partner_references
+#: model:ir.ui.view,arch_db:partner_references.partner_practices_form
+#: model:ir.ui.view,arch_db:partner_references.partner_references_form
+msgid "Nom"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_note
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_note
+#: model:ir.ui.view,arch_db:partner_references.view_res_partner_form
+msgid "Note"
+msgstr "Note"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_partner_id
+#: model:ir.ui.view,arch_db:partner_references.res_config_settings_view_form
+msgid "Partner"
+msgstr "Contact"
+
+#. module: partner_references
+#: model:ir.actions.act_window,name:partner_references.partner_practices_action
+#: model:ir.ui.menu,name:partner_references.menu_partner_practices
+msgid "Partner Practices"
+msgstr "Habitudes du contact"
+
+#. module: partner_references
+#: model:ir.actions.act_window,name:partner_references.partner_references_action
+#: model:ir.model.fields,field_description:partner_references.field_mrp_repair_order_partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin_partner_references
+#: model:ir.model.fields,field_description:partner_references.field_sale_order_partner_references
+#: model:ir.ui.menu,name:partner_references.menu_partner_references
+msgid "Partner References"
+msgstr "Références du contact"
+
+#. module: partner_references
+#: model:ir.actions.act_window,name:partner_references.action_view_references_data
+#: model:ir.ui.menu,name:partner_references.menu_data_references
+msgid "Partner References (data)"
+msgstr "Références du contact (données)"
+
+#. module: partner_references
+#: model:ir.model.fields,help:partner_references.field_partner_references_data_name
+#: model:ir.model.fields,help:partner_references.field_partner_references_name
+msgid "Partner reference name"
+msgstr ""
+
+#. module: partner_references
+#: code:addons/partner_references/models/partner_references_data.py:63
+#, python-format
+msgid "Please specify missing partner references."
+msgstr ""
+
+#. module: partner_references
+#: model:ir.ui.view,arch_db:partner_references.view_res_partner_form
+msgid "Practice"
+msgstr "Habitude"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_res_partner_practice_ids
+#: model:ir.model.fields,field_description:partner_references.field_res_users_practice_ids
+#: model:ir.ui.view,arch_db:partner_references.view_res_partner_form
+msgid "Practices"
+msgstr "Habitudes"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_reference_id
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_name
+#: model:ir.ui.view,arch_db:partner_references.view_res_partner_form
+msgid "Reference"
+msgstr "Référence"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_mrp_repair_order_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin_references
+#: model:ir.model.fields,field_description:partner_references.field_res_partner_reference_ids
+#: model:ir.model.fields,field_description:partner_references.field_res_users_reference_ids
+#: model:ir.model.fields,field_description:partner_references.field_sale_order_references
+#: model:ir.ui.view,arch_db:partner_references.view_res_partner_form
+msgid "References"
+msgstr "Références"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_res_id
+msgid "Related Document ID"
+msgstr "Identifiant du document lié"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_res_model
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_res_model_id
+msgid "Related Document Model"
+msgstr "Modèle du document lié"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_required
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_required
+#: model:ir.ui.view,arch_db:partner_references.view_res_partner_form
+msgid "Required"
+msgstr "Requis"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_mrp_repair_order_res_model_id
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_mixin_res_model_id
+#: model:ir.model.fields,field_description:partner_references.field_sale_order_res_model_id
+msgid "Res Model"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_res_config_settings_partner_references_fields
+msgid "Références"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_sequence
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_partner_references_data_value
+msgid "Value"
+msgstr "Valeur"
+
+#. module: partner_references
+#: model:ir.model.fields,help:partner_references.field_partner_references_data_required
+#: model:ir.model.fields,help:partner_references.field_partner_references_required
+msgid "Value required"
+msgstr "Valeur requise"
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_res_partner_has_practices
+#: model:ir.model.fields,field_description:partner_references.field_res_users_has_practices
+msgid "habitudes"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model,name:partner_references.model_partner_practices
+msgid "partner.practices"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model,name:partner_references.model_partner_references
+msgid "partner.references"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model,name:partner_references.model_partner_references_data
+msgid "partner.references.data"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model,name:partner_references.model_partner_references_mixin
+msgid "partner.references.mixin"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model,name:partner_references.model_res_config_settings
+msgid "res.config.settings"
+msgstr ""
+
+#. module: partner_references
+#: model:ir.model.fields,field_description:partner_references.field_res_partner_has_references
+#: model:ir.model.fields,field_description:partner_references.field_res_users_has_references
+msgid "références"
+msgstr ""

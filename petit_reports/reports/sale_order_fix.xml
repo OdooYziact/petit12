@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="petit_reports.report_saleorder_document_fix" t-name="petit_reports.report_saleorder_document_fix">
+        <t t-call="web.external_layout">
+
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+                    <link rel='stylesheet' href="/petit_reports/static/src/css/style.css"/>
+
+                    <div class="page">
+                        <div class="oe_structure"/>
+
+                        <!-- Addresses -->
+                        <div class="row">
+                            <div class="col-xs-6" t-if="doc.partner_contact_id">
+                                <strong>A l'attention de</strong>
+                                <div t-field="doc.partner_contact_id.parent_id.name"/>
+                                <div t-field="doc.partner_contact_id.name"/>
+                                <div t-field="doc.partner_contact_id"
+                                     t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}' />
+                                <p t-if="doc.partner_contact_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'TIN'"/> : <span t-field="doc.partner_contact_id.vat"/></p>
+                            </div>
+                            <div class="col-xs-6" t-else="">
+                                <strong>A l'attention de</strong>
+                                <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                                <p t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="doc.partner_id.vat"/></p>
+                            </div>
+                            <div class="col-xs-6">
+                                <t t-if="doc.partner_shipping_id == doc.partner_invoice_id">
+                                    <strong t-if="doc.partner_shipping_id == doc.partner_invoice_id">Adresse de livraison et de facturation</strong>
+                                    <strong t-if="doc.partner_shipping_id != doc.partner_invoice_id">Adresse de facturation</strong>
+                                    <div t-field="doc.partner_invoice_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                                    <div t-if="doc.partner_shipping_id != doc.partner_invoice_id" class="mt8">
+                                        <strong>Adresse de livraison</strong>
+                                        <div t-field="doc.partner_shipping_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                                    </div>
+                                </t>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Titre -->
+                        <h2>
+                            <span t-if="doc.flag == 'repair'">Devis de réparation </span>
+                            <span t-else="">Devis </span>
+                            <span t-field="doc.name"/>
+                        </h2>
+
+
+                        <!-- Commentaires -->
+                        <p t-if="doc.comment">
+                            <strong>Commentaires</strong> <br />
+                            <span t-field="doc.comment"/>
+                        </p>
+
+                        <br />
+
+
+                        <!-- Informations principales -->
+                        <div name="info">
+                            <div class="row">
+                                <div t-if="doc.partner_id and doc.partner_id.ref" class="col-xs-3">
+                                    <strong>Votre N° appel d'offre</strong>
+                                    <p t-field="doc.partner_id.ref"/>
+                                </div>
+                                <div t-if="not (env.context.get('proforma', False) or is_pro_forma) and doc.state not in ['draft','sent'] and doc.client_order_ref" class="col-xs-3">
+                                    <strong>Num commande</strong>
+                                    <p t-field="doc.client_order_ref"/>
+                                </div>
+                                <div t-if="date_order" class="col-xs-2">
+                                    <strong>Date devis</strong>
+                                    <p t-esc="date_order" t-options="{'widget': 'date'}"/>
+                                </div>
+                                <div t-if="doc.create_uid" class="col-xs-2">
+                                    <strong>Rédacteur</strong>
+                                    <p t-field="doc.create_uid"/>
+                                </div>
+                                <div t-if="doc.partner_id and doc.partner_id.user_id" class="col-xs-2">
+                                    <strong>Commercial</strong>
+                                    <p t-field="doc.partner_id.user_id"/>
+                                </div>
+                                <div t-if="doc.validity_date" class="col-xs-2">
+                                    <strong>Offre valable jusqu'au</strong>
+                                    <p t-field="doc.validity_date" t-options='{"widget": "date"}'/>
+                                </div>
+                                <div t-if="doc.payment_term_id" class="col-xs-2">
+                                    <strong>Conditions de règlement</strong>
+                                    <p t-field="doc.payment_term_id"/>
+                                </div>
+                                <div t-if="not (env.context.get('proforma', False) or is_pro_forma) and doc.state not in ['draft','sent'] and doc.requested_date" class="col-xs-2">
+                                    <strong>Date de livraison</strong>
+                                    <p t-field="doc.requested_date" t-options='{"widget": "date"}'/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- References client -->
+                        <t t-if="doc.partner_references">
+                            <h4>Vos références</h4>
+                            <table class="table table_references">
+                                <tr t-foreach="doc.get_references_fields()" t-as="line">
+                                    <t t-foreach="line" t-as="elem">
+                                        <td width="25%">
+                                            <strong><span t-esc="elem['name']"/></strong> <span t-esc="elem['value']"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                        </t>
+
+                        <!-- Caracteristiques techniques - Uniquement pour les reparations -->
+                        <t t-if="doc.flag == 'repair' and doc.repair_order_id.specification_ids">
+                            <h4>Caractéristiques techniques du matériel</h4>
+                            <table class="table table-condensed table_caracteristiques">
+                                <thead>
+                                    <tr>
+                                        <th>Libellé</th>
+                                        <th>Valeur</th>
+                                        <th>Unité</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.repair_order_id.specification_ids" t-as="specification">
+                                        <tr>
+                                            <td><span t-field="specification.description"/></td>
+                                            <td><span t-field="specification.value"/></td>
+                                            <td><span t-field="specification.unit"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <div t-if="doc.flag == 'repair'">
+                            <!-- Tableau devis de reparation detaille -->
+                            <div t-if="doc.show_details == True">
+                                <table class="table table-condensed table_repair">
+                                    <thead>
+                                        <th>Désignation</th>
+                                        <th>Quantité</th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.get_lines_not_detailed_for_report()" t-as="line">
+                                            <tr>
+                                                <td><span t-esc="line.get('name', 'NC')"/></td>
+                                                <td><span t-esc="line.get('product_uom_qty', 'NC')"/> <span t-esc="line.get('product_uom', 'NC')"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-condensed table_repair">
+                                    <thead>
+                                        <tr>
+                                            <th>Désignation</th>
+                                            <th>Quantité</th>
+                                            <th>Montant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table_titles"><td colspan="3"><strong>Travaux</strong></td></tr>
+                                        <t t-foreach="doc.order_line" t-as="line">
+                                            <tr t-if="line.layout_category_id.name == 'Services'">
+                                                <td><span t-field="line.name"/></td>
+                                                <td/>
+                                                <td><span t-field="line.price_subtotal"/></td>
+                                            </tr>
+                                            <tr t-elif="line.layout_category_id.name != 'Matériel'">
+                                                <td><span t-field="line.name"/></td>
+                                                <td/>
+                                                <td><span t-field="line.price_subtotal"/></td>
+                                            </tr>
+                                        </t>
+                                        <tr class="table_titles"><td colspan="3"><strong>Fournitures</strong></td></tr>
+                                        <t t-foreach="doc.order_line" t-as="line">
+                                            <tr t-if="line.layout_category_id.name == 'Matériel'">
+                                                <td><span t-field="line.name"/></td>
+                                                <td><span t-field="line.product_uom_qty"/> <span t-field="line.product_uom"/></td>
+                                                <td><span t-field="line.price_subtotal"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Tableau devis de reparation non detaille -->
+                            <div t-if="doc.show_details == False">
+                                <table class="table table-condensed table_repair">
+                                    <thead>
+                                        <th>Désignation</th>
+                                        <th>Quantité</th>
+                                        <th>PU HT</th>
+                                        <th>Total HT</th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.order_line" t-as="line">
+                                            <tr>
+                                                <td><span t-field="line.name"/></td>
+                                                <td><span t-field="line.product_uom_qty"/> <span t-field="line.product_uom.name"/></td>
+                                                <td><span t-field="line.price_unit"/></td>
+                                                <td><span t-field="line.price_subtotal"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-condensed table_repair" t-if="doc.print_details == True">
+                                    <thead>
+                                        <tr>
+                                            <th>Désignation</th>
+                                            <th>Quantité</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table_titles"><td colspan="2"><strong>Travaux</strong></td></tr>
+
+                                        <t t-foreach="doc.repair_order_id._prepare_for_sale()['operations']" t-as="line">
+                                            <tr>
+                                                <td><p t-esc="line.get('description', 'NC')"/></td>
+                                                <td/>
+                                            </tr>
+                                        </t>
+                                        <tr class="table_titles"><td colspan="2"><strong>Fournitures</strong></td></tr>
+                                        <t t-foreach="doc.repair_order_id._prepare_for_sale()['materials']" t-as="line">
+                                            <tr>
+                                                <td><p t-esc="line.get('description', 'NC')"/></td>
+                                                <td><span t-esc="line.get('product_uom_qty', 'NC')"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <!-- Tableau devis de negoce -->
+                        <table class="table table-condensed" t-if="doc.flag != 'repair'">
+                            <thead>
+                                <th>Référence interne</th>
+                                <th>Désignation</th>
+                                <th>Qté</th>
+                                <th>PU HT</th>
+                                <th>Total HT</th>
+                                <th>Délai (jours)</th>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.order_line" t-as="line">
+                                    <tr>
+                                        <td><span t-field="line.product_id.code"/></td>
+                                        <td><span t-field="line.product_id.name"/> <br /> <span t-field="line.name"/></td>
+                                        <td><span t-field="line.product_uom_qty"/></td>
+                                        <td><span t-field="line.price_unit"/></td>
+                                        <td><span t-field="line.price_subtotal"/></td>
+                                        <td><span t-field="line.delai_line"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+
+                        <!-- Totaux -->
+                        <div class="clearfix">
+                            <div class="row" name="total">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed" style="min-width: 200px;max-width: 350px;">
+                                        <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                            <td><strong>Sous-total</strong></td>
+                                            <td class="text-right">
+                                                <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="doc._get_tax_amount_by_group()" t-as="amount_by_group">
+                                            <tr style="border-bottom:1px solid #dddddd;">
+                                                <t t-if="amount_by_group[3] == 1 and doc.amount_untaxed == amount_by_group[2]">
+                                                    <td>
+                                                        <span t-esc="amount_by_group[0]"/>
+                                                        <span>&amp;nbsp;<span>sur</span>&amp;nbsp;<t t-esc="amount_by_group[2]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/></span>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span t-esc="amount_by_group[1]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                                    </td>
+                                                </t>
+                                                <t t-else="">
+                                                    <td>
+                                                        <span t-esc="amount_by_group[0]"/>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span t-esc="amount_by_group[1]" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                        <tr class="border-black">
+                                            <td><strong>Total</strong></td>
+                                            <td class="text-right">
+                                                <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Commentaires -->
+                        <p t-field="doc.note"/>
+
+                        <div class="oe_structure"/>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

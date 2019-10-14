@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- TREE -->
+    <record id="oee_tree_view" model="ir.ui.view">
+        <field name="name">oee_tree_view</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="inherit_id" ref="mrp.oee_tree_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='workcenter_id']" position="before">
+                <field name="origin" string="Origine"/>
+            </xpath>
+
+            <xpath expr="//field[@name='workcenter_id']" position="after">
+                <field name="operation_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+    <record id="oee_search_view" model="ir.ui.view">
+        <field name="name">oee_search_view</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="inherit_id" ref="mrp.oee_search_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='workcenter_id']" position="after">
+                <field name="origin"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='today']" position="after">
+                <filter string="Hier" name="yesterday"
+                        domain="[('date_start', '&gt;',  (context_today()-datetime.timedelta(days=2)).strftime('%Y-%m-%d')),
+                        ('date_end', '&lt;',  (context_today()).strftime('%Y-%m-%d'))]"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='loss_date']" position="before">
+                <filter string="Origine" name="origin" context="{'group_by': 'origin'}"/>
+                <filter string="Opération" name="operation" context="{'group_by': 'operation_id'}"/>
+                <separator/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

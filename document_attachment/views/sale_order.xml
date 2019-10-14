@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">view_order_form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                <button name="action_view_attachment" type="object" class="oe_stat_button" icon="fa-list-alt">
+                    <field name="attachment_count" string="Document(s)" widget="statinfo"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//button[@name='action_unlock']" position="after">
+                <button name="%(document_attachment.action_add_attachment)d" type="action" string="Nouveau document"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

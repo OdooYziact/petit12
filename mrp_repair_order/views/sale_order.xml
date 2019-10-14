@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_order_form_sale" model="ir.ui.view">
+        <field name="name">SO inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        <field name="priority" eval="40"/>
+        <field name="arch" type="xml">
+
+            <!-- field flag sous le h1-->
+            <xpath expr="//h1" position="after">
+                <h2><field name="flag" readonly="1"/></h2>
+                <!--<field name="state" readonly="1" attrs="{'invisible': [('state', 'IN', ('done', 'cancel', 'sale'))]}"/>-->
+            </xpath>            
+
+
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_order_form_repair" model="ir.ui.view">
+        <field name="name">Repair inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id" eval="[(4, ref('mrp.group_mrp_user'))]"/>
+        <field name="priority" eval="40"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='print_quotation']" position="after">
+                <field name="repair_order_id" invisible="1"/>
+                <field name="flag" invisible="1"/>
+                <field name="ready_to_sync" invisible="1"/>
+
+                <button name="action_repair_sync" string="Update" type="object"
+                        attrs="{'invisible': ['|', ('flag', '!=', 'repair'), ('ready_to_sync', '=', False)]}"/>
+                <button name="action_repair_confirm" string="Confirm repair" type="object"
+                        attrs="{'invisible': ['|', ('flag', '!=', 'repair'), ('state', 'not in', ['draft', 'sent'])]}"/>
+                <!--<button name="action_repair_group" string="1-LINE" type="object"-->
+                        <!--attrs="{'invisible': [('flag', '!=', 'repair')]}"/>-->
+            </xpath>
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="show_details" widget="boolean" attrs="{'invisible': [('flag', '=', 'quotation')]}"/>
+                <field name="print_details" widget="boolean" attrs="{'invisible': [('flag', '=', 'quotation')]}"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                <button name="action_view_repair_order" type="object" string="Repair Order" class="oe_stat_button"
+                        icon="fa-wrench" attrs="{'invisible': [('repair_order_id', '=', False)]}">
+                </button>
+            </xpath>
+            
+            <!--<xpath expr="//button[@name='action_confirm'][1]" position="attributes">-->
+                <!--<attribute name="attrs">{'invisible': ['|',('flag', '=', 'repair'),('state', 'not in', ['sent', 'repair_confirmed'])]}</attribute>-->
+            <!--</xpath>-->
+
+            <!--<xpath expr="//button[@name='action_confirm'][2]" position="attributes">-->
+                <!--<attribute name="attrs">{'invisible': ['|',('flag', '=', 'repair'),('state', 'not in', ['draft', 'repair_confirmed'])]}</attribute>-->
+            <!--</xpath>-->
+
+            <!--<xpath expr="//field[@name='amount_untaxed']" position="before">-->
+                <!--<field name="total_estimated_cost" widget="monetary" options="{'currency_field': 'currency_id'}"-->
+                       <!--attrs="{'invisible': [('flag', '=', 'quotation')]}" string="Total estimated cost"/>-->
+            <!--</xpath>-->
+
+            <xpath expr="//notebook" position="inside">
+<!--                <page string="Cost" attrs="{'invisible': [('flag', '!=', 'repair')]}">-->
+<!--                    <group>-->
+<!--                        <field name="fixed_cost_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                        <field name="shipping_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                        <field name="raw_material_estimated_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                        <field name="operations_estimated_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                        <hr/>-->
+<!--                        <field name="total_estimated_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                    </group>-->
+<!--                </page>-->
+                <page string="Material request" attrs="{'invisible': [('repair_order_id', '=', False)]}">
+                    <field name="request_line_ids" editable="false">
+                        <tree>
+                            <field name="currency_id" invisible="1"/>
+                            <field name='request_id'/>
+                            <field name='request'/>
+                            <field name='name'/>
+                            <field name='product_id'/>
+                            <field name='description'/>
+                            <field name='supplier_id'/>
+                            <field name='product_qty'/>
+                            <field name='product_uom'/>
+                            <field name='price_unit' widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name='price_total' string='Total' widget="monetary"
+                                   options="{'currency_field': 'currency_id'}" sum='Total'/>
+                            <field name='state'/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+            <!--<xpath expr="//h1" position="before">-->
+                <!--&lt;!&ndash;<div attrs="{'invisible': [('warning', '!=', True)]}">&ndash;&gt;-->
+                <!--<div>-->
+                    <!--<span class="label label-danger pull-right"><field name="warning"/></span>-->
+                <!--</div>-->
+            <!--</xpath>-->
+
+        </field>
+    </record>
+
+    <!-- DEVIS / group_by sur le flag: réparation ou négoce -->
+    <record id="sale_order_view_search_inherit_quotation" model="ir.ui.view">
+        <field name="name">sale_order_view_search_inherit_quotation</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="priority" eval="50"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//group" position="inside">
+                <filter string="Type" domain="[]" context="{'group_by':'flag'}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- BON DE COMMANDE / group_by sur le flag: réparation ou négoce -->
+    <record id="sale_order_view_search_inherit_sale" model="ir.ui.view">
+        <field name="name">sale_order_view_search_inherit_sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="priority" eval="50"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//group" position="inside">
+                <filter string="Type" domain="[]" context="{'group_by':'flag'}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- DEVIS + BON DE COMMANDE/ filtre_by sur flag -->
+    <record id="view_sales_order_filter" model="ir.ui.view">
+        <field name="name">sale_order_view_search_inherit_quotation</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="priority" eval="50"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//filter[last()]" position="after">
+                <separator/>
+                <filter string="Repair" name="repair" domain="[('flag','=','repair')]"/>
+                <filter string="Quotation" name="quotation" domain="[('flag','=','quotation')]"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- DEVIS / Ajout de la colonne flag -->
+    <record id="view_quotation_tree" model="ir.ui.view">
+        <field name="name">view_quotation_tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="priority" eval="50"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="flag" string="Type"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- BON DE COMMANDE / Ajout de la colonne flag -->
+    <record id="view_order_tree" model="ir.ui.view">
+        <field name="name">view_order_tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="priority" eval="50"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="flag" string="Type"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

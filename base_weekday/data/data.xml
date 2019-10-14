@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+            <record id="day_0" model="base.weekday">
+                <field name="name">Monday</field>
+                <field name="weekday">1</field>
+                <field name="sequence">1</field>
+                <field name="fold" eval="False"/>
+            </record>
+
+            <record id="day_1" model="base.weekday">
+                <field name="name">Tuesday</field>
+                <field name="weekday">2</field>
+                <field name="sequence">2</field>
+                <field name="fold" eval="False"/>
+            </record>
+
+            <record id="day_2" model="base.weekday">
+                <field name="name">Wednesday</field>
+                <field name="weekday">3</field>
+                <field name="sequence">3</field>
+                <field name="fold" eval="False"/>
+            </record>
+
+            <record id="day_3" model="base.weekday">
+                <field name="name">Thursday</field>
+                <field name="weekday">4</field>
+                <field name="sequence">4</field>
+                <field name="fold" eval="False"/>
+            </record>
+
+            <record id="day_4" model="base.weekday">
+                <field name="name">Friday</field>
+                <field name="weekday">5</field>
+                <field name="sequence">5</field>
+                <field name="fold" eval="False"/>
+            </record>
+
+            <record id="day_5" model="base.weekday">
+                <field name="name">Saturday</field>
+                <field name="weekday">6</field>
+                <field name="sequence">6</field>
+                <field name="fold" eval="False"/>
+            </record>
+
+            <record id="day_undefined" model="base.weekday">
+                <field name="name">Undefined</field>
+                <field name="weekday" eval="False"/>
+                <field name="sequence">0</field>
+                <field name="fold" eval="True"/>
+            </record>
+
+    </data>
+</odoo>

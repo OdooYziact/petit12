@@ -18,8 +18,10 @@
         "data" : [
         'views/color_change.xml',
     ],
-    "test" : [
-    ],
+    "test" : [],
+
+    'css': ['static/src/css/fix_chatter_bottom.css'],
+
     "auto_install": False,
     "application": False,
     "installable": True,

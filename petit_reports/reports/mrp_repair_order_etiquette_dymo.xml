@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="petit_reports.report_etiquette_dymo">
+        <t t-call="web.html_container">
+
+            <div class="header"/>
+
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t t-set="o" t-value="o.with_context({'lang': o.partner_id.lang})"/>
+                    <link rel='stylesheet' href="/petit_reports/static/src/css/style.css"/>
+
+                    <div class="page">
+                        <div class="etiquette_t4"><span t-if="o.partner_id" t-field="o.partner_id" class="truncate_title"/><span t-if="o.name" t-field="o.name" class="affaire_right"/></div>
+                        <div class="center_text etiquette_t3 truncate_ref" t-if="o.product_id and o.product_id.default_code" t-field="o.product_id.default_code"/>
+
+                        <table class="center_table total_width">
+                            <t t-set="nb_spec" t-value="0"/>
+                            <tr t-foreach="o.get_specifications_fields2()" t-as="line">
+                                <t t-if="nb_spec &lt; 11">
+                                    <t t-foreach="line" t-as="elem">
+                                        <td width="50%">
+                                            <strong class="spec_desc"><span t-esc="elem['description']"/></strong> <span class="spec_value" t-esc="elem['value']"/> <span class="spec_unit" t-esc="elem['unit']"/>
+                                        </td>
+                                    </t>
+                                    <t t-set="nb_spec" t-value="nb_spec + 2"/>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <div class="center_text" t-if="o.issue" t-esc="o.issue[:200]"/>
+
+                    </div>
+
+                </t>
+            </t>
+
+            <div class="footer"/>
+
+        </t>
+    </template>
+
+</odoo>

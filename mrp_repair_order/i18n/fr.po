@@ -1,0 +1,1170 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_repair_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-04 16:22+0000\n"
+"PO-Revision-Date: 2019-04-04 18:22+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_stock_picking_count
+msgid "# Stock picking"
+msgstr "# Stock picking"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_invoice_count
+msgid "# of Invoices"
+msgstr "Factures"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_sale_order_id
+msgid "# Repair Order"
+msgstr "# Réparation"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "+15 min"
+msgstr "+15 min"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+msgid "+15m"
+msgstr "+15 min\t"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "+30 min"
+msgstr "+30 min"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+msgid "+30m"
+msgstr "+30 min"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_partner_form
+msgid "<span class=\"o_stat_text\"># of Repair Order</span>"
+msgstr "<span class=\"o_stat_text\">Réparation</span>"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "<span class=\"o_stat_text\">Delivery Slip</span>"
+msgstr "<span class=\"o_stat_text\">Bon de transport</span>"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "<span class=\"o_stat_text\">Material request</span>"
+msgstr "<span class=\"o_stat_text\">Approvisionnement</span>"
+
+#. module: mrp_repair_order
+#: model:ir.actions.server,name:mrp_repair_order.mrp_workorder_server_action_ready
+msgid "Active"
+msgstr "Actif"
+
+#. module: mrp_repair_order
+#: model:ir.actions.act_window,name:mrp_repair_order.action_add_workorder
+msgid "Add an operation"
+msgstr "Opération"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Add document"
+msgstr "Ajouter un document"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Add internal notes..."
+msgstr "Ajouter des notes internes..."
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+msgid "Add operation"
+msgstr "Ajouter une opération"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Add quotation notes..."
+msgstr "Ajouter des notes au devis..."
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/sale_order.py:89
+#, python-format
+msgid "All operations aren't done, are you sure to continue ?"
+msgstr "Les opérations ne sont pas terminées, voulez-vous continuer ?"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Amount Due"
+msgstr "Montant dû"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workcenter_approval
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_workcenter_view
+msgid "Approval needed"
+msgstr "Approbation nécessaire"
+
+#. module: mrp_repair_order
+#: model:stock.location,name:mrp_repair_order.stock_location_manufacture
+msgid "Atelier"
+msgstr "Atelier"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_quality_check_attachment_id
+msgid "Attachment"
+msgstr "Pièce jointe"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Balance Sheet"
+msgstr "Bilan"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Block"
+msgstr "Bloquer"
+
+#. module: mrp_repair_order
+#: model:ir.actions.server,name:mrp_repair_order.action_server_repair_cancel
+#: model:ir.actions.server,name:mrp_repair_order.mrp_workorder_server_action_cancel
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,state:0
+msgid "Canceled"
+msgstr "Annulé"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:322
+#, python-format
+msgid "Cannot cancel completed repairs."
+msgstr "Impossible d'annuler des réparations terminées."
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Check"
+msgstr "Vérifier"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.quality_check_view_tree
+msgid "Checked By"
+msgstr "Vérifié par"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.quality_check_view_tree
+msgid "Checked Date"
+msgstr "Date de vérification"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,help:mrp_repair_order.field_mrp_repair_order_partner_id
+msgid "Choose partner for whom the order will be invoiced and delivered."
+msgstr "Choisissez un partenaire pour lequel la commande sera facturée et livrée."
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Clear"
+msgstr "Effacer"
+
+#. module: mrp_repair_order
+#: model:ir.actions.act_window,help:mrp_repair_order.action_repair_order_tree
+msgid "Click to create a reparation order."
+msgstr "Cliquez pour créer une réparation."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_comment
+msgid "Comment"
+msgstr "Commentaires"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_comments
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_recommendations
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+msgid "Comments"
+msgstr "Commentaires"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_company_id
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Company"
+msgstr "Société"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_order_form
+msgid "Confirm repair"
+msgstr "Confirmer la réparation"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_is_confirmed
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Consult done"
+msgstr "Terminer la consultation"
+
+#. module: mrp_repair_order
+#: model:ir.actions.server,name:mrp_repair_order.action_server_consume_material
+msgid "Consume material"
+msgstr "Consommer les pièces"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_res_partner
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_partner_contact_id
+#: model:ir.model.fields,help:mrp_repair_order.field_mrp_repair_order_partner_contact_id
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Contact"
+msgstr "Contact"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Continue Production"
+msgstr "Continuer"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Cost"
+msgstr "Prix de revient"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_partner_id
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_partner_name
+msgid "Customer"
+msgstr "Client"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_name
+msgid "Deal number"
+msgstr "N° affaire"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_default_address_id
+msgid "Default Address"
+msgstr "Adresse par défaut"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_res_config_settings_default_picking_type_in
+msgid "Default picking type for move in"
+msgstr "Opération pour l'entrée en stock"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.res_config_settings_view_form
+msgid "Default picking type for move in."
+msgstr "Opération pour l'entrée en stock."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_res_config_settings_default_picking_type_out
+msgid "Default picking type for move out"
+msgstr "Opération pour la sortie de stock"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.res_config_settings_view_form
+msgid "Default picking type for move out."
+msgstr "Opération pour la sortie de stock."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_is_defined
+msgid "Defined"
+msgstr "Défini"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_delivered
+msgid "Delivered"
+msgstr "Livré"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_partner_address_id
+msgid "Delivery address"
+msgstr "Adresse de livraison"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Describe the issue here..."
+msgstr "Décrire le problème ici..."
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Description"
+msgstr "Description"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+#: selection:mrp.repair.order,state:0
+msgid "Diagnostic"
+msgstr "Diagnostic"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Document(s)"
+msgstr "Document(s)"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+#: selection:mrp.repair.order,state:0 selection:mrp.repair.order,step:0
+msgid "Done"
+msgstr "Fait"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+#: selection:mrp.repair.order,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:438
+#, python-format
+msgid "Error, diagnostic"
+msgstr "Erreur, statut diagnostic"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+#: selection:mrp.repair.order,step:0
+msgid "Estimate"
+msgstr "Estimer"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_total_estimated_cost
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Estimated Cost"
+msgstr "Estimation"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_routing_workcenter_expertise
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_routing_workcenter_form_view
+msgid "Expertise"
+msgstr "Expertise"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/sale_order.py:80
+#, python-format
+msgid "Expertise not done, are you sure to continue ?"
+msgstr "Attention, l'expertise n'a pas encore été réalisée."
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Finish Order"
+msgstr "Terminer l'opération"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,planned_method:0
+msgid "Fixed date"
+msgstr "Date demandée"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Future Activities"
+msgstr "Activités futures"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_mrp_routing_workcenter_filter
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_internal_notes
+msgid "Internal Notes"
+msgstr "Notes internes"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_account_invoice
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_invoice_id
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_invoice_ids
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_partner_invoice_id
+msgid "Invoice address"
+msgstr "Adresse de facturation"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_invoiced
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Invoiced"
+msgstr "Facturé"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_is_expertise_done
+msgid "Is Expertise Done"
+msgstr "Expertise terminée"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_issue
+msgid "Issue"
+msgstr "Demande du client"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Late Activities"
+msgstr "Activités en retard"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_lot_id
+msgid "Lot"
+msgstr "Lot"
+
+#. module: mrp_repair_order
+#: model:ir.actions.server,name:mrp_repair_order.action_server_repair_close
+msgid "Mark as done"
+msgstr "Mark as done"
+
+#. module: mrp_repair_order
+#: model:ir.actions.act_window,name:mrp_repair_order.action_material_request_form
+#: model:ir.actions.act_window,name:mrp_repair_order.action_view_material_request_tree
+msgid "Material Request"
+msgstr "Approvisionnement"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_order_form
+msgid "Material request"
+msgstr "Demande de fourniture"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_tolerance_max
+msgid "Max Tolerance"
+msgstr "Tolérance max"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_tolerance_min
+msgid "Min Tolerance"
+msgstr "Tolérance min"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "My activities"
+msgstr "Mes activités"
+
+#. module: mrp_repair_order
+#: selection:sale.order,flag:0
+msgid "NEGOCE"
+msgstr "Négoce"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_workorder_simple_form_view
+msgid "Name"
+msgstr "Nom"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_routing_workcenter_no_approval
+msgid "Need an approval"
+msgstr "Nécessite une approbation"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:493
+#, python-format
+msgid "No linked repair."
+msgstr "Pas de réparation liée"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_bom_id
+msgid "Nomenclature"
+msgstr "Nomenclature"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_notes
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Notes"
+msgstr "Notes"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:552
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:571
+#, python-format
+msgid "Only draft repair order can be received."
+msgstr "Seules les réparations en brouillon peuvent être réceptionnées."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_line_operation_id
+msgid "Operation"
+msgstr "Opération"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_operation_note
+msgid "Operation Note"
+msgstr "Note de l'opération"
+
+#. module: mrp_repair_order
+#: model:ir.actions.act_window,name:mrp_repair_order.mrp_routing_workcenter_action
+#: model:ir.actions.act_window,name:mrp_repair_order.mrp_workorder_action_tablet
+#: model:ir.ui.menu,name:mrp_repair_order.mrp_repair_model_act
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_mrp_routing_workcenter_filter
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_mrp_routing_workcenter_tree
+msgid "Operations"
+msgstr "Opérations"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_operation_cost
+msgid "Operations Cost"
+msgstr "Main d'oeuvre"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_operations_estimated_cost
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_operations_estimated_cost
+msgid "Operations Estimated Cost"
+msgstr "Main d'oeuvre"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Partner references"
+msgstr "Références du client"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Pause"
+msgstr "Mettre en attente"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_picking_type_in
+msgid "Picking Type In"
+msgstr "Méthode d'entrée en stock"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_picking_type_out
+msgid "Picking Type out"
+msgstr "Méthode livraison\t"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+msgid "Pickings"
+msgstr "Bon de transport"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_date_planned_finished
+msgid "Planned date"
+msgstr "Date prévue"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_is_priority
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_product_id
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_routing_workcenter_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_mrp_routing_workcenter_filter
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_mrp_routing_workcenter_tree
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Product"
+msgstr "Article"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Product Confirm"
+msgstr "Confirmer l'article"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_product_qty
+msgid "Product Quantity"
+msgstr "Quantité d'articles"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_product_tmpl_id
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_routing_workcenter_product_tmpl_id
+msgid "Product Tmpl"
+msgstr "Article"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_product_uom
+msgid "Product Unit of Measure"
+msgstr "Unité de mesure du produit"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:555
+#, python-format
+msgid "Product can only be received once."
+msgstr "L'article ne peut être réceptionné qu'un fois."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_product_category_id
+msgid "Product category"
+msgstr "Catégorie d'article"
+
+#. module: mrp_repair_order
+#: model:product.template,name:mrp_repair_order.generic_repair_product_operation
+msgid "Product operation"
+msgstr "Product operation"
+
+#. module: mrp_repair_order
+#: model:product.template,name:mrp_repair_order.product_to_repair
+msgid "Product to repair"
+msgstr "Article à réparer"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_production
+msgid "Production"
+msgstr "Fabrication"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_workorder_simple_form_view
+msgid "Production Workcenter"
+msgstr "Poste de travail de production"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_production_id
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Production order"
+msgstr "Ordre de fabrication"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:576
+#, python-format
+msgid "Products can only be received once."
+msgstr "Les articles ne peuvent être réceptionnés qu'une seule fois."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,help:mrp_repair_order.field_mrp_repair_order_lot_id
+msgid "Products repaired are all belonging to this lot"
+msgstr "Les produits réparés appartiennent tous à ce lot"
+
+#. module: mrp_repair_order
+#: model:stock.picking.type,name:mrp_repair_order.picking_type_manufacture
+msgid "Préparation atelier"
+msgstr "Ex Préparation atelier"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_quality_check
+msgid "Quality Check"
+msgstr "Contrôle qualité"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_quality_point
+msgid "Quality Point"
+msgstr "Point(s) de contrôle qualité"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_sale_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_sale_order_ids
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_sales_order_filter
+#: selection:mrp.repair.order,state:0
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_quotation_notes
+msgid "Quotation Notes"
+msgstr "Notes de devis"
+
+#. module: mrp_repair_order
+#: selection:sale.order,flag:0
+msgid "REPARATION"
+msgstr "Réparation"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_raw_material_cost
+msgid "Raw Material Cost"
+msgstr "Matières premières"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_raw_material_estimated_cost
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_raw_material_estimated_cost
+msgid "Raw Material Estimated Cost"
+msgstr "Matières premières"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Ready"
+msgstr "Prêt"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_ready_to_sync
+msgid "Ready To Sync"
+msgstr "Prêt à synchroniser"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_receipt_date
+msgid "Receipt date"
+msgstr "Date de réception"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_is_received
+msgid "Received"
+msgstr "Reçu"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Recommandations"
+msgstr "Constatation"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+#: selection:mrp.repair.order,step:0
+msgid "Removal"
+msgstr "Entrée / Enlèvement"
+
+#. module: mrp_repair_order
+#: model:ir.actions.act_window,name:mrp_repair_order.action_repair_order_tree
+#: model:ir.ui.menu,name:mrp_repair_order.mrp_repair_order_model_act
+#: model:ir.ui.view,arch_db:mrp_repair_order.res_config_settings_view_form
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_sales_order_filter
+#: selection:mrp.repair.order,state:0
+msgid "Repair"
+msgstr "Réparation"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_data_repair_order_id
+#: model:ir.model.fields,field_description:mrp_repair_order.field_res_partner_repair_order_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_res_users_repair_order_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_stock_picking_repair_order_id
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_order_form
+msgid "Repair Order"
+msgstr "Réparation"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_res_partner_repair_order_count
+#: model:ir.model.fields,field_description:mrp_repair_order.field_res_users_repair_order_count
+msgid "Repair Order Count"
+msgstr "Nombre de réparation"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Repair Quotation"
+msgstr "Devis de réparation"
+
+#. module: mrp_repair_order
+#: model:product.template,name:mrp_repair_order.generic_repair_product
+msgid "Repair Service"
+msgstr "Repair Service"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Repair isn't done. Are you sure to print balance sheet ?"
+msgstr "Le réparation n'est pas terminée, êtes-vous sûr de vouloir éditer le bilan d'affaire ?"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_repair_model_id
+msgid "Repair model"
+msgstr "Modèle de réparation"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:853
+#, python-format
+msgid "Repair must be canceled in order to remove it."
+msgstr "La réparation doit être annulée dans le but de la supprimer."
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:445
+#, python-format
+msgid "Repair must be done, invoiced or cancelled in order to delivery"
+msgstr "La réparation doit être terminée, facturée ou annulée pour pouvoir être livré."
+
+#. module: mrp_repair_order
+#: model:product.category,name:mrp_repair_order.operation_product_category
+msgid "Repair operations"
+msgstr "Repair operations"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_account_invoice_repair_order_id
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_repair_order_id
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_repair_order_id
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Repair order"
+msgstr "Réparation"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:423
+#, python-format
+msgid "Repair order must be in draft state."
+msgstr "La réparation doit être en brouillon."
+
+#. module: mrp_repair_order
+#: model:ir.actions.act_window,name:mrp_repair_order.action_repair_order
+msgid "Repair orders"
+msgstr "Réparations"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_planned_method
+msgid "Repair time"
+msgstr "Délai de réparation"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_repaired
+msgid "Repaired"
+msgstr "Réparé"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_tree
+msgid "Repairs"
+msgstr "Réparations"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_request_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_request_ids
+msgid "Request"
+msgstr "Demande"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_request_count
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_request_count
+msgid "Request Count"
+msgstr "Nombre de demande"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_request_line_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_request_line_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_request_line_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_line_request_line_id
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_request_line_ids
+msgid "Request Line"
+msgstr "Ligne de demande"
+
+#. module: mrp_repair_order
+#: model:ir.actions.server,name:mrp_repair_order.action_server_repair_restart
+msgid "Restart production"
+msgstr "Relancer les opérations"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_routing_id
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_mrp_routing_workcenter_filter
+msgid "Routing"
+msgstr "Gamme"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_routing
+msgid "Routings"
+msgstr "Gammes"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Run"
+msgstr "Lancer"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Run procurement"
+msgstr "Lancer les achats"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Sale order"
+msgstr "Devis"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:350
+#, python-format
+msgid "Sale order should be confirmed in order to be invoiced"
+msgstr "Le devis doit être confirmé pour être facturé"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_sale_advance_payment_inv
+msgid "Sales Advance Payment Invoice"
+msgstr "Facture de paiement d'avance"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Scrap"
+msgstr "Rebut"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_scrap_cost
+msgid "Scrap Cost"
+msgstr "Rebuts"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Search Repairs"
+msgstr "Chercher des réparations"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_shipping_cost
+msgid "Shipping Cost"
+msgstr "Frais de port"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Show all records which has next action date is before today"
+msgstr "Montrez toutes les enregistrements pour lesquelles la date des prochaines actions est pour aujourd'hui ou avant. "
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_show_details
+msgid "Show detailed lines"
+msgstr "Chiffrage détaillé"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_print_details
+msgid "Show detailed lines on report"
+msgstr "Afficher les lignes détaillées sur le devis"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_specification_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_specifications
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_specification_ids
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_specifications
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Specifications"
+msgstr "Spécifications"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,planned_method:0
+msgid "Standard time"
+msgstr "Temps standard"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Start Working"
+msgstr "Commencer le travail"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_state
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Status"
+msgstr "État"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_production_repair_step
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_step
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Step"
+msgstr "Etape"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_stock_picking_ids
+msgid "Stock picking"
+msgstr "Mouvement de stock"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Tablet view"
+msgstr "Vue tablette"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:665
+#, python-format
+msgid "The Product Unit of Measure you chose has a different category than in the product form."
+msgstr "L'unité de mesure du produit que vous avez choisi a une catégorie différente de celle du formulaire du produit."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,help:mrp_repair_order.field_mrp_repair_order_routing_id
+msgid "The operations for producing this BoM.  When a routing is specified, the production orders will  be executed through work orders, otherwise everything is processed in the production order itself. "
+msgstr "Les opérations de production de cette BoM. Lorsqu'une gamme est spécifiée, les ordres de production sont exécutés via les ordres de travail, sinon tout est traité dans l'ordre de production lui-même. "
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,help:mrp_repair_order.field_mrp_repair_order_state
+msgid "The status of a repair line is set automatically to the one of the linked repair order."
+msgstr "Le statut d'une ligne de réparation est automatiquement défini sur celle de l'opération correspondante."
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_helpdesk_ticket_id
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_workorder_title
+msgid "Title"
+msgstr "Titre"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "To Consult"
+msgstr "A consulter"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+#: selection:mrp.repair.order,step:0
+msgid "To Deliver"
+msgstr "A livrer"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "To Disassemble"
+msgstr "A démonter"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "To Estimate"
+msgstr "A chiffrer"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "To Evaluate"
+msgstr "A expertiser"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "To Prepare"
+msgstr "A préparer"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "To Receive"
+msgstr "A réceptionner"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "To Restart"
+msgstr "A relancer"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form_filter
+msgid "Today Activities"
+msgstr "Activités du Jour"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_order_form
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Total"
+msgstr "Total"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_total_cost
+msgid "Total Cost"
+msgstr "Total"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_total_estimated_cost
+msgid "Total Estimated Cost"
+msgstr "Total"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_flag
+#: model:ir.ui.view,arch_db:mrp_repair_order.sale_order_view_search_inherit_quotation
+#: model:ir.ui.view,arch_db:mrp_repair_order.sale_order_view_search_inherit_sale
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_order_tree
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_quotation_tree
+msgid "Type"
+msgstr "Type"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_workcenter_form_view_inherit
+msgid "Unblock"
+msgstr "Débloquer"
+
+#. module: mrp_repair_order
+#: selection:mrp.repair.order,step:0
+msgid "Under Repair"
+msgstr "En réparation"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_order_form
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_repair_order_form
+msgid "Update"
+msgstr "Mise à jour"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_production_form_view
+msgid "WO Quality Checks"
+msgstr "Contrôles Opérations"
+
+#. module: mrp_repair_order
+#: model:ir.model.fields,field_description:mrp_repair_order.field_mrp_repair_order_waiting_for_approval
+msgid "Waiting for customer approval"
+msgstr "Devis obligatoire"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:665
+#: model:ir.model.fields,field_description:mrp_repair_order.field_sale_order_warning
+#, python-format
+msgid "Warning"
+msgstr "Attention"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_workcenter
+msgid "Work Center"
+msgstr "Poste de Travail"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Utilisation du poste de travail"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_workorder
+msgid "Work Order"
+msgstr "Opération"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_workorder
+msgid "Waiting approval"
+msgstr "En attente d'approbation"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.view_mrp_routing_workcenter_filter
+msgid "Workcenter"
+msgstr "Poste de travail"
+
+#. module: mrp_repair_order
+#: code:addons/mrp_repair_order/models/mrp_repair_order.py:381
+#, python-format
+msgid "You can only finish repair order in progress."
+msgstr "Vous ne pouvez terminer que les réparations en cours."
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_material_request_line
+msgid "material.request.line"
+msgstr "Ligne de demande de fourniture"
+
+#. module: mrp_repair_order
+#: model:ir.ui.view,arch_db:mrp_repair_order.mrp_workorder_simple_form_view
+msgid "minutes"
+msgstr "minutes"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_mrp_repair_data
+msgid "mrp.repair.data"
+msgstr "mrp.repair.data"
+
+#. module: mrp_repair_order
+#: model:ir.model,name:mrp_repair_order.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"

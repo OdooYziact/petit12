@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_custom_popup_form" model="ir.ui.view">
+        <field name="name">custom.popup</field>
+        <field name="model">custom.popup</field>
+        <field name="arch" type="xml">
+            <form delete="0" editable="0" nocreate="1">
+                <sheet>
+                    <group>
+                        <field name="message" nolabel="1"/>
+                        <field name="model" groups="base.group_no_one"/>
+                        <field name="res_id" groups="base.group_no_one"/>
+                        <field name="action" groups="base.group_no_one"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Close" class="btn-default" type="object" name="action_close" attrs="{'invisible': [('action', '!=', False)]}"/>
+                    <button string="Confirm" class="btn-default" type="object" name="action_run" attrs="{'invisible': [('action', '=', False)]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel" attrs="{'invisible': [('action', '=', False)]}"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_custom_popup_view" model="ir.actions.act_window">
+        <field name="name">Custom Popup</field>
+        <field name="res_model">custom.popup</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_custom_popup_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

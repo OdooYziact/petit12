@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_routing_synchronization
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-03 15:08+0000\n"
+"PO-Revision-Date: 2019-01-03 16:10+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: fr\n"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model.fields,field_description:mrp_routing_synchronization.field_mrp_routing_child_count
+#: model:ir.ui.view,arch_db:mrp_routing_synchronization.mrp_routing_form_view
+msgid "# Child"
+msgstr "Enfant(s)"
+
+#. module: mrp_routing_synchronization
+#: code:addons/mrp_routing_synchronization/models/mrp_routing.py:126
+#, python-format
+msgid "%s (copy)"
+msgstr "%s (copie)"
+
+#. module: mrp_routing_synchronization
+#: model:ir.ui.view,arch_db:mrp_routing_synchronization.mrp_routing_form_view
+msgid ""
+"<span class=\"label label-danger\" attrs=\"{'invisible': [('to_sync', '=', "
+"False)]}\">Modifications pending</span>"
+msgstr ""
+"<span class=\"label label-danger\" attrs=\"{'invisible': [('to_sync', '=', "
+"False)]}\">Modifications en attente de synchronisation</span>"
+
+#. module: mrp_routing_synchronization
+#: model:ir.ui.view,arch_db:mrp_routing_synchronization.mrp_routing_form_view
+msgid "Erase relationship"
+msgstr "Emanciper"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model.fields,field_description:mrp_routing_synchronization.field_mrp_routing_is_sync
+msgid "Is synchronized"
+msgstr "Synchronisé"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model.fields,field_description:mrp_routing_synchronization.field_mrp_routing_last_synchronization
+msgid "Last synchronization"
+msgstr "Dernière synchronisation"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model.fields,field_description:mrp_routing_synchronization.field_mrp_routing_to_sync
+msgid "Must be synchronize"
+msgstr "Doit être synchronisé"
+
+#. module: mrp_routing_synchronization
+#: model:ir.ui.view,arch_db:mrp_routing_synchronization.mrp_routing_search_view
+msgid "Parent"
+msgstr "Parent"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model,name:mrp_routing_synchronization.model_quality_point
+#: model:ir.ui.view,arch_db:mrp_routing_synchronization.mrp_routing_form_view
+msgid "Quality Point"
+msgstr "Point(s) de contrôle qualité"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model.fields,field_description:mrp_routing_synchronization.field_mrp_routing_workcenter_ref_id
+#: model:ir.model.fields,field_description:mrp_routing_synchronization.field_quality_point_ref_id
+msgid "Ref."
+msgstr "Référence"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model,name:mrp_routing_synchronization.model_mrp_routing
+msgid "Routings"
+msgstr "Gammes"
+
+#. module: mrp_routing_synchronization
+#: model:ir.ui.view,arch_db:mrp_routing_synchronization.mrp_routing_form_view
+msgid "Synchronize"
+msgstr "Synchroniser\t"
+
+#. module: mrp_routing_synchronization
+#: model:ir.model,name:mrp_routing_synchronization.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Utilisation du poste de travail"

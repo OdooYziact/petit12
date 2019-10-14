@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Rapport de travaux -->
+    <!--<template id="petit_reports.report_mrprepairorder_bilan">-->
+    <template id="report_mrprepairorder_bilan">
+
+        <t t-call="web.html_container">
+            <div class="header"/>
+            <div class="footer"/>
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t t-set="o" t-value="o.with_context({'lang': o.partner_id.lang})"/>
+                    <link rel='stylesheet' href="/petit_reports/static/src/css/style.css"/>
+                    <div class="page">
+                        <h2 class="text-center">Bilan d'affaire de réparation</h2>
+
+                        <table class="table table-condensed table_bilan">
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th>N°</th>
+                                    <th>Date</th>
+                                    <th/>
+                                    <th>Validation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Affaire</td>
+                                    <td><span t-if="o.name" t-field="o.name"/></td>
+                                    <td><span t-if="o.receipt_date" t-field="o.receipt_date" t-options='{"widget": "date"}'/></td>
+                                    <td rowspan="2">M. Olivier</td>
+                                    <td rowspan="2"/>
+                                </tr>
+                                <tr>
+                                    <td>Devis</td>
+                                    <td><span t-if="o.sale_order_id and o.sale_order_id.name" t-field="o.sale_order_id.name"/></td>
+                                    <td><span t-if="o.sale_order_id and o.sale_order_id.date_order" t-field="o.sale_order_id.date_order" t-options='{"widget": "date"}'/></td>
+                                </tr>
+                                <tr class="double_height">
+                                    <td>BL</td>
+                                    <td>
+                                        <t t-foreach="o.stock_picking_ids" t-as="bl">
+                                            <span t-if="bl.name" t-field="bl.name"/><br/>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-foreach="o.stock_picking_ids" t-as="bl">
+                                            <span t-if="bl.date_done" t-field="bl.date_done" t-options='{"widget": "date"}'/>
+                                            <span t-else=""> </span>
+                                            <br/>
+                                        </t>
+                                    </td>
+                                    <td>M. Petit</td>
+                                    <td/>
+                                </tr>
+                                <tr class="double_height">
+                                    <td>Commande client</td>
+                                    <td><span t-if="o.sale_order_id and o.sale_order_id.client_order_ref" t-field="o.sale_order_id.client_order_ref"/></td>
+                                    <td/>
+                                    <td>Mme Petit</td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td><strong>Client</strong></td>
+                                    <td colspan="4"><h3><strong><span t-if="o.partner_id and o.partner_id.name" t-field="o.partner_id.name"/></strong></h3></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Commercial</strong></td>
+                                    <td colspan="4"><strong><span t-if="o.sale_order_id and o.sale_order_id.user_id and o.sale_order_id.user_id.name" t-field="o.sale_order_id.user_id.name"/></strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Material details -->
+                        <t t-if="o.specification_ids">
+                            <h4>Caractéristiques techniques du matériel : <strong><span t-if="o.product_id and o.product_id.name" t-field="o.product_id.name"/></strong></h4>
+                            <table class="table table-condensed table_caracteristiques">
+                                <thead>
+                                    <tr>
+                                        <th>Libellé</th>
+                                        <th>Valeur</th>
+                                        <th>Unité</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.specification_ids" t-as="specification">
+                                        <tr>
+                                            <td><span t-field="specification.description"/></td>
+                                            <td><span t-field="specification.value"/></td>
+                                            <td><span t-field="specification.unit"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <t t-set="totalPrevu" t-value="0.00"/>
+                        <t t-set="totalReel" t-value="0.00"/>
+                        <t t-set="totalEcart" t-value="0.00"/>
+                        <t t-set="totalHTTravaux" t-value="0.00"/>
+                        <t t-set="totalHTPieces" t-value="0.00" />
+
+                        <div t-if="o.production_id._prepare_workorders_for_report() != []">
+                            <h4>Détail des travaux</h4>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Technicien(s)</th>
+                                        <th>T prév</th>
+                                        <th>T réel</th>
+                                        <th>Ecart</th>
+                                        <th>Taux</th>
+                                        <th>Total HT</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.production_id._prepare_workorders_for_report()" t-as="order">
+                                        <tr t-if="order['state'] in ('done')">
+                                            <td><span t-esc="order['name']"/></td>
+                                            <td>
+                                                <t t-foreach="order['techs']" t-as="tech">
+                                                    <span t-esc="tech"/><br />
+                                                </t>
+                                            </td>
+                                            <td><span t-esc="'%.2f'%(order['duration_expected'])" t-if="order['duration_expected'] != 0.00"/></td>
+                                            <td><span t-esc="'%.2f'%(order['duration'])" t-if="order['duration'] != 0.00"/></td>
+                                            <td><span t-esc="'%.2f'%(order['duration_expected'] - order['duration'])"  t-if="order['duration_expected'] - order['duration'] != 0.00"/></td>
+                                            <td><span t-esc="order['costs_hour']"/></td>
+                                            <td><span t-esc="'%.2f'%(order['costs_hour'] * order['duration'] / 60)" t-if="order['costs_hour'] * order['duration'] != 0.00"/></td>
+
+                                            <t t-set="totalPrevu" t-value="totalPrevu + order['duration_expected']"/>
+                                            <t t-set="totalReel" t-value="totalReel + order['duration']"/>
+                                            <t t-set="totalEcart" t-value="totalEcart + (order['duration_expected'] - order['duration'])"/>
+                                            <t t-set="totalHTTravaux" t-value="totalHTTravaux + (order['costs_hour'] * order['duration'] / 60)"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Total main d'oeuvre</strong></td>
+                                        <td><span t-esc="'%.2f'%(totalPrevu)"/></td>
+                                        <td><span t-esc="'%.2f'%(totalReel)"/></td>
+                                        <td><span t-esc="'%.2f'%(totalEcart)"/></td>
+                                        <td/>
+                                        <td><span t-esc="'%.2f'%(totalHTTravaux)"/></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <!-- Pieces -->
+                        <div t-if="o.production_id._prepare_materials_for_report() != []">
+                            <h4>Pièces de rechange</h4>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Désignation</th>
+                                        <th>Quantité</th>
+                                        <th>PA HT</th>
+                                        <th>Total HT</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.production_id._prepare_materials_for_report()" t-as="piece">
+                                        <tr>
+                                            <td><span t-esc="piece['pname']"/></td>
+                                            <td><span t-esc="piece['qty']"/> <span t-esc="piece['uom']"/></td>
+                                            <td><span t-esc="'%.2f'%(piece['pprice'])"/></td>
+                                            <td><span t-esc="'%.2f'%(piece['pprice'] * piece['qty'])"/></td>
+                                            <t t-set="totalHTPieces" t-value="totalHTPieces + (piece['pprice'] * piece['qty'])"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"><strong>Total pièces</strong></td>
+                                        <td><span t-esc="'%.2f'%(totalHTPieces)"/> </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <t t-set="fixed_cost" t-value="0.00"/>
+                        <t t-if="o.sale_order_id and o.sale_order_id.fixed_cost_id and o.sale_order_id.fixed_cost_id.standard_price"
+                           t-set="fixed_cost"
+                           t-value="o.sale_order_id.fixed_cost_qty * o.sale_order_id.fixed_cost_id.standard_price"/>
+
+                        <div class="clearfix">
+                            <div class="row" name="total">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed" style="min-width: 200px;max-width: 350px;">
+                                        <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                            <td><strong>Total coûts fixes</strong></td>
+                                            <td class="text-right"><span t-esc="'%.2f'%(fixed_cost)"/> €</td>
+                                        </tr>
+                                        <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                            <td><strong>Total coût de revient</strong></td>
+                                            <td class="text-right">
+                                                <span t-if="o.sale_order_id.fixed_cost_qty * o.sale_order_id.fixed_cost_id.standard_price != 0.00"
+                                                      t-esc="'%.2f'%(fixed_cost + totalHTPieces + totalHTTravaux)"/>
+                                                <span t-else="" t-esc="'%.2f'%(totalHTPieces + totalHTTravaux)"/>
+                                                €
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                            <td><strong>Total prix de vente</strong></td>
+                                            <td class="text-right"><span t-esc="'%.2f'%(o.sale_order_id.amount_untaxed)"/> €</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Marge %</strong></td>
+                                            <td class="text-right"><span
+                                                    t-if="o.sale_order_id.amount_untaxed != 0.00"
+                                                    t-esc="'%.2f'%(((o.sale_order_id.amount_untaxed -
+                                                    (fixed_cost + totalHTPieces + totalHTTravaux))
+                                                    /o.sale_order_id.amount_untaxed)*100)"/> %</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

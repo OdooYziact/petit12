@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_repair_order_tree" model="ir.ui.view">
+        <field name="name">mrp.repair.order.tree</field>
+        <field name="model">mrp.repair.order</field>
+        <field name="arch" type="xml">
+            <tree string="Repairs" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'" default_order="date_planned_finished desc,planned_method">
+                <field name="name"/>
+                <field name="specifications"/>
+                <field name="partner_id"/>
+                <field name="references"/>
+                <field name="company_id" groups="base.group_multi_company" invisible="1"/>
+                <field name="state"/>
+                <field name="step"/>
+                <field name="planned_method"/>
+                <field name="date_planned_finished" widget="date"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_repair_order_form" model="ir.ui.view">
+        <field name="name">mrp.repair.form</field>
+        <field name="model">mrp.repair.order</field>
+        <field name="arch" type="xml">
+            <form string="Repair" duplicate="0">
+                <header>
+                    <!--Ajout des actions: réceptionner-->
+                    <button name="action_removal" type="object" string="Removal" class="oe_highlight"
+                            attrs="{'invisible': [('is_received','=', True)]}"/>
+                    <button name="action_product_confirm" type="object" string="Product Confirm" class="oe_highlight"
+                            attrs="{'invisible': [('is_defined','=', True)]}"/>
+                    <button name="action_repair_quotation" type="object" string="Repair Quotation"
+                            attrs="{'invisible': [('sale_order_id','!=', False)]}"/>
+
+
+                    <button name="petit_reports.action_report_mrprepairorder_bilan" attrs="{'invisible': ['|', ('state', '=', 'repair'), ('step', '=', 'done')]}" string="Balance Sheet" type="action" class="oe_highlight" confirm="Repair isn't done. Are you sure to print balance sheet ?"/>
+                    <button name="petit_reports.action_report_mrprepairorder_bilan" attrs="{'invisible': ['|', ('state', '!=', 'repair'), ('step', '!=', 'done')]}" string="Balance Sheet" type="action" class="oe_highlight"/>
+
+                    <button name="action_estimate" type="object" string="Estimate" class="oe_highlight"
+                            states="draft"/>
+                    <button name="action_diagnostic" type="object" title="Diagnostic"
+                            string="Run" class="oe_highlight" attrs="{'invisible': ['|', '|', ('is_received', '=', False), ('is_defined', '=', False), ('production_id', '!=', False)]}"/>
+                    <!--<button name="action_validate" type="object" string="Unlock" class="oe_highlight"-->
+                            <!--states="confirmed"/>-->
+                    <!--<button name="action_confirm" string="Confirm" type="object" states="quotation"/>-->
+<!--                    <button name="action_procurement" string="Run procurement" type="object" attrs="{'invisible': [('is_confirmed', '=', False)]}"/>-->
+<!--                    <button name="action_consult_done" string="Consult done" type="object" attrs="{'invisible': [('step', 'not in', ('to_consult'))]}"/>-->
+
+
+                    <!--<button name="action_invoice_create" string="Create invoice" class="oe_highlight" type="object"-->
+                            <!--attrs="{'invisible': [('state', 'in', ('done')), ('invoiced', '=', True), '|', ('state', 'not in', ('done'))]}"/>-->
+                    <button name="action_to_deliver" string="To Deliver" class="oe_highlight" type="object"
+                            attrs="{'invisible': [('state', 'not in', ('done', 'invoiced', 'cancel')), ('delivered', '=', False)]}"/>
+
+                    <button name="%(document_attachment.action_add_attachment)d" type="action"
+                            string="Add document"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible=">draft,diagnostic,quotation,repair"/>
+               </header>
+               <sheet string="Repair">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_delivery" type="object" class="oe_stat_button" icon="fa-truck"
+                                groups="base.group_user">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="stock_picking_count" widget="statinfo" nolabel="1"/></span>
+                                <span class="o_stat_text">Delivery Slip</span>
+                            </div>
+                        </button>
+
+                        <button name="action_view_sale_order" type="object" string="Sale order"
+                                class="oe_stat_button" icon="fa-list-alt" attrs="{'invisible': [('sale_order_id','=',False)]}"/>
+                        <button name="action_view_production" type="object" string="Production order"
+                                class="oe_stat_button" icon="fa-cogs" attrs="{'invisible': [('production_id','=',False)]}"/>
+                        <button name="action_view_attachment" type="object" class="oe_stat_button" icon="fa-list-alt">
+                            <field name="attachment_count" string="Document(s)" widget="statinfo"/>
+                        </button>
+                    </div>
+
+                    <span class="label label-danger text-center pull-right" attrs="{'invisible': [('step', '=', False)]}">
+                        <field name="step" nolabel="1"/>
+                    </span>
+
+                    <label for="name"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+
+                    <group>
+                        <!--BLOC GAUCHE-->
+                        <group>
+                            <!--champs invisible-->
+                            <field name="sale_order_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="product_uom" invisible="1"/>
+                            <field name="product_qty" invisible="1"/>
+                            <field name='routing_id' invisible="1"/>
+                            <field name="is_received" groups="base.group_no_one"/>
+                            <field name="is_defined" groups="base.group_no_one"/>
+                            <field name="is_confirmed" groups="base.group_no_one"/>
+                            <field name="is_consulted" groups="base.group_no_one"/>
+                            <field name="is_expertised" groups="base.group_no_one"/>
+                            <field name="invoiced" groups="base.group_no_one"/>
+                            <field name="delivered" groups="base.group_no_one"/>
+                            <field name="product_tmpl_id" invisible="1"/>
+                            <field name="production_id" invisible="1"/>
+
+                            <!--Champ contact et modification partner-->
+                            <field name="partner_id" attrs="{'readonly':[('state','!=','draft')]}"
+                                   domain="[('customer','=',True), ('is_company', '=', True)]"/>
+                            <field name="partner_contact_id" groups="sale.group_delivery_invoice_address"
+                                   domain="[('parent_id', '=', partner_id), ('type', '=', 'contact')]"
+                                   options='{"always_reload": True}'
+                                   attrs="{'readonly': [('partner_id', '=', False)]}"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="partner_address_id" groups="sale.group_delivery_invoice_address"
+                                   context="{'default_type':'delivery'}" options="{'always_reload': True}"
+                                   domain="[('parent_id', '=', partner_id), ('type', '=', 'delivery')]"/>
+                            <field name="partner_invoice_id"
+                                   groups="sale.group_delivery_invoice_address" options="{'always_reload': True}"
+                                   domain="[('parent_id', '=', partner_id), ('type', '=', 'invoice')]" context="{'default_type':'invoice'}"/>
+                            <field name="picking_type_in"/>
+                            <field name="picking_type_out" groups="base.group_no_one"/>
+                            <field name="waiting_for_approval"/>
+                            <field name="planned_method" widget="selection"/>
+                            <field name="date_planned_finished" widget="date"/>
+
+                        </group>
+                        <!--BLOC DROIT-->
+                        <group>
+                            <field name="repair_model_id"/>
+                            <field name="product_category_id"/>
+                            <field name="product_id" domain="[('product_tmpl_id.categ_id', '=', product_category_id)]"
+                                   options="{'no_create': True}"/>
+                            <field name="bom_id" options="{'no_create': True}"/>
+                            <field name="lot_id" />
+                            <field name="receipt_date"/>
+                        </group>
+                    </group>
+                <notebook>
+                    <page string="Description">
+                        <group>
+                            <field name="issue" placeholder="Describe the issue here..." string="Demande du client"/>
+                        </group>
+                        <group>
+                            <field name="recommendations" placeholder="Recommandations" string="Constatation"/>
+                        </group>
+                    </page>
+                    <page string="Specifications">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <field name="specification_ids" options="{'create': False, 'no_open': True, 'no_create': True}">
+                                    <tree editable="bottom" decoration-danger="required == True">
+                                        <field name='field_type' invisible="1"/>
+                                        <field name='description'/>
+                                        <field name='unit'/>
+                                        <field name='value'/>
+                                        <field name='required' invisible="1"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </div>
+                    </page>
+                    <page string="Partner references" >
+                        <field name="res_model_id" invisible="1"/>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <field name="partner_references" nocreate="1"
+                                       context="{'default_res_model': _rel_model, '_default_res_id': _rel_id, 'default_partner_id': partner_id}"
+                                       options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'
+                                       attrs="{'invisible': [('partner_references', '=', [])]}">
+                                    <tree create="false" delete="false" editable="true" decoration-warning="required">
+                                        <field name='name'/>
+                                        <field name='note' />
+                                        <field name='value'/>
+                                        <field name='res_id' groups="base.group_no_one"/>
+                                        <field name='res_model_id' groups="base.group_no_one"/>
+                                        <field name='partner_id' groups="base.group_no_one"/>
+                                        <field name='required' groups="base.group_no_one"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </div>
+                        <group>
+                            <group>
+                                <div class="oe_inline">
+                                    <button name="action_check_references" type="object" string="Check"/>
+                                    <button name="action_update_references" type="object" string="Update"/>
+                                    <button name="action_clear_references" type="object" string="Clear"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="_rel_id" groups="base.group_no_one"/>
+                                <field name="_rel_model" groups="base.group_no_one"/>
+                                <field name="res_model_id" groups="base.group_no_one"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Notes">
+                        <field name="internal_notes" placeholder="Add internal notes..."/>
+                        <field name="quotation_notes" placeholder="Add quotation notes..."/>
+                    </page>
+                    <page string="Quotation">
+                        <field name="sale_order_ids" options="{'no_create': True, 'no_open': True, 'no_quick_create': True}"
+                               domain="[('invoice_status', 'not in', ('invoiced'))]">
+                            <tree create="false" delete="false" editable="false">
+                                <field name='name'/>
+                                <field name='flag'/>
+                                <field name='confirmation_date'/>
+                                <field name='amount_total'/>
+                                <field name='state'/>
+                                <field name='invoice_status'/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Invoice">
+                        <field name="invoice_ids" options="{'no_create': True, 'no_quick_create': True}"
+                               domain="[('invoice_ids', '!=', [])]">
+                            <tree create="false" delete="false" editable="false"
+                                  decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                                <field name='name'/>
+                                <field name='date_invoice'/>
+                                <field name='number'/>
+                                <field name='date_due'/>
+                                <field name='amount_total_signed' sum="Total"/>
+                                <field name='residual_signed' sum="Amount Due"/>
+                                <field name='state'/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Cost">
+                        <group>
+                            <group string="Estimated Cost">
+                                <field name="raw_material_estimated_cost" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="operations_estimated_cost" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="total_estimated_cost"/>
+                                </div>
+                                <field name="total_estimated_cost" nolabel="1" class="oe_subtotal_footer_separator"
+                                       widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                            <group string="Cost">
+                                <field name="raw_material_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="operation_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="scrap_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="total_cost"/>
+                                </div>
+                                <field name="total_cost" nolabel="1" class="oe_subtotal_footer_separator"
+                                       widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </group>
+
+                        <div class="oe_inline">
+                            <button name="action_update_cost" type="object" string="Update"/>
+                        </div>
+
+                        <div class="oe_clear"/>
+                    </page>
+                </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_repair_order_kanban" model="ir.ui.view">
+        <field name="name">mrp.repair.order.kanban</field>
+        <field name="model">mrp.repair.order</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name" />
+                <field name="product_id" />
+                <field name="partner_id"/>
+                <field name="date_planned_finished" widget="date"/>
+                <field name="state"/>
+                <field name="step"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="row mb4">
+                                <div class="col-xs-6">
+                                    <strong><span><t t-esc="record.name.value"/></span></strong>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <span class="label label-default">
+                                        <field name="state" widget="kanban_label_selection"
+                                               options="{'classes': {'draft': 'info', 'cancel': 'danger', 'done': 'success', 'under_repair': 'dafault'}}"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 text-muted">
+                                    <span><t t-esc="record.product_id.value"/></span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <span class="pull-right">
+                                        <field name="partner_id"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_repair_order_form_filter" model="ir.ui.view">
+          <field name="name">mrp.repair.select</field>
+          <field name="model">mrp.repair.order</field>
+          <field name="arch" type="xml">
+              <search string="Search Repairs">
+                  <field name="name" string="Repair order"/>
+                  <field name="state"/>
+                  <filter string="Draft" domain="[('state','=','draft')]"/>
+                  <filter string="Diagnostic" domain="[('state','=','diagnostic')]" name="current" />
+                  <filter string="Quotation" domain="[('state','=','quotation')]"/>
+                  <filter string="Repair" domain="[('state','=','repair')]"/>
+                  <separator/>
+                  <filter string="Invoiced" domain="[('invoiced','=',True)]"/>
+                  <field name="product_id"/>
+                  <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
+                  <separator/>
+                  <filter string="My activities" name="activities_my"
+                      domain="[('activity_ids.user_id', '=', uid)]"/>
+                  <separator/>
+                  <filter string="Late Activities" name="activities_overdue"
+                      domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                      help="Show all records which has next action date is before today"/>
+                  <filter string="Today Activities" name="activities_today"
+                      domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                  <filter string="Future Activities" name="activities_upcoming_all"
+                        domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+                  <group expand="0" string="Group By">
+                      <filter string="Contact" domain="[]" context="{'group_by':'partner_id'}"/>
+                      <filter string="Product" domain="[]" context="{'group_by':'product_id'}"/>
+                      <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                      <filter string="Step" domain="[]" context="{'group_by':'step'}"/>
+                      <filter string="Company" domain="[]" context="{'group_by':'company_id'}"
+                              groups="base.group_multi_company"/>
+                  </group>
+              </search>
+          </field>
+    </record>
+
+    <record id="action_repair_order_tree" model="ir.actions.act_window">
+        <field name="name">Repair</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.repair.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="view_repair_order_form_filter"/>
+        <field name="context">{'group_by':['planned_method','date_planned_finished']}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a reparation order.
+            </p>
+        </field>
+    </record>
+
+    <!--Insertion dans le menu Fabrication / Opérations-->
+    <menuitem
+        id="mrp_repair_order_model_act"
+        name="Repair"
+        sequence="0"
+        action="action_repair_order_tree"
+        parent="mrp.menu_mrp_manufacturing"/>
+
+    <record id="action_server_repair_cancel" model="ir.actions.server">
+        <field name="name">Cancel</field>
+        <field name="model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="binding_model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="model">mrp.repair.order</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_cancel()
+        </field>
+    </record>
+
+    <record id="action_server_repair_close" model="ir.actions.server">
+        <field name="name">Mark as done</field>
+        <field name="model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="binding_model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="model">mrp.repair.order</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_close()
+        </field>
+    </record>
+
+    <record id="action_server_repair_restart" model="ir.actions.server">
+        <field name="name">Restart production</field>
+        <field name="model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="binding_model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="model">mrp.repair.order</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_production_restart()
+        </field>
+    </record>
+
+    <record id="action_server_procurement" model="ir.actions.server">
+        <field name="name">Run procurement</field>
+        <field name="model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="binding_model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="model">mrp.repair.order</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_procurement()
+        </field>
+    </record>
+
+    <record id="action_server_consult_done" model="ir.actions.server">
+        <field name="name">Consult done</field>
+        <field name="model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="binding_model_id" ref="mrp_repair_order.model_mrp_repair_order"/>
+        <field name="model">mrp.repair.order</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_consult_done()
+        </field>
+    </record>
+
+</odoo>

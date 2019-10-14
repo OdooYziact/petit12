@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="assets_backend" name="custom_product_checker assets" inherit_id="web.assets_backend">
+        <xpath expr="//script[last()]" position="after">
+            <link rel="stylesheet" href="/custom_product_checker/static/src/css/style.css"/>
+            <!--<script type="text/javascript" src="/yzi_utils/static/src/css/xxx.js"></script>-->
+        </xpath>
+    </template>
+
+</odoo>

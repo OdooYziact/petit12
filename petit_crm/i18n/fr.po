@@ -1,0 +1,307 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* petit_crm
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"#-#-#-#-#  fr_FR.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-02 12:41+0000\n"
+"PO-Revision-Date: 2019-04-02 14:42+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+"#-#-#-#-#  fr.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-27 09:11+0000\n"
+"PO-Revision-Date: 2018-11-27 10:13+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "<span>CA réalisé</span>"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "<span>Champs temporaires</span>"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "<span>Gestion des tournées</span>"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "<span>Objectif CA</span>"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "<span>Planification des visites</span>"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_temp_bl_chiffre
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_temp_bl_chiffre
+msgid "BL chiffré"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_total_sales
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_total_sales
+msgid "CA réalisé"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_total_sales_y1
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_total_sales_y1
+msgid "CA réalisé n-1"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_total_sales_y2
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_total_sales_y2
+msgid "CA réalisé n-2"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model,name:petit_crm.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_delivery_day
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_delivery_day
+msgid "Delivery day"
+msgstr "Jour de livraison"
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Distance"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_distance
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_distance
+msgid "Distance (Km)"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_temp_condition_devis
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_temp_condition_devis
+msgid "Durée validité devis"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_temp_delai_relance
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_temp_delai_relance
+msgid "Délai Relance"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_fax
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Fax"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Fréquence de visite"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area_id
+msgid "ID"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Jour de la semaine"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification"
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour"
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "N-1"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "N-2"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_monthly_planned_visits
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_monthly_planned_visits
+msgid "Nombre de visite"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_annual_planned_visits
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_annual_planned_visits
+msgid "Nombre de visites prévues pour l'année"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Négoce"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_trading_sales_target
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_trading_sales_target
+msgid "Objectif CA négoce"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_repair_sales_target
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_repair_sales_target
+msgid "Objectif CA réparation"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Prévision pour l'année"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Réparation"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_petit_crm_geographical_area_name
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "Secteur"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_geographical_area
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_geographical_area
+msgid "Secteur géographique"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.actions.act_window,name:petit_crm.petit_crm_geographical_area_action
+#: model:ir.ui.menu,name:petit_crm.petit_crm_geographical_area_act
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_geographical_area_form
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_geographical_area_tree
+msgid "Secteurs géographiques"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "jours"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "km"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model,name:petit_crm.model_petit_crm_customer_practices
+msgid "petit_crm.customer_practices"
+msgstr "petit_crm.customer_practices"
+
+#. module: petit_crm
+#: model:ir.model,name:petit_crm.model_petit_crm_customer_references
+msgid "petit_crm.customer_references"
+msgstr "petit_crm.customer_references"
+
+#. module: petit_crm
+#: model:ir.model,name:petit_crm.model_petit_crm_geographical_area
+msgid "petit_crm.geographical_area"
+msgstr "petit_crm.geographical_area"
+
+#. module: petit_crm
+#: model:ir.ui.view,arch_db:petit_crm.petit_crm_res_partner_form_view
+msgid "tout les"
+msgstr "tous les"
+
+#. module: petit_crm
+#: selection:res.partner,delivery_day:0
+msgid "Jeudi"
+msgstr ""
+
+#. module: petit_crm
+#: model:ir.model.fields,field_description:petit_crm.field_res_partner_delivery_day
+#: model:ir.model.fields,field_description:petit_crm.field_res_users_delivery_day
+msgid "Jour de la tournée"
+msgstr ""
+
+#. module: petit_crm
+#: selection:res.partner,delivery_day:0
+msgid "Lundi"
+msgstr ""
+
+#. module: petit_crm
+#: selection:res.partner,delivery_day:0
+msgid "Mardi"
+msgstr ""
+
+#. module: petit_crm
+#: selection:res.partner,delivery_day:0
+msgid "Mercredi"
+msgstr ""
+
+#. module: petit_crm
+#: selection:res.partner,delivery_day:0
+msgid "Samedi"
+msgstr ""
+
+#. module: petit_crm
+#: selection:res.partner,delivery_day:0
+msgid "Vendredi"
+msgstr ""
+
+#. module: petit_crm
+#: selection:res.partner,delivery_day:0
+msgid "non défini"
+msgstr ""

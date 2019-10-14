@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_etiquette_A4">
+        <t t-call="web.html_container">
+
+            <div class="header"/>
+
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t t-set="o" t-value="o.with_context({'lang': o.partner_id.lang})"/>
+                    <link rel='stylesheet' href="/petit_reports/static/src/css/style.css"/>
+
+                    <div class="page">
+                        <h1 t-field="o.name" class="etiquette_t1 text-center"/>
+                        <h1 t-field="o.partner_id.name" class="etiquette_t2 text-center"/>
+                        <h1 t-if="o.planned_method == 'fixed_date'" t-field="o.date_planned_finished" class="etiquette_t2 text-center" t-options='{"widget": "date"}'/>
+
+                        <table class="table table_references_etiquette">
+                            <tr t-foreach="o.get_specifications_fields()" t-as="line">
+                                <t t-foreach="line" t-as="elem">
+                                    <td width="25%" class="etiquette_t3">
+                                        <strong><span t-esc="elem['description']"/></strong> <span t-esc="elem['value']"/> <span t-esc="elem['unit']"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <h3 class="center_text"><span t-esc="o.issue[:600]"/></h3>
+                    </div>
+
+                    <div class="footer">
+                        <p class="text-left">Réception : <span t-field="o.receipt_date" t-options='{"widget": "date"}'/></p>
+                        <p class="text-right">Impression : <span t-field="o.current_date" t-options='{"widget": "date"}'/></p>
+                    </div>
+                </t>
+            </t>
+
+        </t>
+    </template>
+
+</odoo>

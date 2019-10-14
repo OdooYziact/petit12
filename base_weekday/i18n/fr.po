@@ -1,0 +1,137 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_weekday
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"#-#-#-#-#  fr_FR.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-02 13:08+0000\n"
+"PO-Revision-Date: 2019-04-02 15:08+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+"#-#-#-#-#  fr.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-17 11:13+0000\n"
+"PO-Revision-Date: 2018-12-17 12:15+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: fr\n"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_create_date
+msgid "Created on"
+msgstr "Date de création"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_name
+msgid "Day"
+msgstr "Jour"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_description
+msgid "Description"
+msgstr "Description"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_fold
+msgid "Folded in Kanban"
+msgstr "Plié en vue kanban"
+
+#. module: base_weekday
+#: model:base.weekday,name:base_weekday.day_4
+msgid "Friday"
+msgstr "Vendredi"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour"
+
+#. module: base_weekday
+#: model:base.weekday,name:base_weekday.day_0
+msgid "Monday"
+msgstr "Lundi"
+
+#. module: base_weekday
+#: model:base.weekday,name:base_weekday.day_5
+msgid "Saturday"
+msgstr "Samedi"
+
+#. module: base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: base_weekday
+#: model:ir.model.fields,help:base_weekday.field_base_weekday_fold
+msgid ""
+"This stage is folded in the kanban view when there are no records in that "
+"stage to display."
+msgstr ""
+"Cette étape est repliée en vue kanban lorsqu'il n'y aucune donnée à afficher."
+
+#. module: base_weekday
+#: model:base.weekday,name:base_weekday.day_3
+msgid "Thursday"
+msgstr "Jeudi"
+
+#. module: base_weekday
+#: model:base.weekday,name:base_weekday.day_1
+msgid "Tuesday"
+msgstr "Mardi"
+
+#. module: base_weekday
+#: model:base.weekday,name:base_weekday.day_undefined
+msgid "Undefined"
+msgstr "Non défini"
+
+#. module: base_weekday
+#: model:base.weekday,name:base_weekday.day_2
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#. module: base_weekday
+#: model:ir.model,name:base_weekday.model_base_weekday
+#: model:ir.model.fields,field_description:base_weekday.field_base_weekday_weekday
+msgid "Weekday"
+msgstr "Jour de la semaine"

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--vue form demande de prix-->
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase_order_form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="priority">40</field>
+        <field name="arch" type="xml">
+
+            <!--bouton confirmer la commande-->
+            <xpath expr="//field[@name='date_order']" position="attributes">
+                <attribute name="string">Date de la demande</attribute>
+            </xpath>
+
+            <!-- modification du domaine partner_id pour ajout du champ contact_id -->
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="domain">[('supplier','=',True), ('is_company', '=', True)]</attribute>
+            </xpath>
+
+            <!--ajout du contact-->
+            <xpath expr="//field[@name='partner_ref']" position="before">
+                <field name="partner_contact_id" domain="[('type', '=', 'contact'), ('parent_id', '=', partner_id)]" options='{"always_reload": True}' attrs="{'readonly': [('partner_id', '=', False)]}"/>
+            </xpath>
+            <!-- move price_unit -->
+            <xpath expr="//field[@name='price_unit']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='product_qty']" position="before">
+                <field name="price_unit" string="Prix unitaire HT"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

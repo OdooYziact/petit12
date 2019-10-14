@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--ACTIONS-->
+        <record id="action_view_purchase_order" model="ir.actions.act_window">
+            <field name="name">Purchase order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('request_id', '=', active_id)]</field>
+            <field name="context">{'search_default_request_id': active_id}</field>
+        </record>
+
+        <record id="action_view_purchase_requisition" model="ir.actions.act_window">
+            <field name="name">Purchase requisition</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.requisition</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('request_id', '=', active_id)]</field>
+            <field name="context">{'search_default_request_id': active_id}</field>
+        </record>
+
+        <!--TREE-->
+        <record id="view_material_request_tree" model="ir.ui.view">
+            <field name="name">material.request.tree</field>
+            <field name="model">material.request</field>
+            <field name="arch" type="xml">
+                <tree string="Material request" decoration-muted="state in ('done','cancel')"
+                      decoration-info="state=='progress'" decoration-warning="state in ('draft')">
+                    <field name="name" />
+                    <field name="model_name"/>
+                    <field name="document_name"/>
+                    <field name="employee"/>
+                    <field name="responsible"/>
+                    <field name="request_date" widget="datetime"/>
+                    <field name="request_deadline" widget="datetime"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--FORM-->
+        <record id="view_material_request_form" model="ir.ui.view">
+            <field name="name">material.request</field>
+            <field name="model">material.request</field>
+            <field name="arch" type="xml">
+                <form string="Material request">
+                   <header>
+                        <!--<button name="action_assign_to_me" string="Assign to me" type="object" class="oe_highlight"-->
+                            <!--attrs="{'invisible' : [('responsible', '!=', False)]}" groups="purchase.group_purchase_manager"/>-->
+                        <button name="action_approve" string="Process" type="object" class="oe_highlight"
+                            attrs="{'invisible' : [('is_approved', '=', True)]}" groups="purchase.group_purchase_manager"/>
+
+                        <button name="action_confirm" string="Mark as done" type="object" class="oe_highlight"
+                                states="progress" groups="purchase.group_purchase_manager"/>
+
+                        <button name="%(material_request.action_create_purchase_requisition_wizard)d" type="action"
+                                string="Create purchase requisition" class="oe_highlight" states="progress"
+                                groups="purchase.group_purchase_manager"/>
+                        <button name="%(material_request.action_purchase_order_create)d" type="action"
+                                string="Create purchase order" class="oe_highlight" states="progress"
+                                groups="purchase.group_purchase_manager"/>
+                        <button name="action_run" string="Run" type="object"
+                            states="done" groups="base.group_no_one"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,progress,done"/>
+                   </header>
+                   <sheet string="Material request">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_document" type="object" class="oe_stat_button" icon="fa-circle"
+                                    attrs="{'invisible': [('res_id','=',False)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value"></span>
+                                    <span class="o_stat_text"><field name="model_name" widget="statinfo" nolabel="1"/></span>
+                                </div>
+                            </button>
+                            <button name="%(material_request.action_view_purchase_requisition)d" type="action" class="oe_stat_button" icon="fa-list-alt"
+                                    attrs="{'invisible': [('purchase_requisition_count','=',0)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value"><field name="purchase_requisition_count" widget="statinfo" nolabel="1"/></span>
+                                    <span class="o_stat_text">Purchase requisition</span>
+                                </div>
+                            </button>
+                            <button name="%(material_request.action_view_purchase_order)d" type="action" class="oe_stat_button" icon="fa-list-alt"
+                                    attrs="{'invisible': [('purchase_order_count','=',0)]}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value"><field name="purchase_order_count" widget="statinfo" nolabel="1"/></span>
+                                    <span class="o_stat_text">Purchase order</span>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="is_approved" invisible="1"/>
+                                <field name="res_id" invisible="1"/>
+                                <field name="res_model" invisible="1"/>
+                                <field name="model_name" string="Origin document"/>
+                                <field name="document_name" string="Reference"/>
+                                <field string="Approved" name="is_approved" groups="base.group_no_one"/>
+                                <field string="In Progress" name="is_progress" groups="base.group_no_one"/>
+                                <field string="Done" name="is_done" groups="base.group_no_one"/>
+                            </group>
+                            <group>
+                                <field name="request_date" widget="datetime"/>
+                                <field name="request_deadline" widget="datetime"/>
+                                <field name="employee" readonly="1"/>
+                                <field name="responsible" groups="purchase.group_purchase_manager"/>
+                            </group>
+                        </group>
+                    <notebook>
+                        <page string="Material request line">
+                            <field name="request_line">
+                                <tree editable="bottom">
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name='request'/>
+                                    <field name='action' groups="base.group_no_one"/>
+                                    <field name='procure_method' groups="base.group_no_one"/>
+                                    <field name='name'/>
+                                    <field name='product_id'/>
+                                    <field name='description'/>
+                                    <field name='supplier_id'/>
+                                    <field name='product_qty'/>
+                                    <field name='product_uom' groups="base.group_no_one"/>
+                                    <field name='price_unit' widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name='price_total' string='Total' widget="monetary"
+                                           options="{'currency_field': 'currency_id'}" sum='Total'/>
+                                    <field name='purchase_order_count'/>
+                                    <field name='state'/>
+                                    <field name='purchase_line_id' groups="base.group_no_one"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Archived" groups="base.group_no_one">
+                            <field name="request_line_done">
+                                <tree editable="bottom">
+                                    <field name='request'/>
+                                    <field name='name'/>
+                                    <field name='product_id'/>
+                                    <field name='description'/>
+                                    <field name='supplier_id'/>
+                                    <field name='product_qty'/>
+                                    <field name='product_uom'/>
+                                    <field name='purchase_order_count'/>
+                                    <field name='state'/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Note">
+                            <field name="note" nolabel="1"/>
+                        </page>
+                    </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_material_request_simple_form" model="ir.ui.view">
+            <field name="name">material.request</field>
+            <field name="model">material.request</field>
+            <field name="arch" type="xml">
+                <form>
+                   <sheet string="Material request">
+                        <field name='state' invisible="1"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                       </div>
+
+                        <group>
+                            <field name="request_deadline" widget="datetime"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Material request line">
+                                <field name="request_line" context="{'default_state': 'draft'}">
+                                    <tree editable="bottom">
+                                        <field name='request'/>
+                                        <field name='name' attrs="{'readonly': [('request', '=', 'internal_picking')]}"/>
+                                        <field name='product_id' attrs="{'readonly': [('request', '=', 'request_for_creation')]}"/>
+                                        <field name='description'/>
+                                        <field name='supplier_id'/>
+                                        <field name='product_qty'/>
+                                        <field name='product_uom' groups="base.group_no_one"/>
+                                        <field name='state' groups="base.group_no_one"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Note">
+                                <field name="note" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_material_request_search" model="ir.ui.view">
+            <field name="name">material.request.search</field>
+            <field name="model">material.request</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <field name="name" string="Reference"/>
+                    <field name="document_name" string="Origin reference"/>
+
+                    <separator/>
+                    <field name="state" string="State"/>
+                    <separator/>
+                    <!--<filter string="Active" name="active" domain="[('active', '=',True)]"/>-->
+                    <!--<filter string="Inactive" domain="[('active', '=',False)]"/>-->
+                    <field name="employee" string="Employee"/>
+                    <field name="responsible" string="Responsible"/>
+                    <filter name="unassigned" string="Unassigned" domain="[('responsible', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Origin reference" domain="[]" context="{'group_by':'document_name'}"/>
+                        <filter string="Origin" domain="[]" context="{'group_by':'model_name'}"/>
+                        <filter string="Employee" domain="[]" context="{'group_by':'employee'}"/>
+                        <filter string="Responsible" domain="[]" context="{'group_by':'responsible'}"/>
+                        <filter string="State" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--ACTION MENU-->
+        <record id="action_material_request_tree" model="ir.actions.act_window">
+            <field name="name">Material request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">material.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_material_request_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a material request.
+                </p>
+            </field>
+        </record>
+
+        <!--MENU-->
+        <menuitem
+            id="material_request_model_act"
+            name="Material request"
+            sequence="60"
+            action="action_material_request_tree"
+            parent="purchase.menu_procurement_management"/>
+
+    </data>
+</odoo>

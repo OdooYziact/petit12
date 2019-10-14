@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Tree view des activites -->
+    <record model="ir.ui.view" id="mail_activity_tree_view">
+        <field name="name">Activités</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <tree create="false" import="false" delete="false" default_order="date_deadline desc">
+                <field name="activity_type_id" string="Type"/>
+                <field name="summary" string="Résumé"/>
+                <field name="note" string="Description"/>
+                <field name="res_name" string="Document"/>
+                <field name="date_deadline" string="Date d'échéance"/>
+                <field name="user_id" string="Assignée à"/>
+                <field name="state" string="Etat" attrs="{'invisible':[('archived','=',True)]}"/>
+                <field name="feedback" string="Compte-rendu" attrs="{'invisible':[('archived','=',False)]}"/>
+                <field name="archived" string="Archivée"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search view des activites -->
+    <record id="mail_activity_search_view" model="ir.ui.view">
+        <field name="name">Filtres</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Fields -->
+                <field name="state"/>
+                <field name="archived"/>
+                <field name="activity_type_id"/>
+                <field name="res_id"/>
+                <field name="res_model"/>
+                <field name="date_deadline"/>
+
+                <!-- Group by -->
+                <group expand="0" string="Group by">
+                    <filter name="grp_by_type" string="Type" context="{'group_by': 'activity_type_id'}"/>
+                </group>
+
+                <!-- Filters -->
+                <filter string="Mes activités" name="mine" domain="[('user_id', '=', uid)]"/>
+
+                <separator/>
+
+                <filter string="Activités en cours" name="currently" domain="[('archived','!=', True)]"/>
+                <filter string="Activités archivées" name="ended" domain="[('archived','=', True)]"/>
+
+                <separator/>
+
+                <filter string="Activités planifiées" name="planned" domain="[('archived','!=', True),('date_deadline','&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Activités aujourd'hui" name="today" domain="[('archived','!=', True),('date_deadline','=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Activités en retard" name="overdue" domain="[('archived','!=', True),('date_deadline','&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Form view des activites -->
+    <record model="ir.ui.view" id="mail_activity_form_view_for_tree">
+        <field name="name">Activités</field>
+        <field name="model">mail.activity</field>
+        <field name="priority" eval="22"/>
+        <field name="arch" type="xml">
+            <form string="Créer une activité" create="false" delete="false">
+                <sheet string="Activités">
+                    <group invisible="1">
+                        <field name="activity_category"/>
+                        <field name="res_model"/>
+                        <field name="res_model_id"/>
+                        <field name="res_id"/>
+                        <field name="archived"/>
+                        <field name="previous_activity_type_id"/>
+                        <field name="has_recommended_activities"/>
+                    </group>
+                    <group attrs="{'invisible': [('has_recommended_activities','=',False)]}">
+                        <div>
+                            <p><strong>Recommended Activities</strong></p>
+                            <field name="recommended_activity_type_id" widget="radio" domain="[('previous_type_ids', '=', previous_activity_type_id)]" options="{'horizontal':true}" nolabel="1"/>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="activity_type_id" required="1" attrs="{'no_create': True, 'no_open': True, 'readonly': [('id', '!=', False)]}" />
+                            <field name="summary" placeholder="Ex. : proposition d'examen" attrs="{'readonly':[('archived','=', True)]}"/>
+                        </group>
+                        <group>
+                            <field name="date_deadline" attrs="{'readonly':[('archived','=', True)]}"/>
+                            <field name="user_id" attrs="{'readonly':[('archived','=', True)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="state" string="Etat" attrs="{'invisible': [('archived', '=', True)], 'readonly': 1}" />
+                        <field name="archived" string="Archivé" attrs="{'invisible': [('archived', '!=', True)], 'readonly': 1}"/>
+                        <field name="note" placeholder="Enregistrer une note..." string="Description" attrs="{'readonly':[('archived','=', True)]}"/>
+                        <field name="feedback" string="Compte-rendu" attrs="{'invisible': [('archived', '!=', True)]}"/>
+                    </group>
+                    <footer attrs="{'invisible': [('archived', '=', True)]}">
+                        <button string="Marquer comme fait" name="open_feedback_form" type="object" class="btn-primary"/>
+                        <button string="SUPPRIMER" name="unlink" type="object" class="btn-link"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="mail_activity_tree_view_action">
+        <field name="name">Activités</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree,form</field>
+        <field name="views">[(False,tree), (False,form)]</field>
+        <field name="search_view_id" ref="mail_activity_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                                      (0, 0, {'view_mode': 'tree', 'view_id': ref('mail_activity_tree_view')}),
+                                      (0, 0, {'view_mode': 'form', 'view_id': ref('mail_activity_form_view_for_tree')})]"/>
+        <field name="context">{'search_default_mine':1}</field>
+        <field name="target">current</field>
+   </record>
+
+    <!-- Ajout d'un menu pour acceder à la tree view -->
+   <menuitem id="menu_activites_tree" parent="crm.crm_menu_root" name="Activités" action="mail_activity_tree_view_action"/>
+
+
+    <!-- Formulaire du feedback -->
+    <record model="ir.ui.view" id="mail_activity_form_feedback">
+        <field name="name">Activités</field>
+        <field name="model">mail.activity</field>
+        <field name="priority" eval="23"/>
+        <field name="arch" type="xml">
+            <form string="Feedback">
+                <group invisible="1">
+                    <field name="activity_category"/>
+                    <field name="res_model"/>
+                    <field name="res_model_id"/>
+                    <field name="res_id"/>
+                    <field name="previous_activity_type_id"/>
+                    <field name="has_recommended_activities"/>
+                </group>
+                <label for="feedback" string="Compte-rendu"/>
+                <field name="feedback" string="Compte-rendu"/>
+                <footer>
+                    <button string="Marqué comme fait" name="action_done_with_feedback" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="mail_activity_form_feedback_action">
+        <field name="name">Feedback</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">form</field>
+        <field name="views">[(False,form)]</field>
+        <field name="view_id" ref="mail_activity_form_feedback"/>
+        <field name="target">new</field>
+   </record>
+
+    <!-- Changement des filtres pour y integrer le fait de ne prendre que les activites non archivees -->
+    <record id="search_view_for_activities8" model="ir.ui.view">
+        <field name="name">Filtres</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/filter[@name='activities_overdue']" position="replace">
+                <filter string="Activités en retard" name="activities_overdue" domain="[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('archived', '!=', True)]" help="Show all records which has next action date is before today"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_today']" position="replace">
+                <filter string="Activités du jour" name="activities_today" domain="[('date_deadline', '=', context_today().strftime('%Y-%m-%d')), ('archived', '!=', True)]"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_upcoming_all']" position="replace">
+                <filter string="Activités futures" name="activities_upcoming_all" domain="[('date_deadline', '&gt;', context_today().strftime('%Y-%m-%d')), ('archived', '!=', True)]"/>
+            </xpath>
+            <xpath expr="//search/filter[@name='activities_my']" position="replace">
+                <filter string="Mes activités" name="activities_my" domain="[('user_id', '=', uid), ('archived', '!=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree view du suivi des relances devis -->
+    <record model="ir.ui.view" id="relance_devis_tree_view">
+        <field name="name">Activités</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <tree string="Relances devis">
+                <field name="archived" invisible="1"/>
+                <field name="sale_order_id" invisible="1"/>
+                <field name="sale_present" invisible="1"/>
+                <field name="sale_order_partner" string="Client"/>
+                <field name="sale_order_name" string="N° devis"/>
+                <field name="sale_order_amount" string="Montant"/>
+                <field name="sale_order_date" string="Date envoi"/>
+                <field name="feedback" string="Compte-rendu"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="relance_client_search_view" model="ir.ui.view">
+        <field name="name">Filtres</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Fields -->
+                <field name="archived"/>
+                <field name="date_deadline"/>
+                <field name="user_id"/>
+                <field name="res_id"/>
+
+                <!-- Group by -->
+                <group expand="0" string="Group by">
+                    <filter name="grp_by_commercial" string="Commercial" context="{'group_by': 'user_id'}"/>
+                </group>
+
+                <group expand="0" string="Group by">
+                    <filter name="grp_by_devis" string="Devis" context="{'group_by': 'res_name'}"/>
+                </group>
+
+                <!-- Filters -->
+                <filter string="Mes activités" name="mine" domain="[('user_id', '=', uid)]"/>
+
+                <separator/>
+
+                <filter string="Activités en cours" name="currently" domain="[('archived','!=', True)]"/>
+                <filter string="Activités archivées" name="ended" domain="[('archived','=', True)]"/>
+
+                <separator/>
+
+                <filter string="Activités planifiées" name="planned" domain="[('archived','!=', True),('date_deadline','&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Activités aujourd'hui" name="today" domain="[('archived','!=', True),('date_deadline','=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Activités en retard" name="overdue" domain="[('archived','!=', True),('date_deadline','&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="relance_devis_action" model="ir.actions.act_window">
+        <field name="name">Relances devis</field>
+        <field name="res_model">mail.activity</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="views">[(False,tree),(False,form)]</field>
+        <field name="view_id" ref="relance_devis_tree_view"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                                      (0, 0, {'view_mode': 'tree', 'view_id': ref('relance_devis_tree_view')}),
+                                      (0, 0, {'view_mode': 'form', 'view_id': ref('mail_activity_form_view_for_tree')})]"/>
+        <field name="search_view_id" ref="relance_client_search_view"/>
+        <field name="domain">[('sale_present','=',True)]</field>
+        <field name="context">
+            {
+                'search_default_grp_by_commercial':1,
+                'search_default_grp_by_devis':1
+            }
+        </field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="crm_relance_devis" name="Suivi des relances devis" parent="crm.crm_menu_report" action="module_action.relance_devis_action"/>
+
+</odoo>

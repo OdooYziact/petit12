@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="petit_crm_geographical_area_tree" model="ir.ui.view">
+        <field name="name">petit_crm.geographical_area.tree</field>
+        <field name="model">petit_crm.geographical_area</field>
+        <field name="arch" type="xml">
+            <tree string="Secteurs géographiques">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="petit_crm_geographical_area_form" model="ir.ui.view">
+        <field name="name">petit_crm.geographical_area.form</field>
+        <field name="model">petit_crm.geographical_area</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Secteurs géographiques">
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="petit_crm_geographical_area_action" model="ir.actions.act_window">
+        <field name="name">Secteurs géographiques</field>
+        <field name="res_model">petit_crm.geographical_area</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="petit_crm_geographical_area_tree"/>
+    </record>
+
+    <menuitem
+        id="petit_crm_geographical_area_act"
+        name="Secteurs géographiques"
+        sequence="60"
+        action="petit_crm_geographical_area_action"
+        parent="crm.crm_menu_config"
+        groups="sales_team.group_sale_manager"/>
+
+
+</odoo>

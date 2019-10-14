@@ -1,0 +1,295 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_repair_model
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"#-#-#-#-#  fr_FR.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-02 12:49+0000\n"
+"PO-Revision-Date: 2019-04-02 14:49+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+"#-#-#-#-#  fr.po (Odoo Server 11.0+e-20180405)  #-#-#-#-#\n"
+"Project-Id-Version: Odoo Server 11.0+e-20180405\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-18 09:49+0000\n"
+"PO-Revision-Date: 2019-02-18 10:55+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_product_count
+msgid "# Products"
+msgstr "# Products"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_active
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_active
+msgid "Active"
+msgstr "Actif/ve"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_value_bool
+msgid "Bool"
+msgstr "Bool"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_code
+msgid "Code"
+msgstr "Code"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_common
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_common
+msgid "Common specification"
+msgstr "Caractéristique commune"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_common_specification_ids
+msgid "Common specifications"
+msgstr "Caractéristiques communes"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_create_uid
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_create_uid
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_create_date
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_create_date
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_value_float
+#: selection:mrp.repair.specification,field_type:0
+msgid "Decimal number"
+msgstr "Nombre décimal"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_display_name
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_display_name
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: mrp_repair_model
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_specification_form
+msgid "Field code"
+msgstr "Code du champ"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_id
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_id
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_id
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_value_int
+#: selection:mrp.repair.specification,field_type:0
+msgid "Integer"
+msgstr "Nombre entier"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_description
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_description
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_specification_form
+msgid "Label"
+msgstr "Libellé"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data___last_update
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model___last_update
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_write_uid
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_write_uid
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_write_date
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_write_date
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_name
+msgid "Model"
+msgstr "Modèle"
+
+#. module: mrp_repair_model
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_model_form
+msgid "Model name"
+msgstr "Nom du modèle"
+
+#. module: mrp_repair_model
+#: model:ir.actions.act_window,name:mrp_repair_model.mrp_repair_model_action
+#: model:ir.ui.menu,name:mrp_repair_model.mrp_repair_model_act
+msgid "Models"
+msgstr "Modèles"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_name
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_name
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_model_form
+msgid "Name"
+msgstr "Nom"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_bom_ids
+msgid "Nomenclature(s)"
+msgstr "Nomenclature(s)"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_bom_count
+msgid "Nomenclatures"
+msgstr "Nomenclatures"
+
+#. module: mrp_repair_model
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_model_form
+msgid "Products"
+msgstr "Articles"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_product_category_id
+msgid "Products category"
+msgstr "Catégorie d'articles"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_required
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_required
+msgid "Required"
+msgstr "Requis"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_routing_id
+msgid "Routing"
+msgstr "Gamme"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_model_specification_ids
+msgid "Specific fields"
+msgstr "Champs spécifiques"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_specification_id
+msgid "Specification"
+msgstr "Caractéristique"
+
+#. module: mrp_repair_model
+#: model:ir.actions.act_window,name:mrp_repair_model.mrp_repair_specification_action
+#: model:ir.ui.menu,name:mrp_repair_model.mrp_repair_specification_act
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_model_form
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_model_tree
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_specification_form
+#: model:ir.ui.view,arch_db:mrp_repair_model.mrp_repair_specification_tree
+msgid "Specifications"
+msgstr "Caractéristiques"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_value_text
+#: selection:mrp.repair.specification,field_type:0
+msgid "Text"
+msgstr "Texte"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,help:mrp_repair_model.field_mrp_repair_model_product_count
+msgid ""
+"The number of products under this category (Does not consider the children "
+"categories)"
+msgstr ""
+"Le nombre d'articles sous cette catégorie (ne considère pas les catégories "
+"enfants)"
+
+#. module: mrp_repair_model
+#: sql_constraint:mrp.repair.model:0 sql_constraint:mrp.repair.specification:0
+msgid "The record must be unique."
+msgstr "L'enregistrement doit être unique."
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_field_type
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_field_type
+msgid "Type"
+msgstr "Type"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_unit
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_specification_unit
+msgid "Unit"
+msgstr "Unité"
+
+#. module: mrp_repair_model
+#: model:ir.model.fields,field_description:mrp_repair_model.field_mrp_repair_data_value
+msgid "Value"
+msgstr "Valeur"
+
+#. module: mrp_repair_model
+#: code:addons/mrp_repair_model/models/repair_data.py:44
+#, python-format
+msgid "You must fill in the required specifications."
+msgstr "Veuillez renseigner les caractéristiques requises."
+
+#. module: mrp_repair_model
+#: selection:mrp.repair.specification,unit:0
+msgid "cm"
+msgstr "cm"
+
+#. module: mrp_repair_model
+#: selection:mrp.repair.specification,unit:0
+msgid "kW"
+msgstr "kW"
+
+#. module: mrp_repair_model
+#: selection:mrp.repair.specification,unit:0
+msgid "kg"
+msgstr "kg"
+
+#. module: mrp_repair_model
+#: selection:mrp.repair.specification,unit:0
+msgid "mm"
+msgstr "mm"
+
+#. module: mrp_repair_model
+#: model:ir.model,name:mrp_repair_model.model_mrp_repair_data
+msgid "mrp.repair.data"
+msgstr "mrp.repair.data"
+
+#. module: mrp_repair_model
+#: model:ir.model,name:mrp_repair_model.model_mrp_repair_model
+msgid "mrp.repair.model"
+msgstr "mrp.repair.model"
+
+#. module: mrp_repair_model
+#: model:ir.model,name:mrp_repair_model.model_mrp_repair_specification
+msgid "mrp.repair.specification"
+msgstr "mrp.repair.specification"
+
+#. module: mrp_repair_model
+#: selection:mrp.repair.specification,unit:0
+msgid "tr/min"
+msgstr "tr/min"

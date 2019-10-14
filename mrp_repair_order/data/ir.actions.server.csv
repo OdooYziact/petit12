@@ -1,0 +1,82 @@
+"id","state","child_ids/id","partner_ids/id","channel_ids/id","code","fields_lines/id","crud_model_id/id","create_date","create_uid/id","write_date","write_uid/id","help","link_field_id/id","model_id/id","template_id/id","binding_model_id/id","name","sequence","type","binding_type","usage"
+"__export__.base_automation_2_ir_actions_server","Exécuter le code Python",,,,"# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+record.production_id.repair_order_id.action_expertise()
+
+",,,"2019-03-08 11:06:00","base.user_root","2019-04-04 22:04:38","base.user_root",,,"mrp.model_mrp_workorder",,,"Début de l'expertise","5","ir.actions.server","Action","Action automatisée"
+"__export__.base_automation_3_ir_actions_server","Exécuter le code Python",,,,"# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+res = env[str(record.res_model)].browse(record.res_id)
+if res and res.repair_order_id:
+  res.repair_order_id.action_consult_done()
+    
+    ",,,"2019-03-08 11:06:00","base.user_root","2019-04-04 22:04:38","base.user_root",,,"material_request.model_material_request",,,"Demande de matériel: fait > Réparation","5","ir.actions.server","Action","Action automatisée"
+"__export__.base_automation_6_ir_actions_server","Mettre à jour l'enregistrement",,,,"# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+
+
+",,,"2019-03-08 11:06:00","base.user_root","2019-04-04 22:04:38","base.user_root",,,"mrp.model_mrp_production",,,"Production: terminé","5","ir.actions.server","Action","Action automatisée"
+"__export__.base_automation_4_ir_actions_server","Exécuter le code Python",,,,"# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+record.action_production_restart()
+
+
+",,,"2019-03-08 11:06:00","base.user_root","2019-04-04 22:04:38","base.user_root",,,"mrp_repair_order.model_mrp_repair_order",,,"Réparation: appro en cours > relancer les OT","5","ir.actions.server","Action","Action automatisée"
+"__export__.base_automation_5_ir_actions_server","Mettre à jour l'enregistrement",,,,"# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+
+
+",,,"2019-03-08 11:06:00","base.user_root","2019-04-04 22:04:38","base.user_root",,,"mrp_repair_order.model_mrp_repair_order",,,"Réparation: devis > commande","5","ir.actions.server","Action","Action automatisée"
+"__export__.base_automation_1_ir_actions_server","Mettre à jour l'enregistrement",,,,"# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+
+
+",,,"2019-03-08 11:06:00","base.user_root","2019-04-04 22:04:38","base.user_root",,,"mrp_repair_order.model_mrp_repair_order",,,"Réparation: enlèvement > à réceptionner","5","ir.actions.server","Action","Action automatisée"

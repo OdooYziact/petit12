@@ -1,0 +1,82 @@
+"id","active","state","child_ids/id","action_server_id/id","channel_ids/id","filter_domain","code","trigger","fields_lines/id","crud_model_id/id","create_uid/id","create_date","trg_date_id/id","write_date","write_uid/id","help","filter_pre_domain","on_change_fields","trg_date_range","link_field_id/id","model_id/id","template_id/id","binding_model_id/id","name","sequence","type","trg_date_range_type","binding_type","usage","trg_date_calendar_id/id"
+"__export__.base_automation_2","True","code",,"__export__.base_automation_2_ir_actions_server",,"[[""state"",""="",""progress""]]","# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+record.production_id.repair_order_id.action_expertise()
+
+","Lors d'une mise à jour",,,"base.user_root","2019-03-08 11:06:00",,"2019-04-04 22:04:38","base.user_root",,"[""&"",[""operation_id.expertise"",""="",True],[""state"",""="",""ready""]]",,"0",,"mrp.model_mrp_workorder",,,"Début de l'expertise","5","ir.actions.server","Jours","action","base_automation",
+"__export__.base_automation_5","True","object_write",,"__export__.base_automation_5_ir_actions_server",,"[""&"",""&"",[""is_confirmed"",""="",True],[""step"",""="",""to_estimate""],[""state"",""="",""quotation""]]","# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+
+
+","Lors d'une mise à jour",,,"base.user_root","2019-03-08 11:06:00",,"2019-04-04 22:04:38","base.user_root",,"[""&"",""&"",[""state"",""="",""quotation""],[""step"",""="",""to_estimate""],[""is_confirmed"",""="",False]]",,"0",,"mrp_repair_order.model_mrp_repair_order",,,"Réparation: devis > commande","5","ir.actions.server","Jours","action","base_automation",
+"__export__.base_automation_1","True","object_write",,"__export__.base_automation_1_ir_actions_server",,"[""&"",[""stock_picking_ids.state"",""="",""done""],[""stock_picking_ids.picking_type_id.id"",""="",9]]","# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+
+
+","Lors d'une mise à jour",,,"base.user_root","2019-03-08 11:06:00",,"2019-04-04 22:04:38","base.user_root",,"[""|"",""&"",[""step"",""="",""removal""],[""step"",""="",""estimate""],[""state"",""="",""draft""]]",,"0",,"mrp_repair_order.model_mrp_repair_order",,,"Réparation: enlèvement > à réceptionner","5","ir.actions.server","Jours","action","base_automation",
+"__export__.base_automation_3","True","code",,"__export__.base_automation_3_ir_actions_server",,"[[""state"",""="",""done""]]","# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+res = env[str(record.res_model)].browse(record.res_id)
+if res and res.repair_order_id:
+  res.repair_order_id.action_consult_done()
+    
+    ","Lors d'une mise à jour",,,"base.user_root","2019-03-08 11:06:00",,"2019-04-04 22:04:38","base.user_root",,"[""&"",[""res_id"",""!="",False],[""res_model"",""="",""mrp.production""]]",,"0",,"material_request.model_material_request",,,"Demande de matériel: fait > Réparation","5","ir.actions.server","Jours","action","base_automation",
+"__export__.base_automation_6","True","object_write",,"__export__.base_automation_6_ir_actions_server",,"[""|"",""&"",[""workorder_ids.state"",""="",""done""],[""workorder_ids.state"",""="",""cancel""],[""state"",""="",""progress""]]","# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+
+
+","Lors d'une mise à jour",,,"base.user_root","2019-03-08 11:06:00",,"2019-04-04 22:04:38","base.user_root",,,,"0",,"mrp.model_mrp_production",,,"Production: terminé","5","ir.actions.server","Jours","action","base_automation",
+"__export__.base_automation_4","True","code",,"__export__.base_automation_4_ir_actions_server",,"[""&"",[""state"",""="",""order""],[""step"",""="",""procurement""]]","# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+record.action_production_restart()
+
+
+","Lors d'une mise à jour",,,"base.user_root","2019-03-08 11:06:00",,"2019-04-04 22:04:38","base.user_root",,,,"0",,"mrp_repair_order.model_mrp_repair_order",,,"Réparation: appro en cours > relancer les OT","5","ir.actions.server","Jours","action","base_automation",

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Rapport de travaux -->
+    <template id="petit_reports.report_saleorder_bilan">
+
+        <t t-call="web.html_container">
+            <div class="header"/>
+            <div class="footer"/>
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t t-set="o" t-value="o.with_context({'lang': o.partner_id.lang})"/>
+                    <link rel='stylesheet' href="/petit_reports/static/src/css/style.css"/>
+                    <div class="page">
+                        <h2 class="text-center">Bilan d'affaire de négoce</h2>
+
+                        <table class="table table-condensed table_bilan">
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th>N°</th>
+                                    <th>Date</th>
+                                    <th/>
+                                    <th>Validation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Affaire</td>
+                                    <td><span t-if="o.name" t-field="o.name"/></td>
+                                    <td><span t-if="o.date_order" t-field="o.date_order" t-options='{"widget": "date"}'/></td>
+                                    <td rowspan="2">M. Olivier</td>
+                                    <td rowspan="2"/>
+                                </tr>
+                                <tr>
+                                    <td>Devis</td>
+                                    <td><span t-if="o.name" t-field="o.name"/></td>
+                                    <td><span t-if="o.date_order" t-field="o.date_order" t-options='{"widget": "date"}'/></td>
+                                </tr>
+                                <tr class="double_height">
+                                    <td>BL</td>
+                                    <td>
+                                        <t t-foreach="o.get_stock_pickings()" t-as="bl">
+                                            <span t-if="bl.name" t-field="bl.name"/><br/>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-foreach="o.get_stock_pickings_date()" t-as="date">
+                                            <span t-esc="date" t-options='{"widget": "date"}'/><br/>
+                                        </t>
+                                    </td>
+                                    <td>M. Petit</td>
+                                    <td/>
+                                </tr>
+                                <tr class="double_height">
+                                    <td>Commande client</td>
+                                    <td><span t-if="o.client_order_ref" t-field="o.client_order_ref"/></td>
+                                    <td/>
+                                    <td>Mme Petit</td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td><strong>Client</strong></td>
+                                    <td colspan="4"><strong><span t-if="o.partner_id and o.partner_id.name" t-field="o.partner_id.name"/></strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Commercial</strong></td>
+                                    <td colspan="4"><strong><span t-if="o.user_id and o.user_id.name" t-field="o.user_id.name"/></strong></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <h3 class="text-center">Détail des travaux</h3>
+
+                        <t t-set="total_temps_travaux" t-value="0.0"/>
+                        <t t-set="total_ht_travaux" t-value="0.0"/>
+                        <t t-set="total_qty_fourn" t-value="0.0"/>
+                        <t t-set="total_ht_fourn" t-value="0.0"/>
+
+                        <table class="table table-condensed table_bilan">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Temps réel</th>
+                                    <th>Taux</th>
+                                    <th>total HT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span t-if="o.fixed_cost_id and o.fixed_cost_id.name" t-field="o.fixed_cost_id.name"/></td>
+                                    <td><span t-if="o.fixed_cost_qty" t-field="o.fixed_cost_qty"/></td>
+                                    <td><span t-if="o.fixed_cost_id and o.fixed_cost_id.standard_price" t-field="o.fixed_cost_id.standard_price"/></td>
+                                    <td><span t-esc="'%.2f'%(o.fixed_cost_qty * o.fixed_cost_id.standard_price)"/></td>
+                                </tr>
+
+                                <t t-set="total_temps_travaux" t-value="total_temps_travaux + o.fixed_cost_qty"/>
+                                <t t-set="total_ht_travaux" t-value="total_ht_travaux + (o.fixed_cost_qty * o.fixed_cost_id.standard_price)"/>
+
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <t t-if="line.product_id.type == 'service'">
+                                        <tr>
+                                            <td><span t-if="line.product_id and line.product_id.name" t-field="line.product_id.name"/></td>
+                                            <td><span t-if="line.product_uom_qty" t-field="line.product_uom_qty"/></td>
+                                            <td><span t-if="line.purchase_price" t-field="line.purchase_price"/></td>
+                                            <td><span t-esc="'%.2f'%(line.product_uom_qty * line.purchase_price)"/></td>
+                                        </tr>
+
+                                        <t t-set="total_temps_travaux" t-value="total_temps_travaux + line.product_uom_qty"/>
+                                        <t t-set="total_ht_travaux" t-value="total_ht_travaux + (line.product_uom_qty * line.purchase_price)"/>
+                                    </t>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><strong>Total main d'oeuvre</strong></td>
+                                    <td><span t-esc="total_temps_travaux"/></td>
+                                    <td/>
+                                    <td><span t-esc="'%.2f'%(total_ht_travaux)"/></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <h3 class="text-center">Détail des articles</h3>
+
+                        <table class="table table-condensed table_bilan">
+                            <thead>
+                                <tr>
+                                    <th>Référence</th>
+                                    <th>Désignation</th>
+                                    <th>Qté</th>
+                                    <th>PA HT</th>
+                                    <th>total HT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <t t-if="line.product_id.type != 'service'">
+                                        <tr>
+                                            <td><span t-if="line.product_id and line.product_id.default_code" t-field="line.product_id.default_code"/> </td>
+                                            <td><span t-if="line.product_id and line.product_id.name" t-field="line.product_id.name"/></td>
+                                            <td><span t-if="line.product_uom_qty" t-field="line.product_uom_qty"/></td>
+                                            <td><span t-if="line.purchase_price" t-field="line.purchase_price"/></td>
+                                            <td><span t-esc="'%.2f'%(line.product_uom_qty * line.purchase_price)"/></td>
+                                        </tr>
+
+                                        <t t-set="total_qty_fourn" t-value="total_qty_fourn + line.product_uom_qty"/>
+                                        <t t-set="total_ht_fourn" t-value="total_ht_fourn + (line.product_uom_qty * line.purchase_price)"/>
+                                    </t>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4"><strong>Total fournitures</strong></td>
+                                    <td><span t-esc="'%.2f'%(total_ht_fourn)"/></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div class="clearfix">
+                            <div class="row" name="total">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed" style="min-width: 200px;max-width: 350px;">
+                                        <tr>
+                                            <td><strong>Total prix de vente</strong></td>
+                                            <td class="text-right"><span t-if="o.amount_untaxed" t-field="o.amount_untaxed"/></td>
+                                        </tr>
+                                        <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                            <td><strong>Total coût de revient</strong></td>
+                                            <td class="text-right"><span t-esc="'%.2f'%(total_ht_travaux + total_ht_fourn)"/> €</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Marge %</strong></td>
+                                            <td class="text-right"><span t-field="o.margin_rate"/> %</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

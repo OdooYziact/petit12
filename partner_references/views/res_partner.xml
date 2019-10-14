@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_res_partner_form" model="ir.ui.view">
+        <field name="name">References and Practices</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="has_references" invisible="1"/>
+                <field name="has_practices" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook/page[@name='sales_purchases']" position="after">
+
+                <page attrs="{'invisible': ['|', ('is_company','=', False), ('has_references', '=', False)]}" name="references" string="References">
+                    <field name="reference_ids" string="">
+                        <tree nocreate="1">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name" string="Reference"/>
+                            <field name="note" string="Note"/>
+                            <field name="required" string="Required"/>
+                        </tree>
+                    </field>
+                </page>
+                <page attrs="{'invisible': ['|', ('is_company','=', False), ('has_practices', '=', False)]}" name="practices" string="Practices">
+                    <field name="practice_ids" string="">
+                        <tree nocreate="1">
+                            <field name="name" string="Practice"/>
+                        </tree>
+                    </field>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

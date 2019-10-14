@@ -1,0 +1,25 @@
+.o_application_switcher
+{
+    background-image:url(/ui_color_palette/static/src/img/background.png);
+    /*background-color: #666666 !important;*/
+}
+
+.o_app_switcher_background
+{
+	background: -webkit-gradient(linear, left top, right bottom, from(#666666), to(#333333));
+}
+
+.o_main_navbar
+{
+	background: -webkit-gradient(linear, left top, right bottom, from(#666666), to(#333333));
+}
+
+.o_facet_values
+{
+	color: #f0ad4e;
+}
+
+body .o_form_view .oe_button_box .btn.oe_stat_button
+{
+	background-color: #fafafa;
+}

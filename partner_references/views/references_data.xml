@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <record id="view_references_data_tree" model="ir.ui.view">
+       <field name="name">Partner References (data)</field>
+       <field name="model">partner.references.data</field>
+       <field name="arch" type="xml">
+           <tree>
+               <field name="res_id"/>
+               <field name="res_model_id"/>
+               <field name="res_model"/>
+               <field name="res_name"/>
+               <field name="reference_id"/>
+               <field name="name"/>
+               <field name="value"/>
+               <field name="required"/>
+               <field name="partner_id"/>
+           </tree>
+       </field>
+   </record>
+
+    <record id="action_view_references_data" model="ir.actions.act_window">
+        <field name="name">Partner References (data)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">partner.references.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_data_references"
+              action="action_view_references_data"
+              parent="contacts.res_partner_menu_config"
+              groups="base.group_no_one"
+              sequence="31"/>
+
+</odoo>

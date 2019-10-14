@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_pricelist_item_form_view" model="ir.ui.view">
+        <field name="name">product_pricelist_item_form_view</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='currency_id']" position="after">-->
+<!--                <div attrs="{'invisible':[('compute_price', '!=', 'coefficient')]}">-->
+<!--                    x <field name="coefficient_price" nolabel="1" class="oe_inline"/><br/>-->
+<!--                    <field name="base" colspan="6"/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+
+            <xpath expr="//group[3]" position="after">
+                <group col="6" attrs="{'invisible':[('compute_price', '!=', 'coefficient')]}">
+                    <field name="base" colspan="6"/>
+
+                    <label string="New Price ="/>
+                    <div>
+                        <span attrs="{'invisible':[('base', '!=', 'list_price')]}">Public Price  x  </span>
+                        <span attrs="{'invisible':[('base', '!=', 'standard_price')]}">Cost  x  </span>
+                        <span attrs="{'invisible':[('base', '!=', 'pricelist')]}">Other Pricelist  x  </span>
+                    </div>
+
+                    <div class="o_row">
+                        <field name="coefficient_price" nolabel="1"/>
+                    </div>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="product_pricelist_view" model="ir.ui.view">
+        <field name="name">product_pricelist_view</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='base']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+

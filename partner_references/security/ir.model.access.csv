@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+partner_references_user,partner_references,model_partner_references,base.group_user,1,0,0,0
+partner_references_manager,partner_references,model_partner_references,base.group_partner_manager,1,1,1,0
+partner_practices_user,partner_practices,model_partner_practices,base.group_user,1,0,0,0
+partner_practices_manager,partner_practices,model_partner_practices,base.group_partner_manager,1,1,1,0
+partner_references_data_user,partner_references_data,model_partner_references_data,base.group_user,1,1,1,1
+partner_references_data_manager,partner_references_data,model_partner_references_data,base.group_partner_manager,1,1,1,1
+
+
+

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="purchase_order_route_tree" model="ir.ui.view">
+            <field name="name">purchase_order_route_tree</field>
+            <field name="model">purchase.order.route</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="Routes">
+                    <!--<field name="name"/>-->
+                    <field name="route_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="purchase_order_route_action" model="ir.actions.act_window">
+            <field name="name">Routes</field>
+            <field name="res_model">purchase.order.route</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new ticket tag.
+              </p><p>
+                Tags allows to organize tickets.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="purchase_order_route_menu" action="purchase_order_route_action"
+            sequence="1" parent="purchase.menu_purchase_config"
+            groups="base.group_no_one"/>
+
+        <!--Ajout de la configuration dans le bloc Achats-->
+        <record id="res_config_settings_view_form_purchase" model="ir.ui.view">
+            <field name="name">res_config_settings_view_form_purchase</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="35"/>
+            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='po_lock']" position="after">
+                    <h2>Routes</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="add_route" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="add_route"/>
+                                <div class="text-muted">
+                                    Ajouter des routes automatiquement aux produits retenus lors des demandes de prix.
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('add_route','=',False)]}">
+                                    <div class="mt16">
+                                        <div>
+                                            <button name="action_view_routes" string="Routes" type="object" class="oe_link" icon="fa-arrow-right"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_petit_helpdesk_configuration" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'petit_helpdesk'}</field>
+        </record>
+
+        <!--<menuitem id="menu_petit_helpdesk_config" name="Settings" parent="helpdesk_menu_config"-->
+            <!--sequence="0" action="action_petit_helpdesk_configuration" groups="base.group_system"/>-->
+    </data>
+</odoo>
+
+
+
+
+
+

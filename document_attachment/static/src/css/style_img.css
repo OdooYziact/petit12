@@ -1,0 +1,20 @@
+#image_container,
+body .e_form_field.e_form_field_html_text._field_widget._readonly_modifier {
+	width: 100%
+}
+
+#allo-test {
+    position: relative;
+    max-width: 100%;
+    display: inline-block;
+}
+
+/*
+body * {
+    color: red;
+    background-color: red;
+}
+
+.o_control_panel > .breadcrumb > li {
+    color: red !important;
+}*/

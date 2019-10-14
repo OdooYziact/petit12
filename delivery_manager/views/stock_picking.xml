@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- FORM -->
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">view_picking_form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string="Sign">
+                    <label for="sign" class="oe_edit_only"/>
+                    <field name="sign" widget="signature" nolabel="1"/>
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="responsible"/>
+                <field name="is_signed" groups="base.group_no_one"/>
+            </xpath>
+
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field name="delivery_day"/>
+                <field name="scheduled_day"/>
+                <field name="priority"/>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="action_assign_to_me" string="Assign to Me" type="object" class="oe_highlight"
+                  attrs="{'invisible' : [('responsible', '!=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='location_dest_id']" position="after">
+                <field name="is_priority"/>
+            </xpath>
+
+            <xpath expr="//field[@name='responsible']" position="after">
+                <field name="is_signed" invisible="1"/>
+                <field name="reception_person" domain="[('parent_id', '=', partner_id), ('type', '=', 'contact')]" options='{"always_reload": True}'/>
+                <!--<field name="reception_person" attrs="{'invisible':[('sign','=',False)]}"/>-->
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="delivery_ref"/>
+            </xpath>
+
+            <xpath expr="//field[@name='carrier_id']" position="after">
+                <field name="carrier_type" string="Type de transport"/>
+            </xpath>
+
+            <xpath expr="//button[@name='button_validate']" position="attributes">
+                <attribute name="string">Livrer</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- TREE -->
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="name">view_picking_tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+
+          <xpath expr="//field[@name='state']" position="after">
+<!--              <field name="carrier_id" attrs="{'invisible': [('picking_type_id', '!=', %(stock_dropshipping.picking_type_dropship)d),('picking_type_id', '!=', %(stock.picking_type_out)d)]}"/>-->
+              <field name="is_priority"/>
+              <field name="responsible"/>
+          </xpath>
+
+          <xpath expr="//field[@name='origin']" position="after">
+              <field name="delivery_ref"/>
+              <field name="carrier_type" invisible="1"/>
+          </xpath>
+
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="name">view_picking_internal_search</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="delivery_ref" string="Delivery Reference" filter_domain="[('delivery_ref','ilike', self)]"/>
+                <field name="responsible" string="Responsible" filter_domain="[('responsible','ilike', self)]"/>
+                <field name="carrier_id" string="Transporteur" filter_domain="[('carrier_id','ilike', self)]"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='backorder']" position="after">
+                <separator/>
+                <filter name="internal" string="Tournée" domain="[('carrier_id.carrier_type','=', 'internal')]"/>
+                <filter name="collect" string="Enlèvement sur place" domain="[('carrier_type','=', 'collect')]"/>
+                <filter name="dropship" string="Livraison directe" domain="[('carrier_type','=', 'dropship')]"/>
+            </xpath>
+
+            <xpath expr="//group/filter[@name='picking_type']" position="before">
+                <filter string="Transporteur" domain="[]" context="{'group_by':'carrier_id'}"/>
+                <filter string="Type de transport" name="carrier_type" context="{'group_by':'carrier_type'}"/>
+                <filter string="Delivery Reference" domain="[]" context="{'group_by':'delivery_ref'}"/>
+                <filter string="Responsible" domain="[]" context="{'group_by':'responsible'}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- KANBAN -->
+    <record model="ir.ui.view" id="stock_picking_kanban">
+        <field name="name">stock.picking.kanban</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.stock_picking_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_record_headings')]" position="inside">
+                <t t-if="record.priority">
+                    <field name="priority" class="badge"/>
+                </t>
+                <!--<span t-if="record.is_priority" class="badge"><i class="fa fa-fw fa-usd"/>Priority</span>-->
+            </xpath>
+        </field>
+    </record>
+
+    <!--calendar inherited-->
+    <!--<record model="ir.ui.view" id="stock_picking_calendar">-->
+        <!--<field name="name">stock.picking.calendar</field>-->
+        <!--<field name="model">stock.picking</field>-->
+        <!--<field name="inherit_id" ref="stock.stock_picking_calendar"/>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<xpath expr="field[@name='partner_id']" position="after">-->
+                <!--<field name="is_priority"/>-->
+            <!--</xpath>-->
+        <!--</field>-->
+    <!--</record>    -->
+
+    <!--action server assign_to_me-->
+    <record id="action_server_assign_to_me" model="ir.actions.server">
+        <field name="name">Assign to me</field>
+        <field name="model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="model">stock.picking</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_assign_to_me()
+        </field>
+    </record>
+
+
+</odoo>

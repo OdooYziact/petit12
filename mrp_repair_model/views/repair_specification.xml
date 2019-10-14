@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_repair_specification_tree" model="ir.ui.view">
+        <field name="name">Specifications</field>
+        <field name="model">mrp.repair.specification</field>
+        <field name="arch" type="xml">
+            <tree string="Specifications">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="field_type"/>
+                <field name="unit"/>
+                <field name="common"/>
+                <field name="required"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_repair_specification_form" model="ir.ui.view">
+        <field name="name">Specifications</field>
+        <field name="model">mrp.repair.specification</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Specifications">
+                <header>
+                    <!--<field name="to_approve_state" invisible="1"/>-->
+                    <!--<button name="button_to_approve" attrs="{'invisible': ['|', ('state', '!=', 'reported'),('to_approve_state', '=', False)]}" string="Confirmer" type="object" class="oe_highlight"/>-->
+                    <!--<button name="button_approved" attrs="{'invisible': ['|', ('state', '!=', 'to_approve'),('to_approve_state', '=', False)]}" string="Approuver le remplacement" type="object" class="oe_highlight"/>-->
+                    <!--<button name="button_cancel" attrs="{'invisible': [('state', '=', 'done')]}" string="Annuler" type="object" class="oe_highlight"/>-->
+                    <!--<button name="button_done" attrs="{'invisible': [('state', '!=', 'approved')]}" string="Remplacer le produit" type="object" class="oe_highlight"/>-->
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+<!--                        <button name="action_view_super_bom" type="object" icon="fa-list" class="oe_stat_button">
+                            <field string="Nomenclature(s)" name="bom_count" widget="statinfo"/>
+                        </button>-->
+                    </div>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Name"/>
+                        <h1>
+                            <field name="name" placeholder="Field code"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="description" placeholder="Label"/>
+                            <field name="field_type"/>
+                            <field name="unit"/>
+                            <field name="common" />
+                            <field name="required"/>
+                        </group>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="mrp_repair_specification_action" model="ir.actions.act_window">
+        <field name="name">Specifications</field>
+        <field name="res_model">mrp.repair.specification</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="mrp_repair_specification_tree"/>
+    </record>
+
+    <menuitem
+        id="mrp_repair_specification_act"
+        name="Specifications"
+        sequence="60"
+        action="mrp_repair_specification_action"
+        parent="mrp.menu_mrp_bom"/>
+
+
+</odoo>

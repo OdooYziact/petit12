@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_purchase_requisition_form" model="ir.ui.view">
+        <field name="name">view_purchase_requisition_form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="helpdesk_ticket_id" invisible="True" groups="helpdesk.group_helpdesk_user"/>
+                <button name="action_view_helpdesk_ticket" type="object" string="Ticket" class="oe_stat_button"
+                        icon="fa-list-alt" attrs="{'invisible': [('helpdesk_ticket_id', '=', False)]}"
+                        groups="helpdesk.group_helpdesk_user"></button>
+            </xpath>
+
+            <!--<xpath expr="//button[@name='%(purchase_requisition.action_purchase_requisition_to_so)d']" position="attributes">-->
+                <!--<attribute name="name">action_create_purchase_order</attribute>-->
+                <!--<attribute name="type">object</attribute>-->
+            <!--</xpath>-->
+
+            <!--<xpath expr="//button[@name='%(purchase_requisition.action_purchase_requisition_to_so)d']" position="attributes">-->
+                <!--<attribute name="string">nouvelle demande de prix</attribute>-->
+                <!--<attribute name="name">action_create_purchase_order</attribute>-->
+                <!--<attribute name="attrs">{'invisible': [('state', 'not in', ('open', 'in_progress'))]}</attribute>-->
+                <!--<attribute name="type">object</attribute>-->
+            <!--</xpath>-->
+
+            <!--masquage du type de contrat-->
+            <xpath expr="//field[@name='type_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('helpdesk_ticket_id', '=', False)], 'readonly': [('state','not in',('draft','in_progress','open'))]}</attribute>
+            </xpath>
+
+            <!--masquage du fournisseur-->
+            <xpath expr="//field[@name='vendor_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

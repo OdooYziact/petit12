@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="petit_crm_res_partner_form_view" model="ir.ui.view">
+        <field name="name">petit_crm_res_partner_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet/group" position="after">
+
+
+                <group attrs="{'invisible': [('is_company','=', False)]}">
+                    <group>
+                        <h3><span>Objectif CA</span></h3>
+                        <field name="trading_sales_target" string="Négoce" widget='monetary'/>
+                        <field name="repair_sales_target" string="Réparation" widget='monetary'/>
+                    </group>
+                    <group>
+                        <h3><span>CA réalisé</span></h3>
+                        <field name="total_sales" string="N" widget='monetary'/>
+                        <field name="total_sales_y1" string="N-1" widget='monetary'/>
+                        <field name="total_sales_y2" string="N-2" widget='monetary'/>
+                    </group>
+                </group>
+
+
+                <group attrs="{'invisible': [('is_company','=', False)]}">
+                    <group>
+                        <h3><span>Planification des visites</span></h3>
+                        <field name="annual_planned_visits" string="Prévision pour l'année"/>
+
+                        <label for="monthly_planned_visits" string="Fréquence de visite"/>
+                        <div>
+                            tout les
+                            <field name="monthly_planned_visits" string=""/>
+                            jours
+                        </div>
+                    </group>
+                    <group>
+                        <h3><span>Gestion des tournées</span></h3>
+                        <field name="delivery_day" string="Jour de la semaine"/>
+                        <field name="geographical_area" string="Secteur"/>
+                        <label for="distance" string="Distance"/>
+                        <span>
+                            <field name="distance"/>
+                            km
+                        </span>
+                    </group>
+                </group>
+
+                <group >
+
+                </group>
+
+                <group groups="base.group_no_one">
+                    <group>
+                        <h3><span>Champs temporaires</span></h3>
+                        <field name="temp_bl_chiffre"/>
+                        <field name="temp_condition_devis"/>
+                        <field name="temp_delai_relance"/>
+                    </group>
+                </group>
+
+            </xpath>
+
+            <xpath expr="//form/sheet/group/group[2]/field[@name='user_ids']" position="before">
+                <field name="fax" string="Fax"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

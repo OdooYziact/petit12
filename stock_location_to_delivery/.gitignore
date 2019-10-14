@@ -1,0 +1,7 @@
+*.xls*
+*.pyc
+*.txt
+.idea/*
+.vscode/*
+venv/% 
+

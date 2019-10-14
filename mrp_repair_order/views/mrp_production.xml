@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="mrp_workorder_simple_form_view">
+        <field name="name">mrp_workorder_simple_form_view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="arch" type="xml">
+            <form string="Production Workcenter" delete="0" create="0">
+                <field name="is_user_working" invisible="1"/>
+                <field name="working_state" invisible="1"/>
+                <field name="production_state" invisible="1"/>
+                <field name="product_id" invisible="1"/>
+                <field name="qty_produced" invisible="1"/>
+                <field name="qty_production" invisible="1"/>
+                <field name="is_produced" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <field name="production_id" invisible="1"/>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Name"/>
+                            <field name="note"/>
+                            <field name="workcenter_id"/>
+
+                            <field name="next_work_order_id" domain="[('production_id', '=', production_id)]"/>
+                        </group>
+                        <group>
+                            <label for="duration_expected"/>
+                            <div>
+                                <field name="duration_expected" widget="float_time" class="oe_inline"/>
+                                minutes
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_material_request_form" model="ir.actions.act_window">
+        <field name="name">Material Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">material.request</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="material_request.view_material_request_simple_form"/>
+        <field name="context">{'default_res_id': active_id, 'default_res_model': 'mrp.production'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_add_workorder" model="ir.actions.act_window">
+        <field name="name">Add an operation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.workorder</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="mrp_repair_order.mrp_workorder_simple_form_view"/>
+        <field name="context">{'default_production_id': active_id, 'default_state': 'approval'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_view_material_request_tree" model="ir.actions.act_window">
+        <field name="name">Material Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">material.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="domain">['&amp;', ('res_id', '=', active_id), ('res_model', '=', active_model)]</field>
+        <field name="context">{'default_res_id': active_id, 'default_res_model': 'mrp.production'}</field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_production_form_view">
+        <field name="name">mrp_production_form_view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[@name='button_box']" position="inside">
+                <field name="repair_order_id" invisible="1"/>
+                <button name="action_view_repair_order" type="object" string="Repair Order" class="oe_stat_button"
+                        attrs="{'invisible': [('repair_order_id', '=', False)]}" icon="fa-wrench"/>
+                <button name="%(mrp_repair_order.action_view_material_request_tree)d" type="action" class="oe_stat_button"
+                        icon="fa-list-alt">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="request_count" widget="statinfo" nolabel="1"/></span>
+                        <span class="o_stat_text">Material request</span>
+                    </div>
+                </button>
+                <button name="action_view_picking" string="Pickings" type="object" class="oe_stat_button" icon="fa-truck"/>
+            </xpath>
+
+            <!-- PET-133 Add check_ids in button box-->
+            <xpath expr="//sheet/div[@name='button_box']/button[@name='1025']" position="after">
+                <button type="object"
+                        name="action_view_quality_checks"
+                        class="oe_stat_button"
+                        string="WO Quality Checks"
+                        icon="fa-check"
+                />
+            </xpath>
+
+            <xpath expr="//sheet/div[@name='button_box']" position="after">
+                <h5 attrs="{'invisible': [('repair_step', '=', False)]}">
+                    <span class="label label-default text-center pull-right">
+                        <field name="repair_step" nolabel="1"/>
+                    </span>
+               </h5>
+            </xpath>
+
+            <!--<xpath expr="//header" position="inside">-->
+                <!--<button name="%(mrp_repair_order.action_material_request_form)d" type="action" string="Material request"-->
+                        <!--class="oe_highlight" attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"/>-->
+            <!--</xpath>-->
+
+            <xpath expr="//field[@name='workorder_ids']" position="replace">
+            </xpath>
+
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string="Operations">
+                    <button name="%(mrp_repair_order.action_add_workorder)d" type="action" string="Add operation" class="oe_highlight"/>
+
+                    <field name="workorder_ids" mode="tree,kanban"
+                                attrs="{'readonly': [('state', 'in', ('done','cancel'))]}">
+                        <tree create="false" editable="bottom" delete="false" default_order="next_work_order_id"
+                              decoration-success="date_planned_start&gt;=current_date and state == 'ready'"
+                              decoration-muted="state in ('done','cancel')"
+                              decoration-danger="date_planned_start&lt;current_date and state in ('ready')">
+                            <field name='name' readonly="1"/>
+                            <field name='workcenter_id' readonly="1"/>
+                            <field name='date_planned_start'/>
+                            <field name='duration_expected' widget="float_time"/>
+                            <field name='duration' widget="float_time"/>
+                            <!--<field name='next_work_order_id'/>-->
+                            <field name='state' readonly="1"/>
+                            <button name="action_ready" type="object" class="oe_link" icon="fa-play"
+                                    attrs="{'invisible': [('state', 'not in', ('cancel', 'approval', 'pending'))]}"/>
+                            <button name="action_cancel" type="object" class="oe_link" icon="fa-stop"
+                                    attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"/>
+                        </tree>
+                        <form>
+                            <header>
+                                <button name="action_worklog_15m" type="object" string="+15m" class="oe_highlight"
+                                        attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"/>
+                                <button name="action_worklog_30m" type="object" string="+30m" class="oe_highlight"
+                                        attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"/>
+                                <button name="action_ready" type="object" string="Ready"
+                                        attrs="{'invisible': [('state', 'not in', ('cancel', 'approval', 'pending'))]}"/>
+                                <button name="action_cancel" type="object" string="Cancel"
+                                        attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"/>
+                            </header>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="state"/>
+
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Material request">
+                    <!--<button name="action_add_raw_move_from_request" type="object" string="Add raw move" class="oe_highlight"/>-->
+                    <field name="request_line_ids" editable="false" options='{"reload_on_button": True}'>
+                        <tree>
+                            <field name="currency_id" invisible="1"/>
+                            <field name='request_id'/>
+                            <field name='request'/>
+                            <field name='name'/>
+                            <field name='product_id'/>
+                            <field name='description'/>
+                            <field name='supplier_id'/>
+                            <field name='product_qty'/>
+                            <field name='product_uom'/>
+                            <field name='price_unit' widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name='price_total' string='Total' widget="monetary"
+                                   options="{'currency_field': 'currency_id'}" sum='Total'/>
+                            <field name='state'/>
+                        </tree>
+                    </field>
+<!--                    <button name="%(mrp_repair_order.action_material_request_form)d" type="action" string="Material request"-->
+<!--                            class="oe_highlight" attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"/>-->
+<!--                    <button name="action_refresh" type="object" icon="fa-refresh" nolabel="1"/>-->
+                </page>
+                <page string="Comments">
+                    <field name='comments'/>
+                </page>
+                <page string="Notes">
+                    <field name='notes'>
+                        <tree>
+                            <field name="name"/>
+                            <field name="comment"/>
+                            <field name="write_uid"/>
+                            <field name="state" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--PET-146 Expert quality point tree view-->
+    <record id="quality_check_view_tree" model="ir.ui.view">
+        <field name="name">quality_check_view_tree</field>
+        <field name="model">quality.check</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="title"/>
+                <field name="quality_state"/>
+                <field name="measure"/>
+                <field name="tolerance_min"/>
+                <field name="tolerance_max" class="mr-50"/>
+                <field name="norm_unit"/>
+                <field name="control_date" string="Checked Date"/>
+                <field name="user_id" string="Checked By"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_workcenter_kanban" model="ir.ui.view">
+        <field name="name">Override quality mrp inherit</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_kanban"/>
+        <field eval="20" name="priority"/>
+        <field name="arch" type="xml">
+
+            <!-- Fuck off ! -->
+            <xpath expr="//button[hasclass('btn', 'btn-primary')]" position="attributes">
+                <attribute name="name">%(mrp.action_work_orders)d</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="action_server_consume_material" model="ir.actions.server">
+        <field name="name">Consume material</field>
+        <field name="model_id" ref="mrp.model_mrp_production"/>
+        <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+        <field name="model">mrp.production</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_consume()
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Ajout des champs societe et contact -->
+    <record id="button_partner_activities" model="ir.ui.view">
+        <field name="name">Evènement</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[1]" position="after">
+                <group>
+                    <field name="activity_archived" invisible="1"/>
+                    <field name="company_activity_id" attrs="{'readonly': [('activity_archived', '=', True)]}"/>
+                    <field name="contact_activity_id" attrs="{'readonly': [('activity_archived', '=', True)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Fin de l'activite depuis le RDV, changement de nom d'un bouton -->
+    <record id="buttons_form_calendar" model="ir.ui.view">
+        <field name="name">Boutons</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/button[@name='action_open_calendar_event']" position="replace">
+                <field name="activity_ids" invisible="1"/>
+                <field name="activity_archived" invisible="1"/>
+                <field name="activity_exist" invisible="1"/>
+                <button string="Document associé" class="oe_stat_button pull-right" icon="fa-bars" type="object" name="action_open_calendar_event" attrs="{'invisible':['|', ('res_model', '=', False), ('res_id', '=', False)]}"/>
+                <button string="Terminer l'activité" class="oe_stat_button pull-right" icon="fa-bars" type="object" name="end_activity" attrs="{'invisible':['|', ('activity_exist', '=', False), '&amp;',('activity_exist', '=', True), ('activity_archived', '=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="buttons_form_popup_calendar" model="ir.ui.view">
+        <field name="name">Boutons - Popup</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form_popup"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/button[@name='action_open_calendar_event']" position="replace">
+                <field name="activity_ids" invisible="1"/>
+                <field name="activity_archived" invisible="1"/>
+                <field name="activity_exist" invisible="1"/>
+                <button string="Document associé" class="oe_stat_button pull-right" icon="fa-bars" type="object" name="action_open_calendar_event" attrs="{'invisible':['|', ('res_model', '=', False), ('res_id', '=', False)]}"/>
+                <button string="Terminer l'activité" class="oe_stat_button pull-right" icon="fa-bars" type="object" name="end_activity" attrs="{'invisible':['|', ('activity_exist', '=', False), '&amp;',('activity_exist', '=', True), ('activity_archived', '=', True)]}"/>
+            </xpath>
+            <xpath expr="//form/group" position="after">
+                <group>
+                    <field name="description" widget="html"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

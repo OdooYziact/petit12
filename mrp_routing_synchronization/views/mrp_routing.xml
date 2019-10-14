@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--FORM VIEW-->
+    <record id="mrp_routing_form_view" model="ir.ui.view">
+        <field name="name">mrp.routing.form.inherit</field>
+        <field name="model">mrp.routing</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_delete_relationship" type="object" string="Erase relationship"
+                            attrs="{'invisible': [('parent_id', '=', False)]}" groups="mrp.group_mrp_manager"/>
+                    <button name="action_sync" type="object" string="Synchronize" class="oe_highlight"
+                            attrs="{'invisible': [('child_ids', '=', [])]}" groups="mrp.group_mrp_manager"/>
+                    <button name="action_quality_point_update" type="object" string="Mettre à jour l'article"/>
+                </header>
+            </xpath>
+
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string='Quality Point'>
+                    <field name="quality_point_ids">
+                        <tree decoration-danger="ref_id == -1" create="false" edit="false">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="title"/>
+                            <field name="product_tmpl_id"/>
+                            <field name="product_id" groups="base.group_no_one"/>
+                            <field name="operation_id"/>
+                            <field name="id" groups="base.group_no_one"/>
+                            <field name="ref_id" groups="base.group_no_one"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string='# Child' attrs="{'invisible': [('child_ids', '=', [])]}">
+                    <field name="child_ids" nolabel="1" widget="many2many_tags"/>
+                    <!--<field name="child_ids" nolabel="1" options="{'no_create': True, 'no_open': True}">-->
+                        <!--<tree decoration-danger="is_sync == False" create="0">-->
+                            <!--<field name="code"/>-->
+                            <!--<field name="name"/>-->
+                            <!--<field name="is_sync" invisible="1"/>-->
+                            <!--<field name="last_synchronization" widget="datetime"/>-->
+                        <!--</tree>-->
+                    <!--</field>-->
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="parent_id"/>
+                <field name="bom_ids" widget="many2many_tags" string="Nomenclature(s)"/>
+                <field name="product_ids" widget="many2many_tags" string="Article(s)"/>
+            </xpath>
+
+
+            <xpath expr="//field[@name='location_id']" position="after">
+                <field name="write_date" widget="datetime" readonly="1"/>
+                <field name="last_synchronization" widget="datetime"/>
+                <!--<field name="to_sync" nolabel="1" widget="bullet_state" options="{'classes': {'assigned': 'success', 'waiting': 'danger'}}" attrs="{'invisible': [('state', '=', 'done')]}"/>-->
+                <field name="to_sync" invisible="1"/>
+                <field name="is_sync" widget="checkbox"/>
+                <span class="label label-danger"  attrs="{'invisible': [('to_sync', '=', False)]}">Modifications pending</span>
+            </xpath>
+
+            <xpath expr="//field[@name='operation_ids']" position="replace">
+                <field name="operation_ids">
+                  <tree decoration-danger="ref_id == -1">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="workcenter_id"/>
+                    <field name="time_cycle"/>
+                    <field name="id" groups="base.group_no_one"/>
+                    <field name="ref_id" groups="base.group_no_one"/>
+                  </tree>
+                </field>
+            </xpath>
+
+
+			<xpath expr="//div[@name='button_box']/button[last()]" position="before">
+                <button name="action_view_child" type="object" class="oe_stat_button"
+                        icon="fa-refresh" attrs="{'invisible': [('child_ids', '=', [])]}">
+                    <field name="child_count" string="# Child" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!--TREE VIEW-->
+    <record id="mrp_routing_tree_view" model="ir.ui.view">
+        <field name="name">mrp.routing.tree.inherit</field>
+        <field name="model">mrp.routing</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="parent_id"/>
+                <field name="is_sync" widget="checkbox"/>
+                <field name="last_synchronization" widget="datetime"/>
+            </xpath>
+        </field>
+
+    </record>
+
+    <!--SEARCH VIEW-->
+    <record id="mrp_routing_search_view" model="ir.ui.view">
+        <field name="name">mrp.routing.search.inherit</field>
+        <field name="model">mrp.routing</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_search_view"/>
+        <field name="arch" type="xml">
+            <!--TODO: store is_sync field-->
+            <!--<xpath expr="//filter[@name='inactive']" position="after">-->
+                <!--<filter string="Is synchronized" name="synchronized" domain="[('is_sync','=',True)]"/>-->
+            <!--</xpath>-->
+
+            <xpath expr="//group" position="inside">
+                <filter string="Parent" domain="[]" context="{'group_by':'parent_id'}"/>
+            </xpath>
+
+        </field>
+
+    </record>
+
+</odoo>
